@@ -96,3 +96,28 @@ All updates to these norms must be reviewed and approved by humans. AI may propo
   - Component patterns to simplify repetition
   - Folder restructuring for scalability
 - **Only updates to `NORM.md` should use the `S-NORM-###` ID prefix**
+    
+---
+
+## 9. Template Integrity
+
+- **No project-specific logic**: This repository is a template. Do not add business logic or domain code here.
+- **Universal Applicability**: Changes must be relevant to *all* future projects using this template.
+- **Drift Prevention**: If a change feels specific to one use case, it belongs in a fork, not here.
+
+---
+
+## 10. Version Control (Git)
+
+- **Branches**:
+  - `main`: Production-ready code.
+  - `feature/<task-id>-<short-desc>`: For new features (e.g., `feature/B-001-init-project`).
+  - `fix/<task-id>-<short-desc>`: For bug fixes.
+- **Commits**:
+  - Use conventional commits: `type: description` (e.g., `feat: setup react app`, `fix: header alignment`).
+  - Keep commits focused and atomic.
+- **Workflow**:
+  - Create a branch for the task.
+  - Implement and verify changes.
+  - Commit often.
+  - Merge to `main` when the task is **Done**.

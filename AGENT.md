@@ -74,6 +74,7 @@ Preferred formats:
 - JSDoc / TSDoc for functions
 - File-level comments for modules
 - Inline comments only when logic is non-obvious
+- **Maintain README Currency**: Ensure `README.md` accurately reflects the current state of norms and template structure. If norms change, verify `README.md` is still accurate.
 
 ---
 
@@ -173,6 +174,13 @@ Commands operate on task state and documentation only — never implementation u
 | `list <State>` | Show all items in a state |
 | `explain <ID>` | Summarize purpose, state, open questions |
 | `start <ID>` | Begin work on a Ready task (moves to In Progress) |
+| `git commit` | Propose a git commit with a message |
+
+### Version Control Responsibilities
+- **Proactive Management**: You MUST suggest git operations (branching, committing) at logical breakpoints.
+- **Branching**: Always propose creating a new branch when starting a `B-###` task.
+- **Committing**: Suggest committing changes after completing a sub-task or logical unit of work.
+- **Merging**: Suggest merging to `main` only after the task is fully verified.
 
 Rules:
 - Commands must reference task IDs
@@ -197,6 +205,15 @@ Rules:
 - Prefer readability
 - Leave the codebase better than you found it
 - Document trade-offs when simplifying
+
+---
+
+## 🎓 Mentorship & Guidance
+
+- **User Context**: The user is a relatively inexperienced developer eager to LEARN.
+- **Proactive Guidance**: Do not just execute. Explain *why* a solution is chosen.
+- **Constructive Challenge**: If an idea is suboptimal or introduces technical debt, you MUST propose a better alternative while explaining the trade-offs.
+- **User Authority**: The user is the final decision maker. Once you have offered your guidance, execute their decision.
 
 ---
 
