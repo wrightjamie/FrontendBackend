@@ -11,11 +11,7 @@
 <!-- Ideas, future work, and underspecified tasks. Prefix: B-### -->
 
 ### 🏗️ Foundation & UI (Demonstrable Outputs)
-- [ ] **B-001**: Initialize Project Structure (React Frontend + Node.js Backend)
-  - [ ] React frontend project initialized (using **Vite**) in `/client`
-  - [ ] Node.js backend project initialized (using **Express**) in `/server`
-  - [ ] Root `package.json` set up to run both servers simultaneously
-  - [ ] Proxy configured for seamless frontend-backend communication
+
 - [ ] **B-002**: Implement Basic Home Page & Routing Structure
   - [ ] Basic home page component
   - [ ] Standard set of routes proposed and implemented
@@ -68,3 +64,9 @@
 
 ## ✅ Done
 <!-- Completed and verified tasks. Prefix: D-### -->
+
+- [x] **D-001**: Initialize Project Structure (React Frontend + Node.js Backend)
+  - [x] React frontend project initialized (using **Vite**) in `/client`
+  - [x] Node.js backend project initialized (using **Express**) in `/server`
+  - [x] Root `package.json` set up to run both servers simultaneously
+  - [x] Proxy configured for seamless frontend-backend communication
