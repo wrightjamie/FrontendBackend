@@ -12,9 +12,7 @@
 
 ### 🏗️ Foundation & UI (Demonstrable Outputs)
 
-- [ ] **B-002**: Implement Basic Home Page & Routing Structure
-  - [ ] Basic home page component
-  - [ ] Standard set of routes proposed and implemented
+
 - [ ] **B-003**: Create Login Modal Component (Global access)
   - [ ] Modal component accessible from any page
   - [ ] Supports Login and Logout functionality
@@ -70,3 +68,7 @@
   - [x] Node.js backend project initialized (using **Express**) in `/server`
   - [x] Root `package.json` set up to run both servers simultaneously
   - [x] Proxy configured for seamless frontend-backend communication
+
+- [x] **D-002**: Implement Basic Home Page & Routing Structure
+  - [x] Basic home page component
+  - [x] Standard set of routes proposed and implemented
