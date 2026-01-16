@@ -1,6 +1,11 @@
 # Project Tasks
 
 ## 🚀 In Progress
+- [ ] **T-009**: Develop Standard Data Hooks (Fetch, CRUD, Types)
+  - [ ] Hook: `useData` (get data)
+  - [ ] Hook: `useDataMutations` (Add, Edit, Delete)
+  - [ ] Hook: `useSiteMeta` (get site title, description, logo)
+  - [ ] Hook: `useSiteMetaMutations` (Add, Edit, Delete meta)
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -27,11 +32,6 @@
   - [ ] Admin table display with reordering of types
   - [ ] Ability to Add, Edit, Delete, and Reorder data
 
-- [ ] **B-009**: Develop Standard Data Hooks (Fetch, CRUD, Types)
-  - [ ] Hook: `useData` (get data)
-  - [ ] Hook: `useDataMutations` (Add, Edit, Delete)
-  - [ ] Hook: `useSiteMeta` (get site title, description, logo)
-  - [ ] Hook: `useSiteMetaMutations` (Add, Edit, Delete meta)
 
 ### 🎨 Metadata & Assets
 - [ ] **B-010**: Develop Site Metadata System (Title, Desc, Logo)
