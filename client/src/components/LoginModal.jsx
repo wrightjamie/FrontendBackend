@@ -1,26 +1,36 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import styles from './LoginModal.module.css';
 
-const LoginModal = ({ isLoggedIn, onLogin, onLogout }) => {
+const LoginModal = () => {
+    const { user, login, logout } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+
         if (username && password) {
-            onLogin(username);
-            // Close popover manually if needed, but normally toggle handles it or we hide it.
-            // With popover API, it stays open until dismissed or toggled. 
-            // We can find the popover and hide it, or just rely on user interaction.
-            // For a better UX, we should likely close it on success.
-            document.getElementById('login-popover').hidePopover();
+            const res = await login(username, password);
+            if (res.success) {
+                document.getElementById('login-popover').hidePopover();
+                setUsername('');
+                setPassword('');
+            } else {
+                setError(res.message || 'Login failed');
+            }
         }
     };
 
-    const handleLogout = () => {
-        onLogout();
+    const handleLogout = async () => {
+        await logout();
         document.getElementById('login-popover').hidePopover();
     };
+
+    const isLoggedIn = !!user;
+    const currentUsername = user?.username;
 
     return (
         <div
@@ -30,7 +40,7 @@ const LoginModal = ({ isLoggedIn, onLogin, onLogout }) => {
         >
             {isLoggedIn ? (
                 <div className={styles.form}>
-                    <h3>Hello, {username || 'User'}</h3>
+                    <h3>Hello, {currentUsername || 'User'}</h3>
                     <button onClick={handleLogout} className={styles.logoutBtn}>
                         Logout
                     </button>
@@ -38,6 +48,7 @@ const LoginModal = ({ isLoggedIn, onLogin, onLogout }) => {
             ) : (
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <h3>Login</h3>
+                    {error && <p className={styles.error}>{error}</p>}
                     <div className={styles.inputGroup}>
                         <label htmlFor="username">Username</label>
                         <input

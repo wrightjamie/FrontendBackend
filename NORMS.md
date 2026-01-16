@@ -14,7 +14,7 @@ All updates to these norms must be reviewed and approved by humans. AI may propo
   - File naming: `ComponentName.module.css`
 - Prefer **modern CSS** wherever possible
   - Use **CSS variables** for colors, spacing, themes
-  - Avoid inline styles and JavaScript-driven styling unless unavoidable
+  - Prohibit inline styles and JavaScript-driven styling (`style={{...}}`)
 - Use **`data-` attributes** for conditional styling (e.g., `[data-state="active"] { ... }`)
 - Avoid CSS-in-JS, styled-components, or other inline styling solutions
 - Keep styles scoped to components; avoid global overrides

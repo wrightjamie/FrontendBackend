@@ -1,54 +1,71 @@
-import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import UserButton from './components/UserButton';
 import LoginModal from './components/LoginModal';
 import AdminLayout from './layouts/AdminLayout';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminData from './pages/admin/AdminData';
 import AdminSettings from './pages/admin/AdminSettings';
 import GenericAdminPage from './pages/admin/GenericAdminPage';
-import { Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Setup from './pages/Setup';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import styles from './App.module.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
+  const { user, needsSetup, loading } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleLogin = (user) => {
-    setIsLoggedIn(true);
-    setUsername(user);
-  };
+  useEffect(() => {
+    // If setup is needed and we aren't on setup page, redirect
+    if (!loading && needsSetup && location.pathname !== '/setup') {
+      navigate('/setup');
+    }
+  }, [needsSetup, loading, location.pathname, navigate]);
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUsername('');
-  };
+  if (loading) return <div>Loading...</div>;
+
+  const isSetupPage = location.pathname === '/setup';
 
   return (
-    <>
-      <UserButton isLoggedIn={isLoggedIn} username={username} />
-      <LoginModal
-        isLoggedIn={isLoggedIn}
-        onLogin={handleLogin}
-        onLogout={handleLogout}
-      />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Navigate to="users" replace />} />
-          <Route path="users" element={<AdminUsers />} />
-          <Route path="data" element={<AdminData />} />
-          <Route path="settings" element={<AdminSettings />} />
-          <Route path="analytics" element={<GenericAdminPage title="Analytics" />} />
-          <Route path="logs" element={<GenericAdminPage title="System Logs" />} />
-          <Route path="security" element={<GenericAdminPage title="Security" />} />
-          <Route path="roles" element={<GenericAdminPage title="Permissions & Roles" />} />
-          <Route path="audit" element={<GenericAdminPage title="Audit Trail" />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+    <div className={styles.appContainer}>
+      {!isSetupPage && (
+        <>
+          <Header />
+          <LoginModal />
+        </>
+      )}
+      <main className={styles.mainContent}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/setup" element={<Setup />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'editor']}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="users" replace />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="data" element={<AdminData />} />
+            <Route path="settings" element={<AdminSettings />} />
+            <Route path="analytics" element={<GenericAdminPage title="Analytics" />} />
+            <Route path="logs" element={<GenericAdminPage title="System Logs" />} />
+            <Route path="security" element={<GenericAdminPage title="Security" />} />
+            <Route path="roles" element={<GenericAdminPage title="Permissions & Roles" />} />
+            <Route path="audit" element={<GenericAdminPage title="Audit Trail" />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      {!isSetupPage && <Footer />}
+    </div>
   );
 }
 

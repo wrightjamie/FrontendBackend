@@ -10,10 +10,27 @@ const PORT = process.env.PORT || 5000;
 // Initialize Database
 require('./config/db');
 
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: 'http://localhost:5173', // Vite default
+  credentials: true
+}));
 app.use(express.json());
 
-// Basic Route
+// Session
+const session = require('express-session');
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'secret-key-change-this',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set to true if using https
+    maxAge: 1000 * 60 * 60 * 24 // 24 hours
+  }
+}));
+
+// Routes
+app.use('/api/auth', require('./routes/auth'));
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });

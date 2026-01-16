@@ -1,7 +1,13 @@
 # Project Tasks
 
 ## 🚀 In Progress
-<!-- Active work. Limit to 1 item. Prefix: T-### -->
+- [ ] **T-008**: Implement Authentication Logic (Roles, Setup Flow, Redirects)
+  - [x] Redirect to setup page if no admin exists (to create admin)
+  - [x] Default role: Viewer (No login required)
+  - [x] Login required for Editor and Admin roles
+  - [x] Hook: `useAuth` (check login status, user role)
+  - [x] Refactor all inline styles to CSS Modules
+  - [x] Implement Premium Global Header & Footer
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -28,11 +34,6 @@
   - [ ] Admin table display with reordering of types
   - [ ] Ability to Add, Edit, Delete, and Reorder data
 
-- [ ] **B-008**: Implement Authentication Logic (Roles, Setup Flow, Redirects)
-  - [ ] Redirect to setup page if no admin exists (to create admin)
-  - [ ] Default role: Viewer (No login required)
-  - [ ] Login required for Editor and Admin roles
-  - [ ] Hook: `useAuth` (check login status, user role)
 - [ ] **B-009**: Develop Standard Data Hooks (Fetch, CRUD, Types)
   - [ ] Hook: `useData` (get data)
   - [ ] Hook: `useDataMutations` (Add, Edit, Delete)
@@ -80,10 +81,11 @@
   - [x] Modal component accessible from any page
   - [x] Supports Login and Logout functionality
 
-- [x] **D-004**: Design Admin Dashboard Layout (Tabbed Interface)
+- [x] **D-004**: Design Admin Dashboard & Global Layout
   - [x] Admin pages organized as tabs
   - [x] Layout customizable for future additional pages
   - [x] Implemented reusable TabNavigation with horizontal scrolling
+  - [x] Implemented Premium Global Header & Footer with Glassmorphism
 
 - [x] **D-013**: Implement Modern CSS Reset
   - [x] Added `reset.css` (User provided)

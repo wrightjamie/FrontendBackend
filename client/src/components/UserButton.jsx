@@ -1,7 +1,11 @@
-import React from 'react';
+import { useAuth } from '../context/AuthContext';
 import styles from './UserButton.module.css';
 
-const UserButton = ({ isLoggedIn, username }) => {
+const UserButton = () => {
+    const { user } = useAuth();
+    const isLoggedIn = !!user;
+    const username = user?.username;
+
     return (
         <div className={styles.container}>
             <button
