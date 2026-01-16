@@ -13,9 +13,7 @@
 ### 🏗️ Foundation & UI (Demonstrable Outputs)
 
 
-- [ ] **B-003**: Create Login Modal Component (Global access)
-  - [ ] Modal component accessible from any page
-  - [ ] Supports Login and Logout functionality
+
 - [ ] **B-004**: Design Admin Dashboard Layout (Tabbed Interface)
   - [ ] Admin pages organized as tabs
   - [ ] Layout customizable for future additional pages
@@ -50,6 +48,11 @@
 - [ ] **B-011**: Implement Image Upload & Storage Strategy
   - [ ] Image upload functionality for Data images and Site Logo
   - [ ] Decision on storage strategy (local vs cloud)
+- [ ] **B-012**: Standardize Base Styles & Colors
+  - [ ] Define global variables for colors, spacing, and typography
+  - [ ] Update existing components to use variables
+  - [ ] Ensure dark mode compatibility
+
 
 ## 💡 Suggestions (AI-generated)
 <!-- AI proposals for improvements. Prefix: S-### -->
@@ -72,3 +75,7 @@
 - [x] **D-002**: Implement Basic Home Page & Routing Structure
   - [x] Basic home page component
   - [x] Standard set of routes proposed and implemented
+
+- [x] **D-003**: Create Login Modal Component (Global access)
+  - [x] Modal component accessible from any page
+  - [x] Supports Login and Logout functionality

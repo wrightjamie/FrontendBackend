@@ -1,0 +1,66 @@
+.popover {
+    /* Popover API defaults */
+    position: absolute;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+
+    /* Anchor Positioning */
+    position-anchor: --user-btn;
+    top: calc(anchor(bottom) + 0.5rem);
+    right: anchor(right);
+
+    /* Reset margins */
+    margin: 0;
+
+    /* Reset UA defaults */
+    left: auto;
+    bottom: auto;
+}
+
+/* Backdrop */
+.popover::backdrop {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: left;
+}
+
+.input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.submitBtn {
+    background-color: #646cff;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logoutBtn {
+    background-color: #ff4646;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
