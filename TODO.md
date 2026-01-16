@@ -1,13 +1,6 @@
 # Project Tasks
 
 ## 🚀 In Progress
-- [ ] **T-008**: Implement Authentication Logic (Roles, Setup Flow, Redirects)
-  - [x] Redirect to setup page if no admin exists (to create admin)
-  - [x] Default role: Viewer (No login required)
-  - [x] Login required for Editor and Admin roles
-  - [x] Hook: `useAuth` (check login status, user role)
-  - [x] Refactor all inline styles to CSS Modules
-  - [x] Implement Premium Global Header & Footer
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -72,6 +65,14 @@
   - [x] Node.js backend project initialized (using **Express**) in `/server`
   - [x] Root `package.json` set up to run both servers simultaneously
   - [x] Proxy configured for seamless frontend-backend communication
+
+- [x] **D-008**: Implement Authentication Logic (Roles, Setup Flow, Redirects)
+  - [x] Redirect to setup page if no admin exists (to create admin)
+  - [x] Default role: Viewer (No login required)
+  - [x] Login required for Editor and Admin roles
+  - [x] Hook: `useAuth` (check login status, user role)
+  - [x] Refactor all inline styles to CSS Modules
+  - [x] Implement Premium Global Header & Footer
 
 - [x] **D-002**: Implement Basic Home Page & Routing Structure
   - [x] Basic home page component
