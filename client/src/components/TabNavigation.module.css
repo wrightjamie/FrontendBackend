@@ -1,0 +1,42 @@
+.tabsContainer {
+    display: flex;
+    gap: 1rem;
+    /* Scroll behavior */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* smooth scrolling on iOS */
+    padding-bottom: 0.5rem;
+    /* space for scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+    max-width: 85vw;
+    /* Ensure scrolling on small screens */
+    width: 100%;
+}
+
+.tab {
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    border-bottom: 3px solid transparent;
+    width: auto;
+    font-weight: bold;
+    white-space: nowrap;
+    /* Prevent individual tabs from breaking */
+}
+
+.tab:hover {
+    color: var(--color-primary-hover);
+}
+
+.activeTab {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.tabsContainer::-webkit-scrollbar {
+    display: none;
+}

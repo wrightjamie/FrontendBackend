@@ -14,9 +14,7 @@
 
 
 
-- [ ] **B-004**: Design Admin Dashboard Layout (Tabbed Interface)
-  - [ ] Admin pages organized as tabs
-  - [ ] Layout customizable for future additional pages
+
 - [ ] **B-005**: Implement Admin User Management UI (Table: Admin/Editor/Viewer)
   - [ ] Admin can manage users (Add, Edit, Delete)
   - [ ] **Roles**: Admin (All permissions), Editor (Add/Edit/Delete data), Viewer (Read-only)
@@ -48,10 +46,15 @@
 - [ ] **B-011**: Implement Image Upload & Storage Strategy
   - [ ] Image upload functionality for Data images and Site Logo
   - [ ] Decision on storage strategy (local vs cloud)
-- [ ] **B-012**: Standardize Base Styles & Colors
-  - [ ] Define global variables for colors, spacing, and typography
+- [ ] **B-012**: Standardize Base Styles & Variables
+  - [ ] Define global variables for colors, spacing, typography (fonts, sizes), and borders
+  - [ ] Configure standard border-radius and shadow tokens
   - [ ] Update existing components to use variables
   - [ ] Ensure dark mode compatibility
+- [ ] **B-013**: Implement Modern CSS Reset
+  - [ ] Add a modern reset (e.g., Andy Bell's or Josh Comeau's)
+  - [ ] Ensure visible focus states and accessible defaults
+
 
 
 ## 💡 Suggestions (AI-generated)
@@ -79,3 +82,8 @@
 - [x] **D-003**: Create Login Modal Component (Global access)
   - [x] Modal component accessible from any page
   - [x] Supports Login and Logout functionality
+
+- [x] **D-004**: Design Admin Dashboard Layout (Tabbed Interface)
+  - [x] Admin pages organized as tabs
+  - [x] Layout customizable for future additional pages
+  - [x] Implemented reusable TabNavigation with horizontal scrolling
