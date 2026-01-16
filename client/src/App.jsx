@@ -10,7 +10,6 @@ import AdminData from './pages/admin/AdminData';
 import AdminSettings from './pages/admin/AdminSettings';
 import GenericAdminPage from './pages/admin/GenericAdminPage';
 import { Navigate } from 'react-router-dom';
-import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
