@@ -27,8 +27,7 @@
   - [ ] Standardized fields per type (Text, Image, Boolean)
   - [ ] Admin table display with reordering of types
   - [ ] Ability to Add, Edit, Delete, and Reorder data
-- [ ] **B-007**: Setup Simple NoSQL Database & Connection
-  - [ ] Connect to simple NoSQL database
+
 - [ ] **B-008**: Implement Authentication Logic (Roles, Setup Flow, Redirects)
   - [ ] Redirect to setup page if no admin exists (to create admin)
   - [ ] Default role: Viewer (No login required)
@@ -51,9 +50,7 @@
   - [ ] Configure standard border-radius and shadow tokens
   - [ ] Update existing components to use variables
   - [ ] Ensure dark mode compatibility
-- [ ] **B-013**: Implement Modern CSS Reset
-  - [ ] Add a modern reset (e.g., Andy Bell's or Josh Comeau's)
-  - [ ] Ensure visible focus states and accessible defaults
+
 
 
 
@@ -87,3 +84,12 @@
   - [x] Admin pages organized as tabs
   - [x] Layout customizable for future additional pages
   - [x] Implemented reusable TabNavigation with horizontal scrolling
+
+- [x] **D-013**: Implement Modern CSS Reset
+  - [x] Added `reset.css` (User provided)
+  - [x] Imported in `index.css` and cleaned up redundancies
+
+- [x] **D-007**: Setup Simple NoSQL Database & Connection
+  - [x] Installed `nedb-promises` (Embedded MongoDB-like DB)
+  - [x] Configured `server/config/db.js` and `server/models/User.js`
+  - [x] Connected in `server/index.js`
