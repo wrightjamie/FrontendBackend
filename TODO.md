@@ -1,10 +1,6 @@
 # Project Tasks
 
 ## 🚀 In Progress
-- [ ] **T-010**: Develop Site Metadata System (Title, Desc, Logo)
-  - [ ] Implement Settings UI in Admin Dashboard
-  - [ ] Connect UI to `useSiteMeta` and `useSiteMetaMutations`
-  - [ ] Ensure instant UI feedback via cache invalidation
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -76,6 +72,11 @@
   - [x] Implemented `DataContext` with SWR (Stale-While-Revalidate) caching
   - [x] Developed generic `useData` and `useDataMutations` hooks
   - [x] Built specialized `useSiteMeta` hooks and backend integration
+
+- [x] **D-010**: Implement Site Metadata UI (B-010)
+  - [x] Transformed Settings placeholder into a functional form
+  - [x] Integrated SWR hooks for live Header/Footer updates
+  - [x] Implemented "dirty check" and success feedback logic
 
 - [x] **D-002**: Implement Basic Home Page & Routing Structure
   - [x] Basic home page component
