@@ -2,14 +2,17 @@ import React from 'react';
 import UserButton from './UserButton';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
+import { useSiteMeta } from '../hooks/useSiteMeta';
 
 const Header = () => {
+    const { meta } = useSiteMeta();
+
     return (
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link to="/" className={styles.logo}>
                     <span className={styles.logoIcon}>⚡</span>
-                    <span className={styles.logoText}>App Name</span>
+                    <span className={styles.logoText}>{meta.title}</span>
                 </Link>
                 <div className={styles.actions}>
                     <UserButton />
