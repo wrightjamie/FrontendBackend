@@ -11,7 +11,7 @@ const SiteMeta = {
     async get() {
         // We only ever want one record
         const meta = await siteMetaDb.findOne({});
-        return meta || { title: 'Vantage', description: 'Your Standard Data Highway' };
+        return meta || { title: 'App Name', description: 'Welcome to the application' };
     },
 
     async update(data) {

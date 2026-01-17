@@ -10,8 +10,8 @@ export const useSiteMeta = () => {
 
     // Provide defaults if data is missing
     const meta = useMemo(() => ({
-        title: data?.title || 'Vantage',
-        description: data?.description || 'Your Standard Data Highway',
+        title: data?.title || 'App Name',
+        description: data?.description || 'Welcome to the application',
         logoUrl: data?.logoUrl || null
     }), [data]);
 

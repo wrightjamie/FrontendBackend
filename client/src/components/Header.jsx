@@ -9,7 +9,7 @@ const Header = () => {
             <div className={styles.container}>
                 <Link to="/" className={styles.logo}>
                     <span className={styles.logoIcon}>⚡</span>
-                    <span className={styles.logoText}>Vantage</span>
+                    <span className={styles.logoText}>App Name</span>
                 </Link>
                 <div className={styles.actions}>
                     <UserButton />

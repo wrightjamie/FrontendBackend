@@ -1,5 +1,5 @@
 /**
- * Standard API Client for the Vantage template.
+ * Standard API Client for the project template.
  * Handles base configuration, JSON parsing, and central error handling.
  */
 const BASE_URL = '/api';
