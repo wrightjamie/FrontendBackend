@@ -13,6 +13,7 @@ const AdminLayout = () => {
         { path: 'security', label: 'Security' },
         { path: 'roles', label: 'Permissions & Roles' },
         { path: 'audit', label: 'Audit Trail' },
+        { path: 'test-toasts', label: 'Test Toasts' },
     ];
 
     return (

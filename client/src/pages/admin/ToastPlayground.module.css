@@ -1,0 +1,49 @@
+.container {
+    padding: 1rem;
+}
+
+.buttonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.testBtn {
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+.testBtn:active {
+    transform: scale(0.95);
+}
+
+.testBtn:hover {
+    opacity: 0.9;
+}
+
+.success {
+    background: #28a745;
+}
+
+.error {
+    background: #dc3545;
+}
+
+.warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.info {
+    background: #17a2b8;
+}
+
+.sticky {
+    background: #6c757d;
+}

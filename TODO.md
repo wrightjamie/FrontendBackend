@@ -84,6 +84,12 @@
   - [x] Integrated SWR hooks for live Header/Footer updates
   - [x] Implemented "dirty check" and success feedback logic
 
+- [x] **D-015**: Implement Global Toast/Alert System (B-015)
+  - [x] Created `ToastContext` with timer-safe state management
+  - [x] Developed OKLCH-based relative color system for premium aesthetics
+  - [x] Implemented 1:1 responsive swipe-to-dismiss gestures
+  - [x] Added `ToastPlayground` for system verification
+
 - [x] **D-002**: Implement Basic Home Page & Routing Structure
   - [x] Basic home page component
   - [x] Standard set of routes proposed and implemented

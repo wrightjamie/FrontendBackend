@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSiteMeta, useSiteMetaMutations } from '../../hooks/useSiteMeta';
+import { useToast } from '../../context/ToastContext';
 import styles from './AdminSettings.module.css';
 
 const AdminSettings = () => {
     const { meta, loading: loadingMeta } = useSiteMeta();
-    const { updateMeta, loading: saving, error: saveError } = useSiteMetaMutations();
+    const { updateMeta, loading: saving } = useSiteMetaMutations();
+    const { addToast } = useToast();
 
     const [formData, setFormData] = useState({
         title: '',
         description: '',
     });
     const [isDirty, setIsDirty] = useState(false);
-    const [status, setStatus] = useState({ type: '', message: '' });
 
     // Sync form with loaded meta
     useEffect(() => {
@@ -27,7 +28,6 @@ const AdminSettings = () => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
         setIsDirty(true);
-        setStatus({ type: '', message: '' });
     };
 
     const handleSubmit = async (e) => {
@@ -36,11 +36,9 @@ const AdminSettings = () => {
 
         if (res.success) {
             setIsDirty(false);
-            setStatus({ type: 'success', message: 'Settings saved successfully!' });
-            // Hide message after a few seconds
-            setTimeout(() => setStatus({ type: '', message: '' }), 3000);
+            addToast('Settings saved successfully!', 'success');
         } else {
-            setStatus({ type: 'error', message: 'Failed to save settings.' });
+            addToast('Failed to save settings.', 'error');
         }
     };
 
@@ -76,18 +74,6 @@ const AdminSettings = () => {
                         placeholder="Say something about this project"
                     />
                 </div>
-
-                {status.message && (
-                    <div className={`${styles.statusMessage} ${styles[status.type]}`}>
-                        {status.message}
-                    </div>
-                )}
-
-                {saveError && !status.message && (
-                    <div className={`${styles.statusMessage} ${styles.error}`}>
-                        Error: {saveError.message}
-                    </div>
-                )}
 
                 <div className={styles.actions}>
                     <button

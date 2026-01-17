@@ -1,0 +1,109 @@
+.toastContainer {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.toast {
+    /* Core Variables */
+    --base-toast-color: hsl(226, 87%, 56%);
+
+    /* Default to Info Hue */
+    --toast-hue: 250;
+    --toast-color: oklch(from var(--base-toast-color) l c var(--toast-hue));
+
+    /* Layout */
+    pointer-events: auto;
+    min-width: 320px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    cursor: grab;
+
+    /* Derived Colors using OKLCH */
+    color: oklch(from var(--toast-color) 25% c h);
+    border: 2px solid oklch(from var(--toast-color) l c h);
+    background: oklch(from var(--toast-color) 96% calc(c / 2) h);
+    box-shadow: 0 12px 24px -8px oklch(from var(--toast-color) l c h / 0.25);
+
+    /* Animations & Transitions */
+    animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    /* Dynamic values from JS (Swipe) */
+    transform: translateX(var(--offset-x, 0));
+    opacity: var(--toast-opacity, 1);
+}
+
+/* Disable transition during active drag for 1:1 responsiveness */
+.toast[data-dragging="true"] {
+    transition: none;
+    cursor: grabbing;
+    box-shadow: 0 8px 16px -4px oklch(from var(--toast-color) l c h / 0.3);
+}
+
+/* Type Styling using OKLCH Hue Rotation */
+.toast[data-type="success"] {
+    --toast-hue: 145;
+}
+
+.toast[data-type="error"] {
+    --toast-hue: 25;
+}
+
+.toast[data-type="warning"] {
+    --toast-hue: 85;
+}
+
+.toast[data-type="info"] {
+    --toast-hue: 250;
+}
+
+.message {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.closeBtn {
+    background: oklch(from var(--toast-color) 90% c h / 0.3);
+    border: none;
+    color: inherit;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.closeBtn:hover {
+    background: oklch(from var(--toast-color) 80% c h / 0.5);
+    transform: scale(1.1);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(-50%, -40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
