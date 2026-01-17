@@ -1,0 +1,101 @@
+.container {
+    padding: 1rem;
+    max-width: 600px;
+}
+
+.title {
+    margin-bottom: 2rem;
+    color: var(--color-text-primary);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--color-bg-secondary);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.input,
+.textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.saveBtn {
+    background: var(--color-accent, #646cff);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.saveBtn:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.saveBtn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.saveBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.statusMessage {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--color-danger);
+}

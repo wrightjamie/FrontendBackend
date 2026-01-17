@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const SiteMeta = require('../models/SiteMeta');
+const { isAdmin } = require('../middleware/auth');
 
 // GET /api/site/meta
 router.get('/meta', async (req, res) => {
@@ -12,8 +13,8 @@ router.get('/meta', async (req, res) => {
     }
 });
 
-// PUT /api/site/meta (Protected later, open for now to test)
-router.put('/meta', async (req, res) => {
+// PUT /api/site/meta (Protected: Admin only)
+router.put('/meta', isAdmin, async (req, res) => {
     try {
         const updated = await SiteMeta.update(req.body);
         res.json(updated);
