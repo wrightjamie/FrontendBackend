@@ -12,9 +12,9 @@ const DataEntity = {
     create: async (typeId, entityData) => {
         // If ordered, find the max order and increment
         let order = 0;
-        const lastEntity = await db.dataEntities.findOne({ typeId }, { sort: { order: -1 } });
-        if (lastEntity) {
-            order = lastEntity.order + 1;
+        const entities = await db.dataEntities.find({ typeId }).sort({ order: -1 }).limit(1);
+        if (entities.length > 0) {
+            order = entities[0].order + 1;
         }
 
         const entity = {

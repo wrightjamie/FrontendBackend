@@ -19,15 +19,21 @@ export const useDataEntities = (typeId) => {
  * useDynamicDataMutations: Standard CRUD operations for dynamic data.
  */
 export const useDynamicDataMutations = (typeId) => {
-    const { create, update, delete: del, loading, error } = useDataMutations(typeId ? `/data/entities/${typeId}` : '/data/entities');
-    const { create: reorder } = useDataMutations('/data/entities/reorder');
+    // Create is type-specific: POST /api/data/entities/:typeId
+    const { create, loading: createLoading, error: createError } = useDataMutations(typeId ? `/data/entities/${typeId}` : '/data/entities');
+
+    // Update/Delete are generic: PUT/DELETE /api/data/entities/:id
+    const { update, delete: del, loading: mutateLoading, error: mutateError } = useDataMutations('/data/entities');
+
+    // Reorder: POST /api/data/entities/reorder
+    const { create: reorderMutate, loading: reorderLoading, error: reorderError } = useDataMutations('/data/entities/reorder');
 
     return {
         create,
-        update: (id, body) => update(id, body), // In useDataMutations, update uses `${endpoint}/${id}`
+        update,
         delete: del,
-        reorder: (updates) => reorder({ updates }),
-        loading,
-        error
+        reorder: (updates) => reorderMutate({ updates }),
+        loading: createLoading || mutateLoading || reorderLoading,
+        error: createError || mutateError || reorderError
     };
 };

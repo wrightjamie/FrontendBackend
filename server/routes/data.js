@@ -5,7 +5,7 @@ const DataEntity = require('../models/DataEntity');
 
 // Middleware to check if user is admin/editor
 const isAuthorized = (req, res, next) => {
-    if (req.session.user && ['admin', 'editor'].includes(req.session.user.role)) {
+    if (req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'editor')) {
         return next();
     }
     res.status(401).json({ message: 'Unauthorized' });
