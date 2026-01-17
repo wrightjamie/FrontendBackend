@@ -1,11 +1,6 @@
 # Project Tasks
 
 ## 🚀 In Progress
-- [ ] **T-009**: Develop Standard Data Hooks (Fetch, CRUD, Types)
-  - [ ] Hook: `useData` (get data)
-  - [ ] Hook: `useDataMutations` (Add, Edit, Delete)
-  - [ ] Hook: `useSiteMeta` (get site title, description, logo)
-  - [ ] Hook: `useSiteMetaMutations` (Add, Edit, Delete meta)
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -73,6 +68,12 @@
   - [x] Hook: `useAuth` (check login status, user role)
   - [x] Refactor all inline styles to CSS Modules
   - [x] Implement Premium Global Header & Footer
+
+- [x] **D-009**: Develop Standard Data Hooks (Fetch, CRUD, Types)
+  - [x] Created `apiClient` for standardized fetching
+  - [x] Implemented `DataContext` with SWR (Stale-While-Revalidate) caching
+  - [x] Developed generic `useData` and `useDataMutations` hooks
+  - [x] Built specialized `useSiteMeta` hooks and backend integration
 
 - [x] **D-002**: Implement Basic Home Page & Routing Structure
   - [x] Basic home page component
