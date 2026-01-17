@@ -1,6 +1,10 @@
 # Project Tasks
 
 ## 🚀 In Progress
+- [ ] **T-010**: Develop Site Metadata System (Title, Desc, Logo)
+  - [ ] Implement Settings UI in Admin Dashboard
+  - [ ] Connect UI to `useSiteMeta` and `useSiteMetaMutations`
+  - [ ] Ensure instant UI feedback via cache invalidation
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -29,8 +33,6 @@
 
 
 ### 🎨 Metadata & Assets
-- [ ] **B-010**: Develop Site Metadata System (Title, Desc, Logo)
-  - [ ] Store Site Title, Description, and Logo in DB
 - [ ] **B-011**: Implement Image Upload & Storage Strategy
   - [ ] Image upload functionality for Data images and Site Logo
   - [ ] Decision on storage strategy (local vs cloud)
