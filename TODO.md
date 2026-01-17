@@ -21,6 +21,12 @@
   - [ ] Editor can edit their own password
 
 ### ⚙️ Core Logic & Data
+- [ ] **B-014**: Create Dedicated Login Page & Redirect Logic
+  - [ ] Implement full-page Login UI
+  - [ ] Update `ProtectedRoute` to redirect to `/login` with `from` state
+  - [ ] Handle unauthorized access alerts for logged-in users
+  - [ ] Implement redirection to original destination after login
+
 - [ ] **B-006**: Implement Dynamic Data Table UI (Customizable Fields)
   - [ ] "Data" entities with configurable types (Rank, Name, Brand, etc.)
   - [ ] Standardized fields per type (Text, Image, Boolean)
