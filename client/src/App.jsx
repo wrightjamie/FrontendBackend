@@ -12,6 +12,7 @@ import GenericAdminPage from './pages/admin/GenericAdminPage';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Setup from './pages/Setup';
+import LoginPage from './pages/LoginPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import styles from './App.module.css';
@@ -43,6 +44,7 @@ function App() {
       <main className={styles.mainContent}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/setup" element={<Setup />} />
           <Route
             path="/admin"
