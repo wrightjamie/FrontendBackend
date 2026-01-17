@@ -1,0 +1,46 @@
+const db = require('../config/db');
+
+/**
+ * DataEntity Repository
+ * Manages the actual data records linked to a DataType.
+ */
+const DataEntity = {
+    findByType: (typeId) => db.dataEntities.find({ typeId }).sort({ order: 1, createdAt: 1 }),
+
+    findOne: (id) => db.dataEntities.findOne({ _id: id }),
+
+    create: async (typeId, entityData) => {
+        // If ordered, find the max order and increment
+        let order = 0;
+        const lastEntity = await db.dataEntities.findOne({ typeId }, { sort: { order: -1 } });
+        if (lastEntity) {
+            order = lastEntity.order + 1;
+        }
+
+        const entity = {
+            ...entityData,
+            typeId,
+            order
+        };
+        return await db.dataEntities.insert(entity);
+    },
+
+    update: (id, update) => db.dataEntities.update({ _id: id }, { $set: update }, { returnUpdatedDocs: true }),
+
+    remove: (id) => db.dataEntities.remove({ _id: id }),
+
+    updateOrder: async (id, newOrder) => {
+        return await db.dataEntities.update({ _id: id }, { $set: { order: newOrder } });
+    },
+
+    // Bulk update for reordering
+    reorder: async (updates) => {
+        // updates = [{ id, order }, ...]
+        const promises = updates.map(u =>
+            db.dataEntities.update({ _id: u.id }, { $set: { order: u.order } })
+        );
+        return await Promise.all(promises);
+    }
+};
+
+module.exports = DataEntity;
