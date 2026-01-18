@@ -13,6 +13,8 @@ const createDatastore = (filename) => {
 
 const db = {
     users: createDatastore('users.db'),
+    dataTypes: createDatastore('datatypes.db'),
+    dataEntities: createDatastore('dataentities.db'),
 };
 
 console.log(`[Database] NeDB initialized in ${DATA_DIR}`);

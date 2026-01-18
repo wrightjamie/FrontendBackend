@@ -20,7 +20,7 @@ export const useData = (endpoint, { staleTime = 300000 } = {}) => {
 
     const fetchData = useCallback(async (isManual = false) => {
         if (!isManual) {
-            setState(prev => ({ ...prev, loading: true }));
+            setState(prev => ({ ...prev, loading: true, data: null }));
         }
 
         try {
@@ -60,12 +60,20 @@ export const useData = (endpoint, { staleTime = 300000 } = {}) => {
 
 /**
  * useDataMutations: Standard hook for creating, updating, and deleting data.
+ * Automates loading states, error handling, and cache invalidation.
+ * @param {string} endpoint - The API endpoint family (e.g., '/data/types').
  */
 export const useDataMutations = (endpoint) => {
     const { invalidate } = useDataEngine();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    /**
+     * mutate: Generic wrapper for API mutations.
+     * @param {string} method - HTTP Method (POST, PUT, DELETE).
+     * @param {object} body - JSON payload.
+     * @param {string} suffix - Optional URL suffix (e.g., '/:id').
+     */
     const mutate = async (method, body = null, suffix = '') => {
         setLoading(true);
         setError(null);
@@ -74,7 +82,6 @@ export const useDataMutations = (endpoint) => {
             const response = await apiClient(url, { method, body });
 
             // On success, invalidate the cache for this endpoint family
-            // Note: In a complex app, we might invalidate related keys too
             invalidate(endpoint);
 
             return { success: true, data: response };
@@ -87,8 +94,11 @@ export const useDataMutations = (endpoint) => {
     };
 
     return {
+        /** Create a new record */
         create: (body) => mutate('POST', body),
+        /** Update an existing record by ID */
         update: (id, body) => mutate('PUT', body, `/${id}`),
+        /** Delete a record by ID */
         delete: (id) => mutate('DELETE', null, `/${id}`),
         loading,
         error

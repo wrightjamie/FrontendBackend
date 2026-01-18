@@ -8,11 +8,6 @@ const AdminLayout = () => {
         { path: 'users', label: 'Users' },
         { path: 'data', label: 'Data' },
         { path: 'settings', label: 'Settings' },
-        { path: 'analytics', label: 'Analytics' },
-        { path: 'logs', label: 'System Logs' },
-        { path: 'security', label: 'Security' },
-        { path: 'roles', label: 'Permissions & Roles' },
-        { path: 'audit', label: 'Audit Trail' },
         { path: 'test-toasts', label: 'Test Toasts' },
     ];
 

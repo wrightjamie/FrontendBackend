@@ -21,17 +21,18 @@
   - [ ] Editor can edit their own password
 
 ### ⚙️ Core Logic & Data
-- [ ] **B-014**: Create Dedicated Login Page & Redirect Logic
-  - [ ] Implement full-page Login UI
-  - [ ] Update `ProtectedRoute` to redirect to `/login` with `from` state
-  - [ ] Handle unauthorized access alerts for logged-in users
-  - [ ] Implement redirection to original destination after login
 
-- [ ] **B-006**: Implement Dynamic Data Table UI (Customizable Fields)
-  - [ ] "Data" entities with configurable types (Rank, Name, Brand, etc.)
-  - [ ] Standardized fields per type (Text, Image, Boolean)
-  - [ ] Admin table display with reordering of types
-  - [ ] Ability to Add, Edit, Delete, and Reorder data
+
+- [ ] **B-006**: Implement Dynamic Data Table System (Customizable Entity Types)
+  - [ ] **Type Schema Management**:
+    - [ ] Create a "Schema" definition stored in DB (JSON format).
+    - [ ] Schema fields: `name`, `type` (text, number, boolean, options, date), `description`, `required`, `defaultValue`.
+    - [ ] Support for ordered vs. unordered data types.
+  - [ ] **Data Management**:
+    - [ ] Reusable `DataTable` component that renders based on a Type's schema.
+    - [ ] Admin interface with tabs for each defined Data Type.
+    - [ ] Full CRUD: Add, Edit, Delete, and Reorder (via drag-and-drop/arrows).
+    - [ ] Permission integration: Handle types that prevent specific actions (add/delete/edit/reorder).
 
 
 ### 🎨 Metadata & Assets
@@ -58,6 +59,13 @@
 
 ## ✅ Done
 <!-- Completed and verified tasks. Prefix: D-### -->
+
+- [x] **D-016**: Implement Dedicated Login Page & Redirect Logic (B-014)
+  - [x] Extracted shared `LoginForm` component for modal and page reuse
+  - [x] Implemented full-page `LoginPage` with glassmorphism UI
+  - [x] Updated `ProtectedRoute` to redirect to `/login` with `from` state
+  - [x] Implemented automatic redirection to original destination after login
+  - [x] Verified `LoginModal` functionality remains intact
 
 - [x] **D-001**: Initialize Project Structure (React Frontend + Node.js Backend)
   - [x] React frontend project initialized (using **Vite**) in `/client`
