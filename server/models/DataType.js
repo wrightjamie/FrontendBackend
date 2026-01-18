@@ -5,12 +5,28 @@ const db = require('../config/db');
  * Manages the schemas for dynamic data types.
  */
 const DataType = {
+    /**
+     * findAll: Retrieve all data types sorted by name.
+     */
     findAll: () => db.dataTypes.find({}).sort({ name: 1 }),
 
-    findOne: (id) => db.dataTypes.findOne({ _id: id }),
+    /**
+     * findOne: Retrieve a single data type by ID or query object.
+     */
+    findOne: (query) => {
+        const q = typeof query === 'string' ? { _id: query } : query;
+        return db.dataTypes.findOne(q);
+    },
 
+    /**
+     * findBySlug: Retrieve a single data type by its URL slug.
+     */
     findBySlug: (slug) => db.dataTypes.findOne({ slug }),
 
+    /**
+     * create: Create a new data type with default permissions.
+     * Automatically generates a slug from the name if not provided.
+     */
     create: async (typeData) => {
         const type = {
             ...typeData,

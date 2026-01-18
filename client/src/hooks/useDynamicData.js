@@ -8,15 +8,18 @@ export const useDataTypes = () => {
 };
 
 /**
- * useDataEntities: Hook for fetching all entities of a specific type.
- * @param {string} typeId - The ID of the data type.
+ * useDataTypeEntities: Specialized hook for fetching entities of a specific type.
+ * @param {string} typeId - The ID of the data type (DataType._id).
+ * @returns {object} { data: entities[], loading, error, refresh }
  */
 export const useDataEntities = (typeId) => {
     return useData(typeId ? `/data/entities/${typeId}` : null);
 };
 
 /**
- * useDynamicDataMutations: Standard CRUD operations for dynamic data.
+ * useDynamicDataMutations: Standard CRUD operations for dynamic data entities.
+ * Handles reordering, building specific URLs for types, and cache invalidation.
+ * @param {string} typeId - The ID of the data type (DataType._id).
  */
 export const useDynamicDataMutations = (typeId) => {
     // Create is type-specific: POST /api/data/entities/:typeId

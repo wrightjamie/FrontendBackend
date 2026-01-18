@@ -3,6 +3,10 @@ import { useDataTypes } from '../../hooks/useDynamicData';
 import DynamicDataTable from '../../components/admin/DynamicDataTable';
 import styles from './AdminData.module.css';
 
+/**
+ * AdminData: Management page for dynamic data types.
+ * Renders tabs for each data type and a DynamicDataTable for the active type.
+ */
 const AdminData = () => {
     const { data: types, loading, error } = useDataTypes();
     const [activeTypeId, setActiveTypeId] = useState(null);
@@ -39,66 +43,27 @@ const AdminData = () => {
             {showGuide && (
                 <div className={styles.guide}>
                     <h3>Data Schema Configuration</h3>
-                    <p>Each data type consists of fields defined by this common schema:</p>
+                    <p>Each data type consists of fields defined by a common schema:</p>
                     <div className={styles.guideGrid}>
                         <div className={styles.guideItem}>
                             <strong>Name:</strong> The label displayed in the table header.
                         </div>
                         <div className={styles.guideItem}>
-                            <strong>Type:</strong> The input method for the data (text, number, boolean, date).
+                            <strong>Type:</strong> The input method (text, number, boolean, date).
                         </div>
                         <div className={styles.guideItem}>
-                            <strong>Required:</strong> Whether the field must be completed to save a record.
+                            <strong>Required:</strong> Whether the field must be completed to save.
                         </div>
                         <div className={styles.guideItem}>
                             <strong>Default:</strong> The initial value assigned to new records.
                         </div>
                         <div className={styles.guideItem}>
-                            <strong>Permissions:</strong> Global toggles for "canAdd", "canEdit", and "canDelete" operations.
-                        </div>
-                    </div>
-
-                    <div className={styles.guideExamples}>
-                        <h4>Implementation Examples:</h4>
-                        <div className={styles.exampleCard}>
-                            <div className={styles.exampleHeader}>
-                                <strong>Brands (Ordered)</strong>
-                                <span>Ideal for product manufacturers</span>
-                            </div>
-                            <pre className={styles.codeBlock}>
-                                {`{
-  "name": "Brands",
-  "isOrdered": true,
-  "fields": [
-    { "name": "Name", "type": "text", "required": true },
-    { "name": "Website", "type": "text" },
-    { "name": "Is Featured", "type": "boolean", "defaultValue": false }
-  ]
-}`}
-                            </pre>
-                        </div>
-                        <div className={styles.exampleCard}>
-                            <div className={styles.exampleHeader}>
-                                <strong>Blog Posts</strong>
-                                <span>Standard content structure</span>
-                            </div>
-                            <pre className={styles.codeBlock}>
-                                {`{
-  "name": "Blog Posts",
-  "isOrdered": false,
-  "permissions": { "canAdd": true, "canEdit": true, "canDelete": false },
-  "fields": [
-    { "name": "Title", "type": "text", "required": true },
-    { "name": "Publish Date", "type": "date" },
-    { "name": "Read Time", "type": "number" }
-  ]
-}`}
-                            </pre>
+                            <strong>Permissions:</strong> Controls for "canAdd", "canEdit", and "canDelete".
                         </div>
                     </div>
 
                     <p className={styles.guideNote}>
-                        <em>* Reordering is available for types flagged as "Ordered" in their configuration.</em>
+                        <em>* Reordering functionality is available for types flagged as "Ordered" in their configuration.</em>
                     </p>
                 </div>
             )}

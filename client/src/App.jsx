@@ -8,7 +8,6 @@ import AdminUsers from './pages/admin/AdminUsers';
 import AdminData from './pages/admin/AdminData';
 import AdminSettings from './pages/admin/AdminSettings';
 import ToastPlayground from './pages/admin/ToastPlayground';
-import GenericAdminPage from './pages/admin/GenericAdminPage';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Setup from './pages/Setup';
@@ -58,11 +57,6 @@ function App() {
             <Route path="users" element={<AdminUsers />} />
             <Route path="data" element={<AdminData />} />
             <Route path="settings" element={<AdminSettings />} />
-            <Route path="analytics" element={<GenericAdminPage title="Analytics" />} />
-            <Route path="logs" element={<GenericAdminPage title="System Logs" />} />
-            <Route path="security" element={<GenericAdminPage title="Security" />} />
-            <Route path="roles" element={<GenericAdminPage title="Permissions & Roles" />} />
-            <Route path="audit" element={<GenericAdminPage title="Audit Trail" />} />
             <Route path="test-toasts" element={<ToastPlayground />} />
           </Route>
           <Route path="*" element={<NotFound />} />

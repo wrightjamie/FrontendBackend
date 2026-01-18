@@ -33,7 +33,10 @@ router.post('/types', isEditorOrAdmin, async (req, res) => {
  * Data Entities (Records)
  */
 
-// Get all entities for a specific type
+/**
+ * GET /api/data/entities/:typeId
+ * Retrieve all records for a specific data type.
+ */
 router.get('/entities/:typeId', async (req, res) => {
     try {
         const entities = await DataEntity.findByType(req.params.typeId);
@@ -43,7 +46,10 @@ router.get('/entities/:typeId', async (req, res) => {
     }
 });
 
-// Reorder entities (Defined BEFORE /entities/:typeId to avoid conflict)
+/**
+ * POST /api/data/entities/reorder
+ * Bulk update the order indices of multiple records.
+ */
 router.post('/entities/reorder', isEditorOrAdmin, async (req, res) => {
     try {
         const { updates } = req.body;
@@ -66,7 +72,10 @@ router.post('/entities/reorder', isEditorOrAdmin, async (req, res) => {
     }
 });
 
-// Create new entity
+/**
+ * POST /api/data/entities/:typeId
+ * Create a new record for a specific data type.
+ */
 router.post('/entities/:typeId', isEditorOrAdmin, async (req, res) => {
     try {
         const type = await DataType.findOne(req.params.typeId);
@@ -80,7 +89,10 @@ router.post('/entities/:typeId', isEditorOrAdmin, async (req, res) => {
     }
 });
 
-// Update entity
+/**
+ * PUT /api/data/entities/:id
+ * Update an existing record by ID.
+ */
 router.put('/entities/:id', isEditorOrAdmin, async (req, res) => {
     try {
         const entityToUpdate = await DataEntity.findOne(req.params.id);
@@ -98,7 +110,10 @@ router.put('/entities/:id', isEditorOrAdmin, async (req, res) => {
     }
 });
 
-// Delete entity
+/**
+ * DELETE /api/data/entities/:id
+ * Delete an existing record by ID.
+ */
 router.delete('/entities/:id', isEditorOrAdmin, async (req, res) => {
     try {
         const entityToDelete = await DataEntity.findOne(req.params.id);

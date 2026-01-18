@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 
+/**
+ * DynamicDataTable: A reusable component to render and manage data for a specific DataType.
+ * Handles CRUD operations and reordering.
+ * @param {object} props.type - The DataType configuration object.
+ */
 const DynamicDataTable = ({ type }) => {
     const { data: entities, loading, refresh } = useDataEntities(type._id);
     const { create, update, delete: del, reorder } = useDynamicDataMutations(type._id);
@@ -13,17 +18,26 @@ const DynamicDataTable = ({ type }) => {
     // Field names for table headers
     const headers = type.fields.map(f => f.name);
 
+    /**
+     * handleEdit: Enter editing mode for a specific record.
+     */
     const handleEdit = (entity) => {
         setEditingId(entity._id);
         setFormData(entity);
     };
 
+    /**
+     * handleCancel: Exit editing/adding mode and reset state.
+     */
     const handleCancel = () => {
         setEditingId(null);
         setIsAdding(false);
         setFormData({});
     };
 
+    /**
+     * handleSave: Create or Update a record based on current mode.
+     */
     const handleSave = async (e) => {
         e.preventDefault();
         let res;
@@ -41,6 +55,9 @@ const DynamicDataTable = ({ type }) => {
         }
     };
 
+    /**
+     * handleDelete: Confirm and delete a record.
+     */
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this record?')) {
             const res = await del(id);
@@ -52,6 +69,11 @@ const DynamicDataTable = ({ type }) => {
         }
     };
 
+    /**
+     * handleMove: Reorder records within the list.
+     * @param {number} index - Current index of the item.
+     * @param {number} direction - -1 for Up, 1 for Down.
+     */
     const handleMove = async (index, direction) => {
         if (!entities) return;
         const newEntities = [...entities];
@@ -59,11 +81,11 @@ const DynamicDataTable = ({ type }) => {
 
         if (targetIndex < 0 || targetIndex >= newEntities.length) return;
 
-        // Swap
+        // Swap items in local array
         const [movedItem] = newEntities.splice(index, 1);
         newEntities.splice(targetIndex, 0, movedItem);
 
-        // Map to updates for backend
+        // Map to bulk update objects for backend: [{ id: string, order: number }, ...]
         const updates = newEntities.map((item, idx) => ({
             id: item._id,
             order: idx
@@ -77,6 +99,9 @@ const DynamicDataTable = ({ type }) => {
         }
     };
 
+    /**
+     * renderInput: Helper to render appropriate input field based on schema type.
+     */
     const renderInput = (field, value, onChange) => {
         const id = `field-${field.name}`;
         switch (field.type) {
@@ -164,8 +189,10 @@ const DynamicDataTable = ({ type }) => {
                                     </td>
                                 ))}
                                 <td>
-                                    <button onClick={handleSave} className={styles.saveBtn}>Save</button>
-                                    <button onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
+                                    <div className={styles.actions}>
+                                        <button onClick={handleSave} className={styles.saveBtn}>Save</button>
+                                        <button onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
+                                    </div>
                                 </td>
                             </tr>
                         )}
@@ -193,22 +220,24 @@ const DynamicDataTable = ({ type }) => {
                                         )}
                                     </td>
                                 ))}
-                                <td className={styles.actions}>
-                                    {editingId === entity._id ? (
-                                        <>
-                                            <button onClick={handleSave} className={styles.saveBtn}>Save</button>
-                                            <button onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            {type.permissions.canEdit && (
-                                                <button onClick={() => handleEdit(entity)} className={styles.editBtn}>Edit</button>
-                                            )}
-                                            {type.permissions.canDelete && (
-                                                <button onClick={() => handleDelete(entity._id)} className={styles.deleteBtn}>Delete</button>
-                                            )}
-                                        </>
-                                    )}
+                                <td className={styles.actionsCell}>
+                                    <div className={styles.actions}>
+                                        {editingId === entity._id ? (
+                                            <>
+                                                <button onClick={handleSave} className={styles.saveBtn}>Save</button>
+                                                <button onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {type.permissions.canEdit && (
+                                                    <button onClick={() => handleEdit(entity)} className={styles.editBtn}>Edit</button>
+                                                )}
+                                                {type.permissions.canDelete && (
+                                                    <button onClick={() => handleDelete(entity._id)} className={styles.deleteBtn}>Delete</button>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
                                 </td>
                             </tr>
                         ))}

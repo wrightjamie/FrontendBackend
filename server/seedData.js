@@ -1,18 +1,27 @@
 const DataType = require('./models/DataType');
 const DataEntity = require('./models/DataEntity');
 
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 const seedData = async () => {
     try {
-        const types = await DataType.findAll();
-        if (types.length > 0) {
-            console.log('[Seed] Database not empty, skipping data seeding.');
-            return;
-        }
+        console.log('[Seed] Starting idempotent database seeding...');
 
-        console.log('[Seed] Seeding initial data types and entities...');
+        // Helper to find or create a data type
+        const getOrCreateType = async (typeConfig) => {
+            let type = await DataType.findOne({ slug: typeConfig.slug });
+            if (!type) {
+                console.log(`[Seed] Creating data type: ${typeConfig.name}`);
+                type = await DataType.create(typeConfig);
+                await wait(100); // Give file system a moment
+            } else {
+                console.log(`[Seed] Data type already exists: ${typeConfig.name}`);
+            }
+            return type;
+        };
 
-        // 1. Create Brands (Ordered)
-        const brands = await DataType.create({
+        // 1. Setup Brands
+        const brands = await getOrCreateType({
             name: 'Brands',
             slug: 'brands',
             description: 'Top technology brands',
@@ -24,8 +33,8 @@ const seedData = async () => {
             ]
         });
 
-        // 2. Create Categories (Unordered)
-        const categories = await DataType.create({
+        // 2. Setup Categories
+        const categories = await getOrCreateType({
             name: 'Categories',
             slug: 'categories',
             description: 'Product categories',
@@ -36,8 +45,8 @@ const seedData = async () => {
             ]
         });
 
-        // 3. Create System Logs (Restricted: Can only Edit, Cannot Add/Delete)
-        const logs = await DataType.create({
+        // 3. Setup System Logs
+        const logs = await getOrCreateType({
             name: 'System Logs',
             slug: 'system-logs',
             description: 'System-generated event logs (Read/Edit Only)',
@@ -50,21 +59,38 @@ const seedData = async () => {
             ]
         });
 
-        // 4. Seed some Brands
-        await DataEntity.create(brands._id, { Name: 'Apple', Website: 'apple.com', 'Is Featured': true });
-        await DataEntity.create(brands._id, { Name: 'Google', Website: 'google.com', 'Is Featured': true });
-        await DataEntity.create(brands._id, { Name: 'Microsoft', Website: 'microsoft.com', 'Is Featured': false });
+        // Seed Entities if empty for each type
+        const seedEntities = async (typeId, entitiesArray, label) => {
+            const existing = await DataEntity.findByType(typeId);
+            if (existing.length === 0) {
+                console.log(`[Seed] Seeding records for ${label}...`);
+                for (const entity of entitiesArray) {
+                    await DataEntity.create(typeId, entity);
+                    await wait(50); // Small delay between insertions to stabilize NeDB
+                }
+            } else {
+                console.log(`[Seed] Records already exist for ${label}.`);
+            }
+        };
 
-        // 5. Seed some Categories
-        await DataEntity.create(categories._id, { Title: 'Smartphones', Description: 'Mobile devices' });
-        await DataEntity.create(categories._id, { Title: 'Laptops', Description: 'Portable computers' });
+        await seedEntities(brands._id, [
+            { Name: 'Apple', Website: 'apple.com', 'Is Featured': true },
+            { Name: 'Google', Website: 'google.com', 'Is Featured': true },
+            { Name: 'Microsoft', Website: 'microsoft.com', 'Is Featured': false }
+        ], 'Brands');
 
-        // 6. Seed some Logs
-        await DataEntity.create(logs._id, { Timestamp: new Date().toISOString().split('T')[0], Event: 'System initialized', Resolved: true });
-        await DataEntity.create(logs._id, { Timestamp: new Date().toISOString().split('T')[0], Event: 'Database seeding completed', Resolved: true });
-        await DataEntity.create(logs._id, { Timestamp: new Date().toISOString().split('T')[0], Event: 'Security audit required', Resolved: false });
+        await seedEntities(categories._id, [
+            { Title: 'Smartphones', Description: 'Mobile devices' },
+            { Title: 'Laptops', Description: 'Portable computers' }
+        ], 'Categories');
 
-        console.log('[Seed] Data seeding completed successfully.');
+        await seedEntities(logs._id, [
+            { Timestamp: new Date().toISOString().split('T')[0], Event: 'System initialized', Resolved: true },
+            { Timestamp: new Date().toISOString().split('T')[0], Event: 'Database seeding completed', Resolved: true },
+            { Timestamp: new Date().toISOString().split('T')[0], Event: 'Security audit required', Resolved: false }
+        ], 'Logs');
+
+        console.log('[Seed] Data seeding process finished.');
     } catch (err) {
         console.error('[Seed] Error during seeding:', err);
     }

@@ -5,6 +5,12 @@ const DataContext = createContext(null);
 /**
  * DataProvider: The central "Engine" for our Stale-While-Revalidate caching.
  * Uses a Map to store data by endpoint URL.
+ * 
+ * Provides:
+ * - getCache(key): Retrieve data from cache.
+ * - setCache(key, data): Store data in cache and update timestamp.
+ * - invalidate(key?): Clear specific or all cache entries.
+ * - cacheVersion: Incremented on every cache change to trigger re-renders in consumers.
  */
 export const DataProvider = ({ children }) => {
     // We use a ref for the cache to keep it stable and outside of the React render cycle
@@ -13,7 +19,7 @@ export const DataProvider = ({ children }) => {
     const [cacheVersion, setCacheVersion] = useState(0);
 
     /**
-     * Set data in cache with a timestamp
+     * setCache: Updates the internal ref and increments the version counter.
      */
     const setCache = useCallback((key, data) => {
         cache.current.set(key, {
@@ -24,14 +30,14 @@ export const DataProvider = ({ children }) => {
     }, []);
 
     /**
-     * Get data from cache
+     * getCache: Retrieves an entry from the internal ref.
      */
     const getCache = useCallback((key) => {
         return cache.current.get(key);
     }, []);
 
     /**
-     * Invalidate specific endpoint or entire cache
+     * invalidate: Clears a specific entry or the entire cache.
      */
     const invalidate = useCallback((key) => {
         if (key) {
@@ -46,12 +52,15 @@ export const DataProvider = ({ children }) => {
         getCache,
         setCache,
         invalidate,
-        cacheVersion // Included so hooks can depend on it
+        cacheVersion
     };
 
     return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
 
+/**
+ * useDataEngine: Access the low-level data cache and invalidation methods.
+ */
 export const useDataEngine = () => {
     const context = useContext(DataContext);
     if (!context) {

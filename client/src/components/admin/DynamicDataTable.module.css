@@ -124,9 +124,15 @@
     cursor: not-allowed;
 }
 
+.actionsCell {
+    /* Standard table-cell display preserved */
+    vertical-align: middle;
+}
+
 .actions {
     display: flex;
     gap: 0.5rem;
+    white-space: nowrap;
 }
 
 .editBtn,
