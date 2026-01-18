@@ -111,24 +111,37 @@
     background: var(--color-bg-primary);
     border: 1px solid var(--color-border);
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1.25rem;
     font-size: 0.85rem;
 }
 
-.exampleCard strong {
-    display: block;
-    margin-bottom: 0.5rem;
+.exampleHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+}
+
+.exampleHeader strong {
     color: var(--color-primary);
+    font-size: 0.95rem;
 }
 
-.exampleCard ul {
-    margin: 0;
-    padding-left: 1.25rem;
+.exampleHeader span {
     color: var(--color-text-secondary);
+    font-size: 0.8rem;
 }
 
-.exampleCard li {
-    margin-bottom: 0.25rem;
+.codeBlock {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    border-left: 3px solid var(--color-primary);
 }
 
 .tabsContainer {

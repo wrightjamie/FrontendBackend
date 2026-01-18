@@ -56,22 +56,40 @@ const AdminData = () => {
                     </div>
 
                     <div className={styles.guideExamples}>
-                        <h4>Examples:</h4>
+                        <h4>Implementation Examples:</h4>
                         <div className={styles.exampleCard}>
-                            <strong>Brands (Ordered):</strong>
-                            <ul>
-                                <li>Field: "Name" (text, required)</li>
-                                <li>Field: "Website" (text)</li>
-                                <li>Field: "Is Featured" (boolean, default: false)</li>
-                            </ul>
+                            <div className={styles.exampleHeader}>
+                                <strong>Brands (Ordered)</strong>
+                                <span>Ideal for product manufacturers</span>
+                            </div>
+                            <pre className={styles.codeBlock}>
+                                {`{
+  "name": "Brands",
+  "isOrdered": true,
+  "fields": [
+    { "name": "Name", "type": "text", "required": true },
+    { "name": "Website", "type": "text" },
+    { "name": "Is Featured", "type": "boolean", "defaultValue": false }
+  ]
+}`}
+                            </pre>
                         </div>
                         <div className={styles.exampleCard}>
-                            <strong>Blog Posts:</strong>
-                            <ul>
-                                <li>Field: "Title" (text, required)</li>
-                                <li>Field: "Published Date" (date)</li>
-                                <li>Field: "Read Time" (number)</li>
-                            </ul>
+                            <div className={styles.exampleHeader}>
+                                <strong>Blog Posts</strong>
+                                <span>Standard content structure</span>
+                            </div>
+                            <pre className={styles.codeBlock}>
+                                {`{
+  "name": "Blog Posts",
+  "isOrdered": false,
+  "fields": [
+    { "name": "Title", "type": "text", "required": true },
+    { "name": "Publish Date", "type": "date" },
+    { "name": "Read Time", "type": "number" }
+  ]
+}`}
+                            </pre>
                         </div>
                     </div>
 
