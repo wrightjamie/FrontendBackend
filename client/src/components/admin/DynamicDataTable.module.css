@@ -1,8 +1,8 @@
 .container {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--color-bg-secondary);
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
 }
 
 .header {
@@ -17,19 +17,19 @@
 .header h2 {
     margin: 0;
     font-size: 1.5rem;
-    color: white;
+    color: var(--color-text-primary);
 }
 
 .header p {
     flex-basis: 100%;
     margin: -0.5rem 0 0 0;
-    color: var(--text-secondary, #64748b);
+    color: var(--color-text-secondary);
     font-size: 0.9rem;
 }
 
 .addBtn {
-    background: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
     padding: 0.5rem 1rem;
     border-radius: 6px;
     border: none;
@@ -39,7 +39,7 @@
 }
 
 .addBtn:hover:not(:disabled) {
-    background: #2563eb;
+    background: var(--color-primary-hover);
     transform: translateY(-1px);
 }
 
@@ -60,8 +60,8 @@
 
 .table th {
     padding: 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
-    color: var(--text-secondary, #64748b);
+    border-bottom: 2px solid var(--color-border);
+    color: var(--color-text-secondary);
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -70,26 +70,26 @@
 
 .table td {
     padding: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: #e2e8f0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-primary);
 }
 
 .table tr:hover:not(.editRow) {
-    background: rgba(255, 255, 255, 0.01);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
 }
 
 .input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
     border-radius: 4px;
-    color: white;
+    color: var(--color-text-primary);
     padding: 0.4rem 0.6rem;
     width: 100%;
     font-size: 0.9rem;
 }
 
 .editRow {
-    background: rgba(59, 130, 246, 0.05) !important;
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
 }
 
 .orderCell {
@@ -105,9 +105,9 @@
 }
 
 .orderBtns button {
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    color: white;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
     cursor: pointer;
     padding: 2px 6px;
     border-radius: 3px;
@@ -116,7 +116,7 @@
 }
 
 .orderBtns button:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--color-border);
 }
 
 .orderBtns button:disabled {
@@ -142,13 +142,14 @@
 }
 
 .editBtn {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
 }
 
 .deleteBtn {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+    color: var(--color-danger);
 }
 
 .saveBtn {
@@ -157,16 +158,17 @@
 }
 
 .cancelBtn {
-    background: rgba(255, 255, 255, 0.05);
-    color: #94a3b8;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
 }
 
 .editBtn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--color-border);
 }
 
 .deleteBtn:hover {
-    background: rgba(239, 68, 68, 0.2);
+    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
 }
 
 .saveBtn:hover {
@@ -176,5 +178,5 @@
 .loading {
     padding: 2rem;
     text-align: center;
-    color: var(--text-secondary, #64748b);
+    color: var(--color-text-secondary);
 }

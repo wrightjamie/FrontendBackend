@@ -13,18 +13,18 @@
 .titleGroup h2 {
     margin: 0 0 0.25rem 0;
     font-size: 1.75rem;
-    color: white;
+    color: var(--color-text-primary);
 }
 
 .titleGroup p {
     margin: 0;
-    color: var(--text-secondary, #64748b);
+    color: var(--color-text-secondary);
     font-size: 0.95rem;
 }
 
 .tabsContainer {
     margin-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .tabs {
@@ -37,7 +37,7 @@
 .tab {
     background: transparent;
     border: 1px solid transparent;
-    color: var(--text-secondary, #64748b);
+    color: var(--color-text-secondary);
     padding: 0.6rem 1.25rem;
     border-radius: 8px;
     font-size: 0.95rem;
@@ -48,14 +48,14 @@
 }
 
 .tab:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-primary);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
 }
 
 .activeTab {
-    color: white;
-    background: rgba(59, 130, 246, 0.1);
-    border-color: rgba(59, 130, 246, 0.2);
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
 .content {
@@ -79,11 +79,13 @@
 .empty {
     padding: 3rem;
     text-align: center;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--color-bg-secondary);
     border-radius: 12px;
-    color: var(--text-secondary, #64748b);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
 }
 
 .error {
-    color: #ef4444;
+    color: var(--color-danger);
+    border-color: var(--color-danger);
 }

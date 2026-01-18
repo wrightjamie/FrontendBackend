@@ -6,8 +6,8 @@
 }
 
 .error {
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-danger);
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
     padding: 0.75rem;
     border-radius: 8px;
     font-size: 0.875rem;
@@ -23,30 +23,30 @@
 .inputGroup label {
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--text-secondary, #64748b);
+    color: var(--color-text-secondary);
 }
 
 .input {
     padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
-    color: white;
+    color: var(--color-text-primary);
     font-size: 1rem;
     transition: all 0.2s ease;
 }
 
 .input:focus {
     outline: none;
-    border-color: #3b82f6;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    border-color: var(--color-primary);
+    background: var(--color-bg-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
 .submitBtn {
     padding: 0.75rem;
-    background: #3b82f6;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -57,7 +57,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-    background: #2563eb;
+    background: var(--color-primary-hover);
     transform: translateY(-1px);
 }
 
