@@ -54,6 +54,27 @@ const AdminData = () => {
                             <strong>Default:</strong> The initial value assigned to new records.
                         </div>
                     </div>
+
+                    <div className={styles.guideExamples}>
+                        <h4>Examples:</h4>
+                        <div className={styles.exampleCard}>
+                            <strong>Brands (Ordered):</strong>
+                            <ul>
+                                <li>Field: "Name" (text, required)</li>
+                                <li>Field: "Website" (text)</li>
+                                <li>Field: "Is Featured" (boolean, default: false)</li>
+                            </ul>
+                        </div>
+                        <div className={styles.exampleCard}>
+                            <strong>Blog Posts:</strong>
+                            <ul>
+                                <li>Field: "Title" (text, required)</li>
+                                <li>Field: "Published Date" (date)</li>
+                                <li>Field: "Read Time" (number)</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <p className={styles.guideNote}>
                         <em>* Reordering is available for types flagged as "Ordered" in their configuration.</em>
                     </p>
