@@ -7,6 +7,8 @@ const AdminData = () => {
     const { data: types, loading, error } = useDataTypes();
     const [activeTypeId, setActiveTypeId] = useState(null);
 
+    const [showGuide, setShowGuide] = useState(false);
+
     // Set first type as active by default once loaded
     useEffect(() => {
         if (types && types.length > 0 && !activeTypeId) {
@@ -26,7 +28,37 @@ const AdminData = () => {
                     <h2>Data Management</h2>
                     <p>Manage content records across your application's data types.</p>
                 </div>
+                <button
+                    className={styles.guideToggle}
+                    onClick={() => setShowGuide(!showGuide)}
+                >
+                    {showGuide ? 'Hide Schema Guide' : 'Show Schema Guide'}
+                </button>
             </div>
+
+            {showGuide && (
+                <div className={styles.guide}>
+                    <h3>Data Schema Configuration</h3>
+                    <p>Each data type consists of fields defined by this common schema:</p>
+                    <div className={styles.guideGrid}>
+                        <div className={styles.guideItem}>
+                            <strong>Name:</strong> The label displayed in the table header.
+                        </div>
+                        <div className={styles.guideItem}>
+                            <strong>Type:</strong> The input method for the data (text, number, boolean, date).
+                        </div>
+                        <div className={styles.guideItem}>
+                            <strong>Required:</strong> Whether the field must be completed to save a record.
+                        </div>
+                        <div className={styles.guideItem}>
+                            <strong>Default:</strong> The initial value assigned to new records.
+                        </div>
+                    </div>
+                    <p className={styles.guideNote}>
+                        <em>* Reordering is available for types flagged as "Ordered" in their configuration.</em>
+                    </p>
+                </div>
+            )}
 
             <div className={styles.tabsContainer}>
                 <div className={styles.tabs}>
