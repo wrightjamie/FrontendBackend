@@ -29,7 +29,24 @@ const isAdmin = async (req, res, next) => {
     }
 };
 
+const isEditorOrAdmin = async (req, res, next) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Authentication required' });
+    }
+
+    try {
+        const user = await User.findOne({ _id: req.session.userId });
+        if (user && (user.role === 'admin' || user.role === 'editor')) {
+            return next();
+        }
+        res.status(403).json({ message: 'Editor or Admin privileges required' });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error during authorization' });
+    }
+};
+
 module.exports = {
     isAuthenticated,
-    isAdmin
+    isAdmin,
+    isEditorOrAdmin
 };

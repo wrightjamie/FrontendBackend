@@ -44,7 +44,7 @@ const AdminData = () => {
 
             <div className={styles.content}>
                 {activeType ? (
-                    <DynamicDataTable type={activeType} />
+                    <DynamicDataTable key={activeTypeId} type={activeType} />
                 ) : (
                     <div className={styles.empty}>No data types defined.</div>
                 )}

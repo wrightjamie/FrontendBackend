@@ -20,7 +20,7 @@ export const useData = (endpoint, { staleTime = 300000 } = {}) => {
 
     const fetchData = useCallback(async (isManual = false) => {
         if (!isManual) {
-            setState(prev => ({ ...prev, loading: true }));
+            setState(prev => ({ ...prev, loading: true, data: null }));
         }
 
         try {

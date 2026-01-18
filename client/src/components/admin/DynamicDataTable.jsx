@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 
@@ -36,13 +36,19 @@ const DynamicDataTable = ({ type }) => {
         if (res.success) {
             handleCancel();
             refresh();
+        } else {
+            alert(`Error saving: ${res.error?.message || 'Operation failed'}`);
         }
     };
 
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this record?')) {
             const res = await del(id);
-            if (res.success) refresh();
+            if (res.success) {
+                refresh();
+            } else {
+                alert(`Error deleting: ${res.error?.message || 'Delete failed'}`);
+            }
         }
     };
 
@@ -63,8 +69,12 @@ const DynamicDataTable = ({ type }) => {
             order: idx
         }));
 
-        await reorder(updates);
-        refresh();
+        const res = await reorder(updates);
+        if (res.success) {
+            refresh();
+        } else {
+            alert(`Error reordering: ${res.error?.message || 'Operation failed'}`);
+        }
     };
 
     const renderInput = (field, value, onChange) => {

@@ -25,7 +25,10 @@ const DataEntity = {
         return await db.dataEntities.insert(entity);
     },
 
-    update: (id, update) => db.dataEntities.update({ _id: id }, { $set: update }, { returnUpdatedDocs: true }),
+    update: (id, updateData) => {
+        const { _id, typeId, createdAt, updatedAt, ...cleanUpdate } = updateData;
+        return db.dataEntities.update({ _id: id }, { $set: cleanUpdate }, { returnUpdatedDocs: true });
+    },
 
     remove: (id) => db.dataEntities.remove({ _id: id }),
 

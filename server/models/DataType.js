@@ -27,7 +27,10 @@ const DataType = {
         return await db.dataTypes.insert(type);
     },
 
-    update: (id, update) => db.dataTypes.update({ _id: id }, { $set: update }, { returnUpdatedDocs: true }),
+    update: (id, updateData) => {
+        const { _id, createdAt, updatedAt, ...cleanUpdate } = updateData;
+        return db.dataTypes.update({ _id: id }, { $set: cleanUpdate }, { returnUpdatedDocs: true });
+    },
 
     remove: (id) => db.dataTypes.remove({ _id: id })
 };

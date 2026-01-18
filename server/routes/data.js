@@ -3,13 +3,7 @@ const router = express.Router();
 const DataType = require('../models/DataType');
 const DataEntity = require('../models/DataEntity');
 
-// Middleware to check if user is admin/editor
-const isAuthorized = (req, res, next) => {
-    if (req.session.user && (req.session.user.role === 'admin' || req.session.user.role === 'editor')) {
-        return next();
-    }
-    res.status(401).json({ message: 'Unauthorized' });
-};
+const { isEditorOrAdmin } = require('../middleware/auth');
 
 /**
  * Data Types (Schemas)
@@ -26,7 +20,7 @@ router.get('/types', async (req, res) => {
 });
 
 // Create new data type (Admin only)
-router.post('/types', isAuthorized, async (req, res) => {
+router.post('/types', isEditorOrAdmin, async (req, res) => {
     try {
         const type = await DataType.create(req.body);
         res.status(201).json(type);
@@ -49,8 +43,19 @@ router.get('/entities/:typeId', async (req, res) => {
     }
 });
 
+// Reorder entities (Defined BEFORE /entities/:typeId to avoid conflict)
+router.post('/entities/reorder', isEditorOrAdmin, async (req, res) => {
+    try {
+        const { updates } = req.body;
+        await DataEntity.reorder(updates);
+        res.json({ message: 'Order updated' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // Create new entity
-router.post('/entities/:typeId', isAuthorized, async (req, res) => {
+router.post('/entities/:typeId', isEditorOrAdmin, async (req, res) => {
     try {
         const entity = await DataEntity.create(req.params.typeId, req.body);
         res.status(201).json(entity);
@@ -60,7 +65,7 @@ router.post('/entities/:typeId', isAuthorized, async (req, res) => {
 });
 
 // Update entity
-router.put('/entities/:id', isAuthorized, async (req, res) => {
+router.put('/entities/:id', isEditorOrAdmin, async (req, res) => {
     try {
         const entity = await DataEntity.update(req.params.id, req.body);
         res.json(entity);
@@ -70,7 +75,7 @@ router.put('/entities/:id', isAuthorized, async (req, res) => {
 });
 
 // Delete entity
-router.delete('/entities/:id', isAuthorized, async (req, res) => {
+router.delete('/entities/:id', isEditorOrAdmin, async (req, res) => {
     try {
         await DataEntity.remove(req.params.id);
         res.json({ message: 'Entity deleted' });
@@ -79,15 +84,5 @@ router.delete('/entities/:id', isAuthorized, async (req, res) => {
     }
 });
 
-// Reorder entities
-router.post('/entities/reorder', isAuthorized, async (req, res) => {
-    try {
-        const { updates } = req.body;
-        await DataEntity.reorder(updates);
-        res.json({ message: 'Order updated' });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
 
 module.exports = router;
