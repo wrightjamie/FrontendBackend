@@ -47,6 +47,18 @@ router.get('/entities/:typeId', async (req, res) => {
 router.post('/entities/reorder', isEditorOrAdmin, async (req, res) => {
     try {
         const { updates } = req.body;
+        if (!updates || updates.length === 0) return res.status(400).json({ message: 'No updates provided' });
+
+        // Check if reordering is allowed for this type (assuming all updates belong to the same type)
+        const firstId = updates[0].id;
+        const firstEntity = await DataEntity.findOne(firstId);
+        if (firstEntity) {
+            const type = await DataType.findOne(firstEntity.typeId);
+            if (!type?.permissions?.canReorder) {
+                return res.status(403).json({ message: 'Reordering not permitted for this data type' });
+            }
+        }
+
         await DataEntity.reorder(updates);
         res.json({ message: 'Order updated' });
     } catch (err) {
@@ -57,6 +69,10 @@ router.post('/entities/reorder', isEditorOrAdmin, async (req, res) => {
 // Create new entity
 router.post('/entities/:typeId', isEditorOrAdmin, async (req, res) => {
     try {
+        const type = await DataType.findOne(req.params.typeId);
+        if (!type?.permissions?.canAdd) {
+            return res.status(403).json({ message: 'Adding records not permitted for this data type' });
+        }
         const entity = await DataEntity.create(req.params.typeId, req.body);
         res.status(201).json(entity);
     } catch (err) {
@@ -67,6 +83,14 @@ router.post('/entities/:typeId', isEditorOrAdmin, async (req, res) => {
 // Update entity
 router.put('/entities/:id', isEditorOrAdmin, async (req, res) => {
     try {
+        const entityToUpdate = await DataEntity.findOne(req.params.id);
+        if (!entityToUpdate) return res.status(404).json({ message: 'Entity not found' });
+
+        const type = await DataType.findOne(entityToUpdate.typeId);
+        if (!type?.permissions?.canEdit) {
+            return res.status(403).json({ message: 'Editing records not permitted for this data type' });
+        }
+
         const entity = await DataEntity.update(req.params.id, req.body);
         res.json(entity);
     } catch (err) {
@@ -77,6 +101,14 @@ router.put('/entities/:id', isEditorOrAdmin, async (req, res) => {
 // Delete entity
 router.delete('/entities/:id', isEditorOrAdmin, async (req, res) => {
     try {
+        const entityToDelete = await DataEntity.findOne(req.params.id);
+        if (!entityToDelete) return res.status(404).json({ message: 'Entity not found' });
+
+        const type = await DataType.findOne(entityToDelete.typeId);
+        if (!type?.permissions?.canDelete) {
+            return res.status(403).json({ message: 'Deleting records not permitted for this data type' });
+        }
+
         await DataEntity.remove(req.params.id);
         res.json({ message: 'Entity deleted' });
     } catch (err) {

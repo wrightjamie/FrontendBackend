@@ -53,6 +53,9 @@ const AdminData = () => {
                         <div className={styles.guideItem}>
                             <strong>Default:</strong> The initial value assigned to new records.
                         </div>
+                        <div className={styles.guideItem}>
+                            <strong>Permissions:</strong> Global toggles for "canAdd", "canEdit", and "canDelete" operations.
+                        </div>
                     </div>
 
                     <div className={styles.guideExamples}>
@@ -83,6 +86,7 @@ const AdminData = () => {
                                 {`{
   "name": "Blog Posts",
   "isOrdered": false,
+  "permissions": { "canAdd": true, "canEdit": true, "canDelete": false },
   "fields": [
     { "name": "Title", "type": "text", "required": true },
     { "name": "Publish Date", "type": "date" },
