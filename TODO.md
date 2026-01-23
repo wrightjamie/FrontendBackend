@@ -78,6 +78,7 @@
     - [x] Copy URL to clipboard
     - [x] Store image metadata (Title, ID) in Database
     - [x] Generate thumbnails on upload (using `sharp`)
+    - [ ] Allow multiple file uploads at once
     - [ ] **Thumbnail Enhancements**:
       - [ ] Extract thumbnail dimensions to a config file (`config/media.js`?)
       - [ ] Add "Regenerate Thumbnails" feature (Admin button + Backend endpoint)

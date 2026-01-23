@@ -43,9 +43,22 @@ const AdminMedia = () => {
         addToast('URL copied to clipboard', 'success');
     };
 
+    const handleTitleUpdate = async (id, newTitle) => {
+        try {
+            await apiClient(`/upload/${id}`, {
+                method: 'PUT',
+                body: { title: newTitle }
+            });
+            setImages(prev => prev.map(img =>
+                img._id === id ? { ...img, title: newTitle } : img
+            ));
+        } catch (err) {
+            addToast('Failed to update title', 'error');
+        }
+    };
+
     const handleUploadSuccess = (newImage) => {
         addToast('Image uploaded successfully', 'success');
-        // Add directly to top of list as we sort by date desc on backend
         setImages(prev => [newImage, ...prev]);
     };
 
@@ -93,8 +106,22 @@ const AdminMedia = () => {
                                         🗑️
                                     </button>
                                 </div>
-                                <div className={styles.filename} title={img.originalName}>
-                                    {img.title || img.filename}
+                                <div className={styles.titleArea}>
+                                    <input
+                                        type="text"
+                                        defaultValue={img.title || img.filename}
+                                        onBlur={(e) => handleTitleUpdate(img._id, e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                e.target.blur();
+                                            }
+                                        }}
+                                        className={styles.titleInput}
+                                        title="Click to edit title"
+                                    />
+                                    <div className={styles.originalName} title={img.originalName}>
+                                        {img.originalName}
+                                    </div>
                                 </div>
                             </div>
                         ))

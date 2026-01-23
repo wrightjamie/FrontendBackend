@@ -40,6 +40,7 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image" }) => {
             if (onUpload) {
                 onUpload(data);
             }
+            setPreview(''); // Clear preview after successful upload as requested
         } catch (err) {
             setError(err.message);
             setPreview('');

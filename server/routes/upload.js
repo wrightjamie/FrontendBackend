@@ -140,4 +140,28 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+/**
+ * @route   PUT /api/upload/:id
+ * @desc    Update media metadata (title)
+ */
+router.put('/:id', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Authentication required' });
+    }
+
+    try {
+        const { title } = req.body;
+        const updatedMedia = await Media.update(req.params.id, { title });
+
+        if (!updatedMedia) {
+            return res.status(404).json({ message: 'Media not found' });
+        }
+
+        res.json(updatedMedia);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to update media' });
+    }
+});
+
 module.exports = router;
