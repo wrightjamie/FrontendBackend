@@ -67,6 +67,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         checkAuth,
+        refreshUser: checkAuth, // Alias for refreshing user data
         checkSetup
     };
 

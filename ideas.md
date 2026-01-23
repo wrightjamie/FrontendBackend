@@ -1,12 +1,9 @@
-Data tables will be editable in the admin dashboard.
-They will be under a data tab
-Each data type will have its own table. Let's use another set of tabs for this.
-Each data type will have a format. I'll let you decide what that looks like, but maybe a JSON format stored in the database?
-It will have a set of fields
-Fields will have a name, type, and description
-They may be required or optional
-Fields may have a default value
-For now, let's have a text field, a number field, a boolean field, options and a date field. We may add more later.
-Data in a type may also be ordered. If it is ordered, we will be able to reorder the data in the admin dashboard.
-We should be able to add / delete / edit / reorder (if appropriate)data.
-Some data types may prevent add / delete / edit / reorder. 
+The Login page and modal will have a "Register" link. 
+This will take users to a registration page. 
+We'll capture username, name, email, and password.
+The user will not become active until an admin approves them.
+We need a way to alert the admin of new users.
+Users need a way to change their password when logged in.
+The admin will be able to change user passwords - this is how we'll deal with forgotten passwords.
+Ideally, resetting the admin password will require a password reset code sent to the admin's email. How do we do e-mail without significant dependencies? I want minimal dependencies. I don't want to have to set up an additional server for SMTP. Give me options for this. I'm happy if the final answer requires manual editting of the user.db to remove the admin password. This could be used to trigger a password reset.
+We'll make use of our admin data tables to show users and allow editing etc.

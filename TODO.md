@@ -14,6 +14,11 @@
 
 
 
+- [ ] **B-017**: Add Admin Dashboard Link for Admin Users
+  - [ ] Display "Admin Dashboard" link in the global header or user menu
+  - [ ] Visible ONLY to users with `admin` role
+  - [ ] Ensure seamless navigation between public site and admin area
+
 - [ ] **B-005**: Implement Admin User Management UI (Table: Admin/Editor/Viewer)
   - [ ] Admin can manage users (Add, Edit, Delete)
   - [ ] **Roles**: Admin (All permissions), Editor (Add/Edit/Delete data), Viewer (Read-only)
@@ -23,16 +28,38 @@
 ### ⚙️ Core Logic & Data
 
 
-- [ ] **B-006**: Implement Dynamic Data Table System (Customizable Entity Types)
-  - [ ] **Type Schema Management**:
-    - [ ] Create a "Schema" definition stored in DB (JSON format).
-    - [ ] Schema fields: `name`, `type` (text, number, boolean, options, date), `description`, `required`, `defaultValue`.
-    - [ ] Support for ordered vs. unordered data types.
-  - [ ] **Data Management**:
-    - [ ] Reusable `DataTable` component that renders based on a Type's schema.
-    - [ ] Admin interface with tabs for each defined Data Type.
-    - [ ] Full CRUD: Add, Edit, Delete, and Reorder (via drag-and-drop/arrows).
-    - [ ] Permission integration: Handle types that prevent specific actions (add/delete/edit/reorder).
+- [x] **B-006**: Implement Dynamic Data Table System (Customizable Entity Types)
+  - [x] **Type Schema Management**:
+    - [x] Create a "Schema" definition stored in DB (JSON format).
+    - [x] Schema fields: `name`, `type` (text, number, boolean, options, date), `description`, `required`, `defaultValue`.
+    - [x] Support for ordered vs. unordered data types.
+  - [x] **Data Management**:
+    - [x] Reusable `DataTable` component that renders based on a Type's schema.
+    - [x] Admin interface with tabs for each defined Data Type.
+    - [x] Full CRUD: Add, Edit, Delete, and Reorder (via arrows).
+    - [x] Permission integration: Handle types that prevent specific actions (add/delete/edit/reorder).
+  - [ ] **Low Priority Enhancement**: Drag-and-drop reordering (currently using arrow buttons)
+
+- [/] **B-005**: Implement User Management & Registration System
+  - [/] **User Registration Flow**:
+    - [x] Add "Register" link to Login page and modal
+    - [x] Create Registration page capturing: username, name, email, password
+    - [x] New users start in "pending" status (inactive until admin approval)
+    - [ ] Admin notification system for new user registrations
+  - [x] **User Management UI** (using Dynamic Data Tables):
+    - [x] Admin can view all users in a data table
+    - [x] Admin can manage users: Edit, Delete, Approve/Activate
+    - [x] **Roles**: Admin (All permissions), Editor (Add/Edit/Delete data), Viewer (Read-only)
+    - [x] Admin can set/reset passwords for all users
+  - [/] **Password Management**:
+    - [x] Logged-in users can change their own password
+    - [ ] Admin can change any user's password (for forgotten password recovery)
+    - [ ] **Admin Password Reset Options** (minimal dependencies):
+      - [ ] Research and document options for admin password reset without SMTP server
+      - [ ] Consider: Manual DB edit to clear password (triggers reset flow)
+      - [ ] Consider: File-based reset token system
+      - [ ] Consider: Simple email service integration (e.g., SendGrid free tier, Resend)
+      - [ ] Implement chosen solution with clear documentation
 
 
 ### 🎨 Metadata & Assets
@@ -53,6 +80,25 @@
 
 ## 🧾 Technical Debt
 <!-- Recorded technical debt. Prefix: TD-### -->
+
+- [ ] **TD-001**: Admin Self-Edit Protection
+  - Admin can currently change their own role or suspend themselves in User Management UI
+  - Needs conditional field disabling logic (check if editing user is current user)
+  - May require enhancement to dynamic table system for conditional field disabling
+  - Location: `client/src/pages/admin/AdminUsers.jsx`
+
+- [ ] **TD-002**: Simplify User Management UI
+  - Current: Separate "Pending Approval" and "All Users" tables
+  - Proposed: Single unified table with all users
+  - Approving should be an action button (not separate section)
+  - When user is approved, replace "Approve" button with "Suspend" button
+  - Benefits: Simpler UI, less code duplication, better UX
+  - Location: `client/src/pages/admin/AdminUsers.jsx`
+
+- [ ] **TD-003**: Redirect on Logout from Restricted Pages
+  - Current: User stays on protected page after logout (until refresh/nav)
+  - Required: Redirect to home or login page immediately upon logout if on a restricted route
+  - Affects: Admin pages, User Profile page
 
 ## 💡 Suggestions (Norm Updates)
 <!-- Proposed updates to NORMS.md. Prefix: S-NORM-### -->

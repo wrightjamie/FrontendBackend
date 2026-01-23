@@ -69,3 +69,22 @@
     opacity: 0.7;
     cursor: not-allowed;
 }
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 0.25rem;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

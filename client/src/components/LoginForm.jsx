@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginForm.module.css';
 
-const LoginForm = ({ onSuccess }) => {
+const LoginForm = ({ onSuccess, onRegisterClick }) => {
     const { login } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -33,36 +34,44 @@ const LoginForm = ({ onSuccess }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
-            {error && <p className={styles.error}>{error}</p>}
-            <div className={styles.inputGroup}>
-                <label htmlFor="username">Username</label>
-                <input
-                    id="username"
-                    type="text"
-                    className={styles.input}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    disabled={loading}
-                />
+        <>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                {error && <p className={styles.error}>{error}</p>}
+                <div className={styles.inputGroup}>
+                    <label htmlFor="username">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        className={styles.input}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        disabled={loading}
+                    />
+                </div>
+                <div className={styles.inputGroup}>
+                    <label htmlFor="password">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        className={styles.input}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        disabled={loading}
+                    />
+                </div>
+                <button type="submit" className={styles.submitBtn} disabled={loading}>
+                    {loading ? 'Signing In...' : 'Sign In'}
+                </button>
+            </form>
+            <div className={styles.footer}>
+                <p>
+                    Don't have an account?
+                    <Link to="/register" className={styles.link} onClick={onRegisterClick}>Register</Link>
+                </p>
             </div>
-            <div className={styles.inputGroup}>
-                <label htmlFor="password">Password</label>
-                <input
-                    id="password"
-                    type="password"
-                    className={styles.input}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={loading}
-                />
-            </div>
-            <button type="submit" className={styles.submitBtn} disabled={loading}>
-                {loading ? 'Signing In...' : 'Sign In'}
-            </button>
-        </form>
+        </>
     );
 };
 

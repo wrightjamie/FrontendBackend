@@ -33,9 +33,7 @@ const LoginPage = () => {
                     <p>Please sign in to continue</p>
                 </div>
                 <LoginForm onSuccess={handleLoginSuccess} />
-                <div className={styles.footer}>
-                    <p>Need help? Contact your administrator.</p>
-                </div>
+
             </div>
         </div>
     );
