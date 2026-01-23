@@ -25,13 +25,13 @@ const AdminMedia = () => {
         fetchImages();
     }, []);
 
-    const handleDelete = async (filename) => {
+    const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this image?')) return;
 
         try {
-            await apiClient(`/upload/${filename}`, { method: 'DELETE' });
+            await apiClient(`/upload/${id}`, { method: 'DELETE' });
             addToast('Image deleted', 'success');
-            setImages(prev => prev.filter(img => img.filename !== filename));
+            setImages(prev => prev.filter(img => img._id !== id));
         } catch (err) {
             addToast('Failed to delete image', 'error');
         }
@@ -45,8 +45,8 @@ const AdminMedia = () => {
 
     const handleUploadSuccess = (newImage) => {
         addToast('Image uploaded successfully', 'success');
-        // Refresh list or add explicitly if return format matches
-        fetchImages();
+        // Add directly to top of list as we sort by date desc on backend
+        setImages(prev => [newImage, ...prev]);
     };
 
     return (
@@ -69,28 +69,32 @@ const AdminMedia = () => {
                         <p className={styles.empty}>No images found.</p>
                     ) : (
                         images.map(img => (
-                            <div key={img.filename} className={styles.card}>
+                            <div key={img._id} className={styles.card}>
                                 <div className={styles.imageWrapper}>
-                                    <img src={img.url} alt={img.filename} loading="lazy" />
+                                    <img
+                                        src={img.thumbnailUrl || img.url}
+                                        alt={img.title || img.filename}
+                                        loading="lazy"
+                                    />
                                 </div>
                                 <div className={styles.actions}>
                                     <button
                                         onClick={() => copyToClipboard(img.url)}
                                         className={styles.copyBtn}
-                                        title="Copy URL"
+                                        title="Copy Full URL"
                                     >
                                         🔗
                                     </button>
                                     <button
-                                        onClick={() => handleDelete(img.filename)}
+                                        onClick={() => handleDelete(img._id)}
                                         className={styles.deleteBtn}
                                         title="Delete"
                                     >
                                         🗑️
                                     </button>
                                 </div>
-                                <div className={styles.filename} title={img.filename}>
-                                    {img.filename}
+                                <div className={styles.filename} title={img.originalName}>
+                                    {img.title || img.filename}
                                 </div>
                             </div>
                         ))

@@ -3,6 +3,8 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const sharp = require('sharp');
+const Media = require('../models/Media');
 
 // Configure storage
 const storage = multer.diskStorage({
@@ -14,13 +16,11 @@ const storage = multer.diskStorage({
         cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
-        // Create unique filename: timestamp-random.ext
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, uniqueSuffix + path.extname(file.originalname));
     }
 });
 
-// File filter (Images only)
 const fileFilter = (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
         cb(null, true);
@@ -32,106 +32,112 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
-    limits: {
-        fileSize: 5 * 1024 * 1024 // 5MB limit
-    }
+    limits: { fileSize: 10 * 1024 * 1024 } // 10MB
 });
 
 /**
  * @route   POST /api/upload
- * @desc    Upload a single image
- * @access  Protected (Authenticated users only)
+ * @desc    Upload image, generate thumbnail, save to DB
  */
-router.post('/', (req, res) => {
-    // Check authentication (basic check for user session)
+router.post('/', async (req, res) => {
     if (!req.session.userId) {
         return res.status(401).json({ message: 'Authentication required' });
     }
 
     const uploadSingle = upload.single('image');
 
-    uploadSingle(req, res, function (err) {
-        if (err instanceof multer.MulterError) {
-            return res.status(400).json({ message: `Upload error: ${err.message}` });
-        } else if (err) {
-            return res.status(400).json({ message: err.message });
+    uploadSingle(req, res, async function (err) {
+        if (err) return res.status(400).json({ message: err.message });
+        if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+
+        try {
+            const originalPath = req.file.path;
+            const filename = req.file.filename;
+            const thumbFilename = `thumb-${filename}`;
+            const thumbPath = path.join(__dirname, '../public/uploads/thumbs', thumbFilename);
+
+            // Ensure thumb dir exists
+            const thumbDir = path.dirname(thumbPath);
+            if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
+
+            // Generate thumbnail
+            await sharp(originalPath)
+                .resize(300, 300, { fit: 'cover' })
+                .toFile(thumbPath);
+
+            // Save to DB
+            const media = await Media.create({
+                filename: filename,
+                originalName: req.file.originalname,
+                mimetype: req.file.mimetype,
+                size: req.file.size,
+                url: `/uploads/${filename}`,
+                thumbnailUrl: `/uploads/thumbs/${thumbFilename}`,
+                title: req.file.originalname // Default title
+            });
+
+            res.json({
+                message: 'Upload successful',
+                ...media
+            });
+
+        } catch (error) {
+            // Clean up if DB save or resize fails
+            if (req.file && fs.existsSync(req.file.path)) {
+                fs.unlinkSync(req.file.path);
+            }
+            console.error('Upload Error:', error);
+            res.status(500).json({ message: 'Failed to process image' });
         }
-
-        if (!req.file) {
-            return res.status(400).json({ message: 'No file uploaded' });
-        }
-
-        // Return path relative to server root for static serving
-        // Assuming static serve at /uploads
-        const fileUrl = `/uploads/${req.file.filename}`;
-
-        res.json({
-            message: 'Image uploaded successfully',
-            url: fileUrl,
-            filename: req.file.filename
-        });
     });
 });
 
 /**
  * @route   GET /api/upload
- * @desc    List all uploaded images
- * @access  Protected (Admin only)
+ * @desc    List all media assets
  */
-router.get('/', (req, res) => {
-    if (!req.session.userId) { // TODO: Check for admin role specifically if needed
-        return res.status(401).json({ message: 'Authentication required' });
-    }
-
-    const uploadDir = path.join(__dirname, '../public/uploads');
-
-    fs.readdir(uploadDir, (err, files) => {
-        if (err) {
-            // If dir doesn't exist just return empty list
-            if (err.code === 'ENOENT') return res.json([]);
-            return res.status(500).json({ message: 'Unable to scan files' });
-        }
-
-        const fileInfos = files.map(file => {
-            return {
-                filename: file,
-                url: `/uploads/${file}`,
-                // Simple stat could be added here if needed (size, date)
-            };
-        });
-
-        res.json(fileInfos);
-    });
-});
-
-/**
- * @route   DELETE /api/upload/:filename
- * @desc    Delete an uploaded image
- * @access  Protected (Admin only)
- */
-router.delete('/:filename', (req, res) => {
+router.get('/', async (req, res) => {
     if (!req.session.userId) {
         return res.status(401).json({ message: 'Authentication required' });
     }
 
-    const filename = req.params.filename;
-    const filepath = path.join(__dirname, '../public/uploads', filename);
+    try {
+        const media = await Media.findAll();
+        res.json(media);
+    } catch (err) {
+        res.status(500).json({ message: 'Failed to fetch media' });
+    }
+});
 
-    // Prevent directory traversal
-    if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
-        return res.status(400).json({ message: 'Invalid filename' });
+/**
+ * @route   DELETE /api/upload/:id
+ */
+router.delete('/:id', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Authentication required' });
     }
 
-    fs.unlink(filepath, (err) => {
-        if (err) {
-            if (err.code === 'ENOENT') {
-                return res.status(404).json({ message: 'File not found' });
-            }
-            return res.status(500).json({ message: 'Could not delete file' });
-        }
+    try {
+        const media = await Media.findOne(req.params.id);
+        if (!media) return res.status(404).json({ message: 'Media not found' });
 
-        res.json({ message: 'File deleted successfully' });
-    });
+        // Paths
+        const uploadDir = path.join(__dirname, '../public/uploads');
+        const filePath = path.join(uploadDir, media.filename);
+        const thumbPath = path.join(uploadDir, 'thumbs', `thumb-${media.filename}`);
+
+        // Delete files
+        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        if (fs.existsSync(thumbPath)) fs.unlinkSync(thumbPath);
+
+        // Remove from DB
+        await Media.remove(req.params.id);
+
+        res.json({ message: 'Media deleted' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to delete media' });
+    }
 });
 
 module.exports = router;

@@ -75,9 +75,12 @@
   - [ ] **Admin Media Gallery**:
     - [ ] View all uploaded images in a grid (with thumbnails)
     - [ ] Delete unused images (files + DB records)
-    - [ ] Copy URL to clipboard
-    - [ ] Store image metadata (Title, ID) in Database
-    - [ ] Generate thumbnails on upload (using `sharp`)
+    - [x] Copy URL to clipboard
+    - [x] Store image metadata (Title, ID) in Database
+    - [x] Generate thumbnails on upload (using `sharp`)
+    - [ ] **Thumbnail Enhancements**:
+      - [ ] Extract thumbnail dimensions to a config file (`config/media.js`?)
+      - [ ] Add "Regenerate Thumbnails" feature (Admin button + Backend endpoint)
 
 - [ ] **B-020**: Generic Frontend Pagination
   - [ ] Create reusable Pagination component
