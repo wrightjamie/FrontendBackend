@@ -40,6 +40,12 @@
     font-size: 1.5rem;
 }
 
+.logoImage {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+}
+
 .logoText {
     background: linear-gradient(135deg, var(--color-primary), #a855f7);
     -webkit-background-clip: text;

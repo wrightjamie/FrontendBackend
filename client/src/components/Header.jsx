@@ -11,7 +11,11 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link to="/" className={styles.logo}>
-                    <span className={styles.logoIcon}>⚡</span>
+                    {meta.logo ? (
+                        <img src={meta.logo} alt={meta.title} className={styles.logoImage} />
+                    ) : (
+                        <span className={styles.logoIcon}>⚡</span>
+                    )}
                     <span className={styles.logoText}>{meta.title}</span>
                 </Link>
                 <div className={styles.actions}>

@@ -7,6 +7,7 @@ const AdminLayout = () => {
     const adminTabs = [
         { path: 'users', label: 'Users' },
         { path: 'data', label: 'Data' },
+        { path: 'media', label: 'Media' },
         { path: 'settings', label: 'Settings' },
         { path: 'test-toasts', label: 'Test Toasts' },
     ];

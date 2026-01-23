@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSiteMeta, useSiteMetaMutations } from '../../hooks/useSiteMeta';
 import { useToast } from '../../context/ToastContext';
+import ImageUpload from '../../components/ImageUpload';
 import styles from './AdminSettings.module.css';
 
 const AdminSettings = () => {
@@ -11,6 +12,7 @@ const AdminSettings = () => {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
+        logo: '',
     });
     const [isDirty, setIsDirty] = useState(false);
 
@@ -20,6 +22,7 @@ const AdminSettings = () => {
             setFormData({
                 title: meta.title || '',
                 description: meta.description || '',
+                logo: meta.logo || '',
             });
         }
     }, [meta]);
@@ -72,6 +75,18 @@ const AdminSettings = () => {
                         value={formData.description}
                         onChange={handleChange}
                         placeholder="Say something about this project"
+                    />
+                </div>
+
+                <div className={styles.field}>
+                    <label className={styles.label}>Site Logo</label>
+                    <ImageUpload
+                        onUpload={(res) => {
+                            setFormData(prev => ({ ...prev, logo: res ? res.url : '' }));
+                            setIsDirty(true);
+                        }}
+                        currentImage={formData.logo}
+                        label="Upload Logo"
                     />
                 </div>
 

@@ -6,6 +6,7 @@ import LoginModal from './components/LoginModal';
 import AdminLayout from './layouts/AdminLayout';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminData from './pages/admin/AdminData';
+import AdminMedia from './pages/admin/AdminMedia';
 import AdminSettings from './pages/admin/AdminSettings';
 import ToastPlayground from './pages/admin/ToastPlayground';
 import { useAuth } from './context/AuthContext';
@@ -67,6 +68,7 @@ function App() {
             <Route index element={<Navigate to="users" replace />} />
             <Route path="users" element={<AdminUsers />} />
             <Route path="data" element={<AdminData />} />
+            <Route path="media" element={<AdminMedia />} />
             <Route path="settings" element={<AdminSettings />} />
             <Route path="test-toasts" element={<ToastPlayground />} />
           </Route>

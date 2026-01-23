@@ -72,6 +72,17 @@
 - [ ] **B-011**: Implement Image Upload & Storage Strategy
   - [ ] Image upload functionality for Data images and Site Logo
   - [ ] Decision on storage strategy (local vs cloud)
+  - [ ] **Admin Media Gallery**:
+    - [ ] View all uploaded images in a grid (with thumbnails)
+    - [ ] Delete unused images (files + DB records)
+    - [ ] Copy URL to clipboard
+    - [ ] Store image metadata (Title, ID) in Database
+    - [ ] Generate thumbnails on upload (using `sharp`)
+
+- [ ] **B-020**: Generic Frontend Pagination
+  - [ ] Create reusable Pagination component
+  - [ ] Integrate into `DataTable` component
+  - [ ] Purely frontend-based (filter visible rows) for snappy UX
 - [ ] **B-012**: Standardize Base Styles & Variables
   - [ ] Define global variables for colors, spacing, typography (fonts, sizes), and borders
   - [ ] Configure standard border-radius and shadow tokens
@@ -172,3 +183,8 @@
   - [x] Installed `nedb-promises` (Embedded MongoDB-like DB)
   - [x] Configured `server/config/db.js` and `server/models/User.js`
   - [x] Connected in `server/index.js`
+
+- [ ] **B-019**: Create Dependencies Documentation
+  - [ ] Create `DEPENDENCIES.md` file
+  - [ ] List all backend and frontend dependencies
+  - [ ] Explain purpose and justification for each choice
