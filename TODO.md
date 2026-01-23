@@ -14,10 +14,10 @@
 
 
 
-- [ ] **B-017**: Add Admin Dashboard Link for Admin Users
-  - [ ] Display "Admin Dashboard" link in the global header or user menu
-  - [ ] Visible ONLY to users with `admin` role
-  - [ ] Ensure seamless navigation between public site and admin area
+- [x] **B-017**: Add Admin Dashboard Link for Admin Users
+  - [x] Display "Admin Dashboard" link in the global header or user menu
+  - [x] Visible ONLY to users with `admin` role
+  - [x] Ensure seamless navigation between public site and admin area
 
 - [ ] **B-005**: Implement Admin User Management UI (Table: Admin/Editor/Viewer)
   - [ ] Admin can manage users (Add, Edit, Delete)

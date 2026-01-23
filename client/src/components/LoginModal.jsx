@@ -28,6 +28,11 @@ const LoginModal = () => {
             {isLoggedIn ? (
                 <div className={styles.form}>
                     <h3>Hello, {currentUsername || 'User'}</h3>
+                    {user?.role === 'admin' && (
+                        <Link to="/admin" className={styles.profileLink} onClick={closeModal}>
+                            Admin Dashboard
+                        </Link>
+                    )}
                     <Link to="/profile" className={styles.profileLink} onClick={closeModal}>
                         My Profile
                     </Link>
