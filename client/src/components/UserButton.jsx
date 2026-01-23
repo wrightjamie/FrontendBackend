@@ -10,7 +10,7 @@ const UserButton = () => {
         <div className={styles.container}>
             <button
                 className={styles.userButton}
-                popovertarget="login-popover"
+                popoverTarget="login-popover"
             >
                 {isLoggedIn ? username || 'User' : 'Login'}
             </button>

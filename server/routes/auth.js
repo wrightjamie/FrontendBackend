@@ -163,7 +163,7 @@ router.post('/login', async (req, res) => {
  */
 router.get('/me', async (req, res) => {
     if (!req.session.userId) {
-        return res.status(401).json({ message: 'Not authenticated' });
+        return res.json({ user: null });
     }
 
     try {
