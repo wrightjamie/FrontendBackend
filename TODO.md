@@ -14,6 +14,12 @@
 
 
 
+- [ ] **B-018**: Enhanced Toast Notifications
+  - [ ] Add toast confirmation on successful logout
+  - [ ] Audit application for consistent user feedback (Success/Error/Warning)
+  - [ ] Ensure API errors trigger appropriate error toasts
+  - [ ] Ensure critical actions (save, delete, etc.) have success toasts
+
 - [x] **B-017**: Add Admin Dashboard Link for Admin Users
   - [x] Display "Admin Dashboard" link in the global header or user menu
   - [x] Visible ONLY to users with `admin` role
