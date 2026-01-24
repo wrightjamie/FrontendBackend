@@ -12,7 +12,7 @@ export const useSiteMeta = () => {
     const meta = useMemo(() => ({
         title: data?.title || 'App Name',
         description: data?.description || 'Welcome to the application',
-        logoUrl: data?.logoUrl || null
+        logo: data?.logo || null
     }), [data]);
 
     return { meta, loading, error, refresh };

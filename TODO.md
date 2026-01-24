@@ -82,6 +82,11 @@
     - [ ] **Thumbnail Enhancements**:
       - [ ] Extract thumbnail dimensions to a config file (`config/media.js`?)
       - [ ] Add "Regenerate Thumbnails" feature (Admin button + Backend endpoint)
+    - [ ] **B-021**: [Bug] Fix Site Logo persistence in Admin Settings
+    - [ ] **B-022**: [Feature] Reusable `ImageSelect` Popover component
+      - [ ] Allows picking already uploaded images from the Media Library
+      - [ ] Replaces direct uploads in settings/content forms
+      - [ ] Implemented as a clean, premium popover UI
 
 - [ ] **B-020**: Generic Frontend Pagination
   - [ ] Create reusable Pagination component

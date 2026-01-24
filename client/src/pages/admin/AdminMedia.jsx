@@ -7,6 +7,8 @@ import ImageUpload from '../../components/ImageUpload';
 const AdminMedia = () => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [regenerating, setRegenerating] = useState(false);
+    const [cacheBuster, setCacheBuster] = useState('');
     const { addToast } = useToast();
 
     const fetchImages = async () => {
@@ -62,14 +64,42 @@ const AdminMedia = () => {
         setImages(prev => [newImage, ...prev]);
     };
 
+    const handleRegenerate = async () => {
+        if (!window.confirm('This will regenerate thumbnails for all images using the current config. Continue?')) return;
+
+        setRegenerating(true);
+        try {
+            const res = await apiClient('/upload/regenerate-thumbs', { method: 'POST' });
+            addToast(`${res.message}: ${res.results.success} successes, ${res.results.failed} failed.`, 'success');
+
+            // Set cache buster to force browser to reload images
+            setCacheBuster(`?v=${Date.now()}`);
+            fetchImages();
+        } catch (err) {
+            addToast('Regeneration failed', 'error');
+        } finally {
+            setRegenerating(false);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h2>Media Library</h2>
+                <div className={styles.titleInfo}>
+                    <h2>Media Library</h2>
+                    <button
+                        onClick={handleRegenerate}
+                        className={styles.regenerateBtn}
+                        disabled={regenerating || loading}
+                    >
+                        {regenerating ? 'Regenerating...' : 'Regenerate Thumbnails'}
+                    </button>
+                </div>
                 <div className={styles.uploader}>
                     <ImageUpload
                         onUpload={handleUploadSuccess}
                         label="Upload New Image"
+                        showPreview={false}
                     />
                 </div>
             </div>
@@ -85,7 +115,7 @@ const AdminMedia = () => {
                             <div key={img._id} className={styles.card}>
                                 <div className={styles.imageWrapper}>
                                     <img
-                                        src={img.thumbnailUrl || img.url}
+                                        src={`${img.thumbnailUrl || img.url}${cacheBuster}`}
                                         alt={img.title || img.filename}
                                         loading="lazy"
                                     />

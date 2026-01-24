@@ -12,7 +12,11 @@ const Header = () => {
             <div className={styles.container}>
                 <Link to="/" className={styles.logo}>
                     {meta.logo ? (
-                        <img src={meta.logo} alt={meta.title} className={styles.logoImage} />
+                        <img
+                            src={`${meta.logo}?v=${Date.now()}`}
+                            alt={meta.title}
+                            className={styles.logoImage}
+                        />
                     ) : (
                         <span className={styles.logoIcon}>⚡</span>
                     )}

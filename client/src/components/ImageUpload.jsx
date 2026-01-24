@@ -6,8 +6,9 @@ import styles from './ImageUpload.module.css';
  * ImageUpload: Reusable component for uploading images.
  * @param {function} onUpload - Callback with { url, filename } on success.
  * @param {string} currentImage - URL of currently selected/uploaded image.
+ * @param {boolean} showPreview - Whether to show the uploaded image in the box after success.
  */
-const ImageUpload = ({ onUpload, currentImage, label = "Upload Image" }) => {
+const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPreview = true }) => {
     const [preview, setPreview] = useState(currentImage || '');
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState('');
@@ -40,7 +41,11 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image" }) => {
             if (onUpload) {
                 onUpload(data);
             }
-            setPreview(''); // Clear preview after successful upload as requested
+            if (showPreview) {
+                setPreview(data.url);
+            } else {
+                setPreview('');
+            }
         } catch (err) {
             setError(err.message);
             setPreview('');

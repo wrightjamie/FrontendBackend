@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
 const Media = require('../models/Media');
+const mediaConfig = require('../config/mediaConfig');
 
 // Configure storage
 const storage = multer.diskStorage({
@@ -32,7 +33,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
-    limits: { fileSize: 10 * 1024 * 1024 } // 10MB
+    limits: { fileSize: mediaConfig.uploads.maxSize }
 });
 
 /**
@@ -62,7 +63,12 @@ router.post('/', async (req, res) => {
 
             // Generate thumbnail
             await sharp(originalPath)
-                .resize(300, 300, { fit: 'cover' })
+                .resize(
+                    mediaConfig.thumbnails.width,
+                    mediaConfig.thumbnails.height,
+                    { fit: mediaConfig.thumbnails.fit }
+                )
+                .webp({ quality: mediaConfig.thumbnails.quality }) // Optional: standardized format
                 .toFile(thumbPath);
 
             // Save to DB
@@ -161,6 +167,62 @@ router.put('/:id', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Failed to update media' });
+    }
+});
+
+/**
+ * @route   POST /api/upload/regenerate-thumbs
+ * @desc    Regenerate ALL thumbnails based on current config
+ */
+router.post('/regenerate-thumbs', async (req, res) => {
+    if (!req.session.userId) { // TODO: Check for admin specifically if roles are enforced
+        return res.status(401).json({ message: 'Authentication required' });
+    }
+
+    try {
+        const assets = await Media.findAll();
+        const results = {
+            total: assets.length,
+            success: 0,
+            failed: 0,
+            skipped: 0
+        };
+
+        const uploadDir = path.join(__dirname, '../public/uploads');
+        const thumbDir = path.join(uploadDir, 'thumbs');
+        if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
+
+        for (const asset of assets) {
+            const originalPath = path.join(uploadDir, asset.filename);
+            const thumbPath = path.join(thumbDir, `thumb-${asset.filename}`);
+
+            if (fs.existsSync(originalPath)) {
+                try {
+                    await sharp(originalPath)
+                        .resize(
+                            mediaConfig.thumbnails.width,
+                            mediaConfig.thumbnails.height,
+                            { fit: mediaConfig.thumbnails.fit }
+                        )
+                        .webp({ quality: mediaConfig.thumbnails.quality })
+                        .toFile(thumbPath);
+                    results.success++;
+                } catch (err) {
+                    console.error(`Failed to regenerate thumb for ${asset.filename}:`, err);
+                    results.failed++;
+                }
+            } else {
+                results.skipped++;
+            }
+        }
+
+        res.json({
+            message: 'Thumbnail regeneration complete',
+            results
+        });
+    } catch (err) {
+        console.error('Regeneration error:', err);
+        res.status(500).json({ message: 'Failed to regenerate thumbnails' });
     }
 });
 

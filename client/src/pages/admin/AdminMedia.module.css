@@ -9,10 +9,40 @@
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    /* Changed from flex-start */
     gap: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--color-border);
+}
+
+.titleInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.regenerateBtn {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.regenerateBtn:hover:not(:disabled) {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    border-color: var(--color-primary);
+}
+
+.regenerateBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .header h2 {

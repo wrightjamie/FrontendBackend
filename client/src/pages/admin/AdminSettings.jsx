@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSiteMeta, useSiteMetaMutations } from '../../hooks/useSiteMeta';
 import { useToast } from '../../context/ToastContext';
-import ImageUpload from '../../components/ImageUpload';
+import ImageSelect from '../../components/ImageSelect';
 import styles from './AdminSettings.module.css';
 
 const AdminSettings = () => {
@@ -79,14 +79,13 @@ const AdminSettings = () => {
                 </div>
 
                 <div className={styles.field}>
-                    <label className={styles.label}>Site Logo</label>
-                    <ImageUpload
-                        onUpload={(res) => {
-                            setFormData(prev => ({ ...prev, logo: res ? res.url : '' }));
+                    <ImageSelect
+                        label="Site Logo"
+                        value={formData.logo}
+                        onChange={(url) => {
+                            setFormData(prev => ({ ...prev, logo: url }));
                             setIsDirty(true);
                         }}
-                        currentImage={formData.logo}
-                        label="Upload Logo"
                     />
                 </div>
 
