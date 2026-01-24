@@ -25,78 +25,63 @@
   - [x] Visible ONLY to users with `admin` role
   - [x] Ensure seamless navigation between public site and admin area
 
-- [ ] **B-005**: Implement Admin User Management UI (Table: Admin/Editor/Viewer)
-  - [ ] Admin can manage users (Add, Edit, Delete)
-  - [ ] **Roles**: Admin (All permissions), Editor (Add/Edit/Delete data), Viewer (Read-only)
-  - [ ] Admin can set passwords for all users
-  - [ ] Editor can edit their own password
+
+- [ ] **B-012**: Standardize Base Styles & Core Components
+  - [ ] Define global design tokens (OKLCH colors, spacing, typography, shadows)
+  - [ ] Create standardized component styles (Buttons, Input fields, Selects, Cards)
+  - [ ] Standardize Table UI (header, rows, hover states, pagination layout)
+  - [ ] Ensure full dark mode compatibility across all core components
+
+- [ ] **B-023**: Implement SVG Icon System
+  - [ ] Research and choose solution (pre-built vs self-built)
+  - [ ] Implement caching for performance
+  - [ ] Ensure ease of use across components
+
+
+- [ ] **B-005**: Refine Admin User Management UI
+  - [ ] Implement premium UI components (replace `window.confirm` and `prompt` with custom modals)
+  - [ ] Consolidate "Pending Approval" and "All Users" into a single unified table (TD-002)
+  - [ ] Add filtering/sorting for status and role
+  - [ ] Implement protection logic to prevent admins from de-activating themselves (TD-001)
+
 
 ### ⚙️ Core Logic & Data
 
+- [ ] **B-024**: Implement Admin Password Management Flow
+  - [ ] Admin can change any user's password (for forgotten password recovery)
+  - [ ] **Admin Password Reset Options** (minimal dependencies):
+    - [ ] Research and document options for admin password reset without SMTP server
+    - [ ] Consider: Manual DB edit to clear password (triggers reset flow)
+    - [ ] Consider: File-based reset token system
+    - [ ] Consider: Simple email service integration (e.g., SendGrid free tier, Resend)
+    - [ ] Implement chosen solution with clear documentation
 
-- [x] **B-006**: Implement Dynamic Data Table System (Customizable Entity Types)
-  - [x] **Type Schema Management**:
-    - [x] Create a "Schema" definition stored in DB (JSON format).
-    - [x] Schema fields: `name`, `type` (text, number, boolean, options, date), `description`, `required`, `defaultValue`.
-    - [x] Support for ordered vs. unordered data types.
-  - [x] **Data Management**:
-    - [x] Reusable `DataTable` component that renders based on a Type's schema.
-    - [x] Admin interface with tabs for each defined Data Type.
-    - [x] Full CRUD: Add, Edit, Delete, and Reorder (via arrows).
-    - [x] Permission integration: Handle types that prevent specific actions (add/delete/edit/reorder).
-  - [ ] **Low Priority Enhancement**: Drag-and-drop reordering (currently using arrow buttons)
-
-- [/] **B-005**: Implement User Management & Registration System
-  - [/] **User Registration Flow**:
-    - [x] Add "Register" link to Login page and modal
-    - [x] Create Registration page capturing: username, name, email, password
-    - [x] New users start in "pending" status (inactive until admin approval)
-    - [ ] Admin notification system for new user registrations
-  - [x] **User Management UI** (using Dynamic Data Tables):
-    - [x] Admin can view all users in a data table
-    - [x] Admin can manage users: Edit, Delete, Approve/Activate
-    - [x] **Roles**: Admin (All permissions), Editor (Add/Edit/Delete data), Viewer (Read-only)
-    - [x] Admin can set/reset passwords for all users
-  - [/] **Password Management**:
-    - [x] Logged-in users can change their own password
-    - [ ] Admin can change any user's password (for forgotten password recovery)
-    - [ ] **Admin Password Reset Options** (minimal dependencies):
-      - [ ] Research and document options for admin password reset without SMTP server
-      - [ ] Consider: Manual DB edit to clear password (triggers reset flow)
-      - [ ] Consider: File-based reset token system
-      - [ ] Consider: Simple email service integration (e.g., SendGrid free tier, Resend)
-      - [ ] Implement chosen solution with clear documentation
-
+- [ ] **B-026**: Update README.md
+  - [ ] Reflect current project architecture and feature set
+  - [ ] Update documentation on how to use the Dynamic Data system
+  - [ ] Document the updated User/Admin permission model
 
 ### 🎨 Metadata & Assets
-- [ ] **B-011**: Implement Image Upload & Storage Strategy
-  - [ ] Image upload functionality for Data images and Site Logo
-  - [ ] Decision on storage strategy (local vs cloud)
-  - [ ] **Admin Media Gallery**:
-    - [ ] View all uploaded images in a grid (with thumbnails)
-    - [ ] Delete unused images (files + DB records)
-    - [x] Copy URL to clipboard
-    - [x] Store image metadata (Title, ID) in Database
-    - [x] Generate thumbnails on upload (using `sharp`)
-    - [ ] Allow multiple file uploads at once
-    - [ ] **Thumbnail Enhancements**:
-      - [ ] Extract thumbnail dimensions to a config file (`config/media.js`?)
-      - [ ] Add "Regenerate Thumbnails" feature (Admin button + Backend endpoint)
-    - [ ] **B-021**: [Bug] Fix Site Logo persistence in Admin Settings
-    - [ ] **B-022**: [Feature] Reusable `ImageSelect` Popover component
-      - [ ] Allows picking already uploaded images from the Media Library
-      - [ ] Replaces direct uploads in settings/content forms
-      - [ ] Implemented as a clean, premium popover UI
+- [ ] **B-011**: Refine Admin Media Gallery
+  - [x] View all uploaded images in a grid (with thumbnails)
+  - [x] Delete images (files + DB records)
+  - [x] Copy URL to clipboard
+  - [x] Store image metadata (Title, ID) in Database
+  - [x] Generate thumbnails on upload (using `sharp`)
+  - [x] **D-022**: Regenerate Thumbnails feature (Admin button + Backend endpoint)
+  - [ ] Allow multiple file uploads at once
+  - [x] **B-021**: [Bug] Fix Site Logo persistence in Admin Settings
+  - [x] **B-022**: [Feature] Reusable `ImageSelect` Popover component
+
+- [ ] **B-025**: Multiple Image Sizes for Responsive Images
+  - [ ] Extend `sharp` processing to generate multiple variants (e.g., sm, md, lg)
+  - [ ] Standardize size definitions in `config/mediaConfig.js`
+  - [ ] Implement frontend helper/component to utilize responsive image sets (`srcset`)
 
 - [ ] **B-020**: Generic Frontend Pagination
   - [ ] Create reusable Pagination component
   - [ ] Integrate into `DataTable` component
   - [ ] Purely frontend-based (filter visible rows) for snappy UX
-- [ ] **B-012**: Standardize Base Styles & Variables
-  - [ ] Define global variables for colors, spacing, typography (fonts, sizes), and borders
-  - [ ] Configure standard border-radius and shadow tokens
-  - [ ] Update existing components to use variables
-  - [ ] Ensure dark mode compatibility
 
 
 
@@ -197,3 +182,20 @@
   - [ ] Create `DEPENDENCIES.md` file
   - [ ] List all backend and frontend dependencies
   - [ ] Explain purpose and justification for each choice
+
+- [x] **D-006**: Implement Dynamic Data Table System (Customizable Entity Types) (B-006)
+  - [x] **Type Schema Management**:
+    - [x] Create a "Schema" definition stored in DB (JSON format).
+    - [x] Schema fields: `name`, `type` (text, number, boolean, options, date), `description`, `required`, `defaultValue`.
+    - [x] Support for ordered vs. unordered data types.
+  - [x] **Data Management**:
+    - [x] Reusable `DataTable` component that renders based on a Type's schema.
+    - [x] Admin interface with tabs for each defined Data Type.
+    - [x] Full CRUD: Add, Edit, Delete, and Reorder (via arrows).
+    - [x] Permission integration: Handle types that prevent specific actions (add/delete/edit/reorder).
+
+## ❄️ Frozen
+<!-- Tasks on hold or low priority. -->
+
+- [ ] **B-006 (Old)**: Drag-and-drop reordering for Data Tables
+  - Note: Currently using arrow buttons, which is sufficient for current needs.
