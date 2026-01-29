@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import { useUsers, useUserMutations } from '../../hooks/useUsers';
 import styles from './AdminUsers.module.css';
 
@@ -7,6 +8,7 @@ import styles from './AdminUsers.module.css';
  * Displays all users in a table with actions for approve, edit role/status, and delete
  */
 const AdminUsers = () => {
+    const { user: currentUser } = useAuth();
     const { data: users, loading, error, refresh } = useUsers();
     const { approveUser, updateUser, deleteUser, resetPassword } = useUserMutations();
 
@@ -156,91 +158,103 @@ const AdminUsers = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {activeUsers.map(user => (
-                                <tr key={user._id}>
-                                    {editingId === user._id ? (
-                                        <>
-                                            <td>{user.username}</td>
-                                            <td>
-                                                <input
-                                                    type="text"
-                                                    className={styles.input}
-                                                    value={editForm.name}
-                                                    onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                                                />
-                                            </td>
-                                            <td>
-                                                <input
-                                                    type="email"
-                                                    className={styles.input}
-                                                    value={editForm.email}
-                                                    onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                                                />
-                                            </td>
-                                            <td>
-                                                <select
-                                                    className={styles.select}
-                                                    value={editForm.role}
-                                                    onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
-                                                >
-                                                    <option value="viewer">Viewer</option>
-                                                    <option value="editor">Editor</option>
-                                                    <option value="admin">Admin</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select
-                                                    className={styles.select}
-                                                    value={editForm.status}
-                                                    onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
-                                                >
-                                                    <option value="active">Active</option>
-                                                    <option value="suspended">Suspended</option>
-                                                </select>
-                                            </td>
-                                            <td className={styles.actionsCell}>
-                                                <div className={styles.actions}>
-                                                    <button onClick={() => handleSaveEdit(user._id)} className={styles.saveBtn}>
-                                                        Save
-                                                    </button>
-                                                    <button onClick={handleCancelEdit} className={styles.cancelBtn}>
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <td>{user.username}</td>
-                                            <td>{user.name}</td>
-                                            <td>{user.email}</td>
-                                            <td>
-                                                <span className={`${styles.badge} ${styles[`badge${user.role}`]}`}>
-                                                    {user.role}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span className={`${styles.badge} ${styles[`badge${user.status}`]}`}>
-                                                    {user.status}
-                                                </span>
-                                            </td>
-                                            <td className={styles.actionsCell}>
-                                                <div className={styles.actions}>
-                                                    <button onClick={() => handleEdit(user)} className={styles.editBtn}>
-                                                        Edit
-                                                    </button>
-                                                    <button onClick={() => handleResetPassword(user._id)} className={styles.resetBtn}>
-                                                        Reset Password
-                                                    </button>
-                                                    <button onClick={() => handleDelete(user._id)} className={styles.deleteBtn}>
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </>
-                                    )}
-                                </tr>
-                            ))}
+                            {activeUsers.map(user => {
+                                const isSelf = currentUser?._id === user._id;
+                                return (
+                                    <tr key={user._id}>
+                                        {editingId === user._id ? (
+                                            <>
+                                                <td>{user.username}</td>
+                                                <td>
+                                                    <input
+                                                        type="text"
+                                                        className={styles.input}
+                                                        value={editForm.name}
+                                                        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        type="email"
+                                                        className={styles.input}
+                                                        value={editForm.email}
+                                                        onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        className={styles.select}
+                                                        value={editForm.role}
+                                                        onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
+                                                        disabled={isSelf}
+                                                        title={isSelf ? "You cannot change your own role" : ""}
+                                                    >
+                                                        <option value="viewer">Viewer</option>
+                                                        <option value="editor">Editor</option>
+                                                        <option value="admin">Admin</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        className={styles.select}
+                                                        value={editForm.status}
+                                                        onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                                                        disabled={isSelf}
+                                                        title={isSelf ? "You cannot change your own status" : ""}
+                                                    >
+                                                        <option value="active">Active</option>
+                                                        <option value="suspended">Suspended</option>
+                                                    </select>
+                                                </td>
+                                                <td className={styles.actionsCell}>
+                                                    <div className={styles.actions}>
+                                                        <button onClick={() => handleSaveEdit(user._id)} className={styles.saveBtn}>
+                                                            Save
+                                                        </button>
+                                                        <button onClick={handleCancelEdit} className={styles.cancelBtn}>
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <td>{user.username}</td>
+                                                <td>{user.name}</td>
+                                                <td>{user.email}</td>
+                                                <td>
+                                                    <span className={`${styles.badge} ${styles[`badge${user.role}`]}`}>
+                                                        {user.role}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span className={`${styles.badge} ${styles[`badge${user.status}`]}`}>
+                                                        {user.status}
+                                                    </span>
+                                                </td>
+                                                <td className={styles.actionsCell}>
+                                                    <div className={styles.actions}>
+                                                        <button onClick={() => handleEdit(user)} className={styles.editBtn}>
+                                                            Edit
+                                                        </button>
+                                                        <button onClick={() => handleResetPassword(user._id)} className={styles.resetBtn}>
+                                                            Reset Password
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDelete(user._id)}
+                                                            className={styles.deleteBtn}
+                                                            disabled={isSelf}
+                                                            title={isSelf ? "You cannot delete your own account" : ""}
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </>
+                                        )}
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

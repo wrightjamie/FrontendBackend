@@ -94,7 +94,7 @@
     color: white;
 }
 
-.approveBtn:hover {
+.approveBtn:hover:not(:disabled) {
     background: #059669;
 }
 
@@ -103,7 +103,7 @@
     color: var(--color-text-inverse);
 }
 
-.editBtn:hover {
+.editBtn:hover:not(:disabled) {
     background: var(--color-primary-hover);
 }
 
@@ -112,7 +112,7 @@
     color: white;
 }
 
-.saveBtn:hover {
+.saveBtn:hover:not(:disabled) {
     background: #059669;
 }
 
@@ -130,7 +130,7 @@
     color: white;
 }
 
-.resetBtn:hover {
+.resetBtn:hover:not(:disabled) {
     background: color-mix(in oklch, var(--color-warning) 85%, black);
 }
 
@@ -139,8 +139,13 @@
     color: white;
 }
 
-.deleteBtn:hover {
+.deleteBtn:hover:not(:disabled) {
     background: color-mix(in oklch, var(--color-danger) 85%, black);
+}
+
+.actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .badge {
@@ -191,6 +196,7 @@
     color: var(--color-text-primary);
     font-size: 0.9rem;
     width: 100%;
+    min-width: 100px;
 }
 
 .input:focus,

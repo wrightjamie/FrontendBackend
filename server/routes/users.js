@@ -53,6 +53,13 @@ router.put('/:id', isAdmin, async (req, res) => {
             return res.status(400).json({ message: 'Use password reset endpoint to change passwords' });
         }
 
+        // Prevent admin from changing their own role or status
+        if (req.session.userId === id) {
+            if (updateData.role || updateData.status) {
+                return res.status(400).json({ message: 'Cannot change your own role or status' });
+            }
+        }
+
         const updatedUser = await User.update(id, updateData);
 
         if (!updatedUser) {
