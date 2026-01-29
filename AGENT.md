@@ -54,7 +54,8 @@ Backlog is read-only. Ready is the execution gate.
 
 ### After Completing
 - Verify acceptance criteria
-- Ensure documentation and tests are complete
+- **Documentation Update**: Update `README.md` and any other relevant docs to reflect changes.
+- Ensure technical documentation and tests are complete
 - Add brief notes to the task if useful
 - Move the task to **Done**, or **Review** if human confirmation is needed
 - When criteria are met and tests pass: **stop work**

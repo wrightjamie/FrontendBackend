@@ -121,3 +121,11 @@ All updates to these norms must be reviewed and approved by humans. AI may propo
   - Implement and verify changes.
   - Commit often.
   - Merge to `main` when the task is **Done**.
+
+---
+
+## 11. Documentation Maintenance
+
+- **`README.md` Currency**: The `README.md` must be updated alongside any feature that adds new functionality, changes architecture, or alters user-facing behavior.
+- **Agent Responsibility**: The AI agent is responsible for proactively identifying documentation gaps and proposing updates as part of every task.
+- **Technical Debt**: Documentation gaps should be recorded as technical debt if they cannot be addressed immediately.

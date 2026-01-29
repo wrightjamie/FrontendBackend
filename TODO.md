@@ -1,6 +1,7 @@
 # Project Tasks
 
 ## 🚀 In Progress
+- [ ] **B-026**: Update README.md (Architecture, Dynamic Data, Permissions) & Doc Norms
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
@@ -20,10 +21,7 @@
   - [ ] Ensure API errors trigger appropriate error toasts
   - [ ] Ensure critical actions (save, delete, etc.) have success toasts
 
-- [x] **B-017**: Add Admin Dashboard Link for Admin Users
-  - [x] Display "Admin Dashboard" link in the global header or user menu
-  - [x] Visible ONLY to users with `admin` role
-  - [x] Ensure seamless navigation between public site and admin area
+
 
 
 - [ ] **B-012**: Standardize Base Styles & Core Components
@@ -42,7 +40,7 @@
   - [ ] Implement premium UI components (replace `window.confirm` and `prompt` with custom modals)
   - [ ] Consolidate "Pending Approval" and "All Users" into a single unified table (TD-002)
   - [ ] Add filtering/sorting for status and role
-  - [ ] Implement protection logic to prevent admins from de-activating themselves (TD-001)
+  - [x] Implement protection logic to prevent admins from de-activating themselves (TD-001)
 
 
 ### ⚙️ Core Logic & Data
@@ -56,10 +54,6 @@
     - [ ] Consider: Simple email service integration (e.g., SendGrid free tier, Resend)
     - [ ] Implement chosen solution with clear documentation
 
-- [ ] **B-026**: Update README.md
-  - [ ] Reflect current project architecture and feature set
-  - [ ] Update documentation on how to use the Dynamic Data system
-  - [ ] Document the updated User/Admin permission model
 
 ### 🎨 Metadata & Assets
 - [ ] **B-011**: Refine Admin Media Gallery
@@ -92,12 +86,6 @@
 ## 🧾 Technical Debt
 <!-- Recorded technical debt. Prefix: TD-### -->
 
-- [ ] **TD-001**: Admin Self-Edit Protection
-  - Admin can currently change their own role or suspend themselves in User Management UI
-  - Needs conditional field disabling logic (check if editing user is current user)
-  - May require enhancement to dynamic table system for conditional field disabling
-  - Location: `client/src/pages/admin/AdminUsers.jsx`
-
 - [ ] **TD-002**: Simplify User Management UI
   - Current: Separate "Pending Approval" and "All Users" tables
   - Proposed: Single unified table with all users
@@ -116,6 +104,16 @@
 
 ## ✅ Done
 <!-- Completed and verified tasks. Prefix: D-### -->
+
+- [x] **D-017**: Add Admin Dashboard Link for Admin Users (B-017)
+  - [x] Display "Admin Dashboard" link in the global header or user menu
+  - [x] Visible ONLY to users with `admin` role
+  - [x] Ensure seamless navigation between public site and admin area
+
+- [x] **D-027**: Admin Self-Edit Protection (TD-001)
+  - [x] Prevent admins from changing their own role or status in UI/Backend
+  - [x] Disable delete button for self in User Management UI
+  - [x] Added `:disabled` styles and tooltips for better UX
 
 - [x] **D-016**: Implement Dedicated Login Page & Redirect Logic (B-014)
   - [x] Extracted shared `LoginForm` component for modal and page reuse
