@@ -1,7 +1,9 @@
 # Project Tasks
 
 ## 🚀 In Progress
-- [ ] **B-026**: Update README.md (Architecture, Dynamic Data, Permissions) & Doc Norms
+- [x] **D-026**: Update README.md (Architecture, Dynamic Data, Permissions) & Doc Norms (B-026)
+  - [x] Establish "Documentation Update" mandate in `AGENT.md` and `NORMS.md`
+  - [x] Complete overhaul of `README.md` to reflect project specifics
 
 ## 📋 Ready
 <!-- User-approved tasks ready for execution. Prefix: R-### -->
