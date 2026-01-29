@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useToast } from './ToastContext';
 
 const AuthContext = createContext(null);
 
@@ -6,6 +7,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [needsSetup, setNeedsSetup] = useState(false);
+    const { addToast } = useToast();
 
     const checkAuth = async () => {
         try {
@@ -58,6 +60,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         await fetch('/api/auth/logout', { method: 'POST' });
         setUser(null);
+        addToast('Logout successful', 'success');
     };
 
     const value = {

@@ -18,7 +18,7 @@
 
 
 - [ ] **B-018**: Enhanced Toast Notifications
-  - [ ] Add toast confirmation on successful logout
+  - [x] Add toast confirmation on successful logout
   - [ ] Audit application for consistent user feedback (Success/Error/Warning)
   - [ ] Ensure API errors trigger appropriate error toasts
   - [ ] Ensure critical actions (save, delete, etc.) have success toasts
@@ -88,6 +88,10 @@
 ## 🧾 Technical Debt
 <!-- Recorded technical debt. Prefix: TD-### -->
 
+- [ ] **TD-003**: Fix Logout Redirection Logic
+  - Currently redirected to Login page on logout instead of Home.
+  - Potential race condition between `AuthContext` state update and `LoginModal` navigation.
+  - Location: `client/src/context/AuthContext.jsx`, `client/src/components/LoginModal.jsx`, `client/src/components/ProtectedRoute.jsx`
 - [ ] **TD-002**: Simplify User Management UI
   - Current: Separate "Pending Approval" and "All Users" tables
   - Proposed: Single unified table with all users
@@ -96,16 +100,16 @@
   - Benefits: Simpler UI, less code duplication, better UX
   - Location: `client/src/pages/admin/AdminUsers.jsx`
 
-- [ ] **TD-003**: Redirect on Logout from Restricted Pages
-  - Current: User stays on protected page after logout (until refresh/nav)
-  - Required: Redirect to home or login page immediately upon logout if on a restricted route
-  - Affects: Admin pages, User Profile page
 
 ## 💡 Suggestions (Norm Updates)
 <!-- Proposed updates to NORMS.md. Prefix: S-NORM-### -->
 
 ## ✅ Done
 <!-- Completed and verified tasks. Prefix: D-### -->
+
+- [x] **D-028**: Logout Success Feedback (B-018)
+  - [x] Implemented "Logout successful" success toast in `AuthContext`
+  - [ ] *Deferred*: Automatic redirection to home on logout (See TD-003)
 
 - [x] **D-017**: Add Admin Dashboard Link for Admin Users (B-017)
   - [x] Display "Admin Dashboard" link in the global header or user menu

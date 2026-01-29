@@ -69,6 +69,7 @@ The "Content Management" core of the platform. Administrators can define custom 
 
 ### Security Features
 - **Protected Routes**: Frontend routes are guarded by the `ProtectedRoute` component.
+- **Automatic Logout Redirection**: Users are automatically redirected to the home page if they logout while on a protected route.
 - **Admin Self-Protection**: Logic prevents administrators from accidentally demoting or deleting their own accounts.
 - **Backend Validation**: Authorization middleware (`isAdmin`, `isEditorOrAdmin`) enforces RBAC on all API endpoints.
 

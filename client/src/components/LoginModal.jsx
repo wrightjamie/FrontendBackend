@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LoginForm from './LoginForm';
 import styles from './LoginModal.module.css';
 
 const LoginModal = () => {
     const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     const closeModal = () => {
         document.getElementById('login-popover').hidePopover();
