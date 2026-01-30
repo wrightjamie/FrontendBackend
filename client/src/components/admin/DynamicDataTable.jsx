@@ -1,6 +1,6 @@
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
-import { Button } from '../ui/Buttons';
+import { Button } from '../ui/Button';
 
 /**
  * DynamicDataTable: A reusable component to render and manage data for a specific DataType.

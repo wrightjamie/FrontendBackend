@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useUsers, useUserMutations } from '../../hooks/useUsers';
-import { Button } from '../../components/ui/Buttons';
+import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import styles from './AdminUsers.module.css';
 

@@ -1,5 +1,5 @@
 import styles from './ChangePassword.module.css';
-import { Button } from '../ui/Buttons';
+import { Button } from '../ui/Button';
 
 /**
  * ChangePassword: Component for users to change their own password

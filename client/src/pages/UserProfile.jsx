@@ -2,7 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import apiClient from '../api/apiClient';
 import ChangePassword from '../components/auth/ChangePassword';
-import { Button } from '../components/ui/Buttons';
+import { Button } from '../components/ui/Button';
 import styles from './UserProfile.module.css';
 import { useState, useEffect } from 'react'; // Added useState and useEffect imports
 

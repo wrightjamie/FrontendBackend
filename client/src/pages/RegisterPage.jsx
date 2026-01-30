@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../api/apiClient';
-import { Button } from '../components/ui/Buttons';
+import { Button } from '../components/ui/Button';
 import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {

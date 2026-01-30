@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import LoginForm from './LoginForm';
-import { Button } from '../ui/Buttons';
+import { Button } from '../ui/Button';
 import styles from './LoginModal.module.css';
 
 const LoginModal = () => {
