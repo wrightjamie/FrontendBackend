@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import LoginModal from './components/LoginModal';
+import LoginModal from './components/auth/LoginModal';
 import AdminLayout from './layouts/AdminLayout';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminData from './pages/admin/AdminData';
@@ -10,13 +10,13 @@ import AdminMedia from './pages/admin/AdminMedia';
 import AdminSettings from './pages/admin/AdminSettings';
 import ToastPlayground from './pages/admin/ToastPlayground';
 import { useAuth } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import Setup from './pages/Setup';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserProfile from './pages/UserProfile';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import styles from './App.module.css';
 
 function App() {

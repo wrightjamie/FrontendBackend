@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import apiClient from '../api/apiClient';
-import ChangePassword from '../components/ChangePassword';
+import ChangePassword from '../components/auth/ChangePassword';
+import { Button } from '../components/ui/Buttons';
 import styles from './UserProfile.module.css';
+import { useState, useEffect } from 'react'; // Added useState and useEffect imports
 
 /**
  * UserProfile: User profile page for managing personal information
  * Accessible to all logged-in users
  */
 const UserProfile = () => {
-    const { user, refreshUser } = useAuth();
+    const { user, refreshUser, logout } = useAuth(); // Added logout from useAuth
     const { addToast } = useToast();
 
     const [formData, setFormData] = useState({
@@ -66,6 +67,11 @@ const UserProfile = () => {
         addToast('Password changed successfully!', 'success');
     };
 
+    const handleLogout = () => {
+        logout();
+        addToast('Logged out successfully!', 'info');
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -119,13 +125,14 @@ const UserProfile = () => {
                     </div>
 
                     <div className={styles.actions}>
-                        <button
+                        <Button
                             type="submit"
                             className={styles.submitBtn}
                             disabled={!isDirty || loading}
+                            intent="primary" // Added intent
                         >
                             {loading ? 'Saving...' : 'Save Changes'}
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </div>

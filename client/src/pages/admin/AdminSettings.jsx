@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSiteMeta, useSiteMetaMutations } from '../../hooks/useSiteMeta';
 import { useToast } from '../../context/ToastContext';
-import ImageSelect from '../../components/ImageSelect';
+import ImageSelect from '../../components/form/ImageSelect';
 import styles from './AdminSettings.module.css';
 
 const AdminSettings = () => {

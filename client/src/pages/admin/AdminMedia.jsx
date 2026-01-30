@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiClient from '../../api/apiClient';
 import { useToast } from '../../context/ToastContext';
 import styles from './AdminMedia.module.css';
-import ImageUpload from '../../components/ImageUpload';
+import ImageUpload from '../../components/form/ImageUpload';
 
 const AdminMedia = () => {
     const [images, setImages] = useState([]);

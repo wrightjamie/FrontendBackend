@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import apiClient from '../api/apiClient';
-import { useToast } from '../context/ToastContext';
+import apiClient from '../../api/apiClient';
+import { useToast } from '../../context/ToastContext';
 import styles from './ImageSelect.module.css';
 import ImageUpload from './ImageUpload';
 

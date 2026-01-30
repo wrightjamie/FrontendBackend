@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../api/apiClient';
+import { Button } from '../components/ui/Buttons';
 import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {
@@ -71,9 +72,9 @@ const RegisterPage = () => {
                     <h1>Registration Successful!</h1>
                     <p>Your account has been created and is pending admin approval.</p>
                     <p>You will be able to log in once an administrator activates your account.</p>
-                    <Link to="/login" className={styles.loginLink}>
+                    <Button as={Link} to="/login" className={styles.loginLink}>
                         Return to Login
-                    </Link>
+                    </Button>
                 </div>
             </div>
         );
@@ -162,9 +163,9 @@ const RegisterPage = () => {
                         />
                     </div>
 
-                    <button type="submit" className={styles.submitBtn} disabled={loading}>
+                    <Button type="submit" disabled={loading} className={styles.submitBtn}>
                         {loading ? 'Creating Account...' : 'Register'}
-                    </button>
+                    </Button>
                 </form>
 
                 <div className={styles.footer}>

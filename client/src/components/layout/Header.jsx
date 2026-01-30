@@ -1,8 +1,8 @@
 import React from 'react';
-import UserButton from './UserButton';
+import UserButton from '../auth/UserButton';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
-import { useSiteMeta } from '../hooks/useSiteMeta';
+import { useSiteMeta } from '../../hooks/useSiteMeta';
 
 const Header = () => {
     const { meta } = useSiteMeta();

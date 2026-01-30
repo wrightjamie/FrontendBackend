@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useUsers, useUserMutations } from '../../hooks/useUsers';
+import { Button } from '../../components/ui/Buttons';
+import { Badge } from '../../components/ui/Badge';
 import styles from './AdminUsers.module.css';
 
 /**
@@ -120,18 +122,20 @@ const AdminUsers = () => {
                                         <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                                         <td className={styles.actionsCell}>
                                             <div className={styles.actions}>
-                                                <button
+                                                <Button
                                                     onClick={() => handleApprove(user._id)}
-                                                    className={styles.approveBtn}
+                                                    intent="success"
+                                                    size="sm"
                                                 >
                                                     Approve
-                                                </button>
-                                                <button
+                                                </Button>
+                                                <Button
                                                     onClick={() => handleDelete(user._id)}
-                                                    className={styles.deleteBtn}
+                                                    intent="danger"
+                                                    size="sm"
                                                 >
                                                     Reject
-                                                </button>
+                                                </Button>
                                             </div>
                                         </td>
                                     </tr>
@@ -208,12 +212,12 @@ const AdminUsers = () => {
                                                 </td>
                                                 <td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
-                                                        <button onClick={() => handleSaveEdit(user._id)} className={styles.saveBtn}>
+                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm">
                                                             Save
-                                                        </button>
-                                                        <button onClick={handleCancelEdit} className={styles.cancelBtn}>
+                                                        </Button>
+                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm">
                                                             Cancel
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </td>
                                             </>
@@ -223,31 +227,32 @@ const AdminUsers = () => {
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
                                                 <td>
-                                                    <span className={`${styles.badge} ${styles[`badge${user.role}`]}`}>
+                                                    <Badge variant={user.role === 'admin' ? 'info' : user.role === 'editor' ? 'success' : 'default'}>
                                                         {user.role}
-                                                    </span>
+                                                    </Badge>
                                                 </td>
                                                 <td>
-                                                    <span className={`${styles.badge} ${styles[`badge${user.status}`]}`}>
+                                                    <Badge variant={user.status === 'active' ? 'success' : user.status === 'pending' ? 'warning' : 'danger'}>
                                                         {user.status}
-                                                    </span>
+                                                    </Badge>
                                                 </td>
                                                 <td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
-                                                        <button onClick={() => handleEdit(user)} className={styles.editBtn}>
+                                                        <Button onClick={() => handleEdit(user)} size="sm">
                                                             Edit
-                                                        </button>
-                                                        <button onClick={() => handleResetPassword(user._id)} className={styles.resetBtn}>
+                                                        </Button>
+                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm">
                                                             Reset Password
-                                                        </button>
-                                                        <button
+                                                        </Button>
+                                                        <Button
                                                             onClick={() => handleDelete(user._id)}
-                                                            className={styles.deleteBtn}
+                                                            intent="danger"
+                                                            size="sm"
                                                             disabled={isSelf}
                                                             title={isSelf ? "You cannot delete your own account" : ""}
                                                         >
                                                             Delete
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </td>
                                             </>

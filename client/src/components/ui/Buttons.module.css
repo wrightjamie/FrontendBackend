@@ -16,7 +16,7 @@
     color: oklch(from var(--btn-color) 100% 0 0);
 
     &:hover:not(:disabled) {
-        background: oklch(from var(--btn-color) calc(l - 10%) c h);
+        background: oklch(from var(--btn-color) calc(l - .1) c h);
         transform: translateY(-1px);
         box-shadow: var(--shadow-md);
     }

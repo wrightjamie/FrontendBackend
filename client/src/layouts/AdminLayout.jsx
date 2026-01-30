@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import TabNavigation from '../components/TabNavigation';
+import TabNavigation from '../components/ui/TabNavigation';
 import styles from './AdminLayout.module.css';
 
 const AdminLayout = () => {

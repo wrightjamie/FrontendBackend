@@ -1,7 +1,7 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import LoginForm from './LoginForm';
+import { Button } from '../ui/Buttons';
 import styles from './LoginModal.module.css';
 
 const LoginModal = () => {
@@ -37,9 +37,9 @@ const LoginModal = () => {
                     <Link to="/profile" className={styles.profileLink} onClick={closeModal}>
                         My Profile
                     </Link>
-                    <button onClick={handleLogout} className={styles.logoutBtn}>
+                    <Button onClick={handleLogout} intent="danger" variant="ghost" className={styles.logoutBtn}>
                         Logout
-                    </button>
+                    </Button>
                 </div>
             ) : (
                 <div className={styles.form}>

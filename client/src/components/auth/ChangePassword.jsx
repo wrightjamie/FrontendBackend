@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import apiClient from '../api/apiClient';
 import styles from './ChangePassword.module.css';
+import { Button } from '../ui/Buttons';
 
 /**
  * ChangePassword: Component for users to change their own password
@@ -135,13 +134,13 @@ const ChangePassword = ({ onSuccess, onCancel }) => {
                 </div>
 
                 <div className={styles.actions}>
-                    <button type="submit" className={styles.submitBtn} disabled={loading}>
+                    <Button type="submit" disabled={loading} className={styles.submitBtn}>
                         {loading ? 'Changing...' : 'Change Password'}
-                    </button>
+                    </Button>
                     {onCancel && (
-                        <button type="button" onClick={onCancel} className={styles.cancelBtn} disabled={loading}>
+                        <Button type="button" onClick={onCancel} variant="outline" disabled={loading} className={styles.cancelBtn}>
                             Cancel
-                        </button>
+                        </Button>
                     )}
                 </div>
             </form>

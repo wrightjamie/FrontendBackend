@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import apiClient from '../api/apiClient';
+import apiClient from '../../api/apiClient';
 import styles from './ImageUpload.module.css';
 
 /**

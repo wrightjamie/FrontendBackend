@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
+import { Button } from '../ui/Buttons';
 
 /**
  * DynamicDataTable: A reusable component to render and manage data for a specific DataType.
@@ -159,13 +159,12 @@ const DynamicDataTable = ({ type }) => {
                 <h2>{type.name}</h2>
                 <p>{type.description}</p>
                 {type.permissions.canAdd && (
-                    <button
-                        className={styles.addBtn}
+                    <Button
                         onClick={() => { setIsAdding(true); setFormData({}); }}
                         disabled={isAdding || !!editingId}
                     >
                         + Add Record
-                    </button>
+                    </Button>
                 )}
             </div>
 
@@ -190,8 +189,8 @@ const DynamicDataTable = ({ type }) => {
                                 ))}
                                 <td>
                                     <div className={styles.actions}>
-                                        <button onClick={handleSave} className={styles.saveBtn}>Save</button>
-                                        <button onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
+                                        <Button onClick={handleSave} intent="success" size="sm">Save</Button>
+                                        <Button onClick={handleCancel} variant="outline" size="sm">Cancel</Button>
                                     </div>
                                 </td>
                             </tr>
@@ -204,8 +203,8 @@ const DynamicDataTable = ({ type }) => {
                                     <td className={styles.orderCell}>
                                         {type.permissions.canReorder && (
                                             <div className={styles.orderBtns}>
-                                                <button onClick={() => handleMove(idx, -1)} disabled={idx === 0}>↑</button>
-                                                <button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1}>↓</button>
+                                                <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="sm" style={{ padding: '2px 4px', minHeight: 'auto' }}>↑</Button>
+                                                <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="sm" style={{ padding: '2px 4px', minHeight: 'auto' }}>↓</Button>
                                             </div>
                                         )}
                                         <span>{idx + 1}</span>
@@ -224,16 +223,16 @@ const DynamicDataTable = ({ type }) => {
                                     <div className={styles.actions}>
                                         {editingId === entity._id ? (
                                             <>
-                                                <button onClick={handleSave} className={styles.saveBtn}>Save</button>
-                                                <button onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
+                                                <Button onClick={handleSave} intent="success" size="sm">Save</Button>
+                                                <Button onClick={handleCancel} variant="outline" size="sm">Cancel</Button>
                                             </>
                                         ) : (
                                             <>
                                                 {type.permissions.canEdit && (
-                                                    <button onClick={() => handleEdit(entity)} className={styles.editBtn}>Edit</button>
+                                                    <Button onClick={() => handleEdit(entity)} variant="outline" size="sm">Edit</Button>
                                                 )}
                                                 {type.permissions.canDelete && (
-                                                    <button onClick={() => handleDelete(entity._id)} className={styles.deleteBtn}>Delete</button>
+                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" variant="outline" size="sm">Delete</Button>
                                                 )}
                                             </>
                                         )}

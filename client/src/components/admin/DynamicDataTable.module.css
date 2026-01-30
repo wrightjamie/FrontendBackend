@@ -27,27 +27,6 @@
     font-size: 0.9rem;
 }
 
-.addBtn {
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.addBtn:hover:not(:disabled) {
-    background: var(--color-primary-hover);
-    transform: translateY(-1px);
-}
-
-.addBtn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
 .tableWrapper {
     overflow-x: auto;
 }
@@ -104,26 +83,6 @@
     gap: 2px;
 }
 
-.orderBtns button {
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-primary);
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.7rem;
-    line-height: 1;
-}
-
-.orderBtns button:hover:not(:disabled) {
-    background: var(--color-border);
-}
-
-.orderBtns button:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
-}
-
 .actionsCell {
     /* Standard table-cell display preserved */
     vertical-align: middle;
@@ -133,52 +92,6 @@
     display: flex;
     gap: 0.5rem;
     white-space: nowrap;
-}
-
-.editBtn,
-.deleteBtn,
-.saveBtn,
-.cancelBtn {
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    border: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.editBtn {
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    color: var(--color-text-primary);
-}
-
-.deleteBtn {
-    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
-    color: var(--color-danger);
-}
-
-.saveBtn {
-    background: var(--color-success);
-    color: var(--color-text-inverse);
-}
-
-.cancelBtn {
-    background: var(--color-bg-secondary);
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-border);
-}
-
-.editBtn:hover {
-    background: var(--color-border);
-}
-
-.deleteBtn:hover {
-    background: color-mix(in oklch, var(--color-danger) 20%, transparent);
-}
-
-.saveBtn:hover {
-    background: oklch(from var(--color-success) calc(l - 10%) c h);
 }
 
 .loading {

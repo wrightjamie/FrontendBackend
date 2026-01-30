@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import { Button } from '../ui/Buttons';
 import styles from './LoginForm.module.css';
+import { useState } from 'react';
 
 const LoginForm = ({ onSuccess, onRegisterClick }) => {
     const { login } = useAuth();
@@ -61,9 +62,9 @@ const LoginForm = ({ onSuccess, onRegisterClick }) => {
                         disabled={loading}
                     />
                 </div>
-                <button type="submit" className={styles.submitBtn} disabled={loading}>
+                <Button type="submit" disabled={loading} className={styles.submitBtn}>
                     {loading ? 'Signing In...' : 'Sign In'}
-                </button>
+                </Button>
             </form>
             <div className={styles.footer}>
                 <p>

@@ -1,23 +1,26 @@
-import styles from './Button.module.css';
+import styles from './Buttons.module.css';
 
 export function Button({
+    as: Component = 'button',
     variant = 'solid', // 'solid' | 'outline' | 'ghost'
     intent = 'primary', // 'primary' | 'secondary' | 'danger' etc.
     size = 'md',      // 'sm' | 'md' | 'lg'
+    className: customClassName,
     children,
     ...props
 }) {
-    const className = clsx(
-        styles.btn,               // Always apply base styles
-        styles[size],             // Apply 'sm' or 'lg' if they match
-        styles[intent],           // Apply 'secondary', 'danger', etc.
-        variant !== 'solid' && styles[variant] // Apply 'outline' or 'ghost'
-    );
+    const className = [
+        styles.btn,
+        styles[size],
+        styles[intent],
+        variant !== 'solid' && styles[variant],
+        customClassName
+    ].filter(Boolean).join(' ');
 
     return (
-        <button className={className} {...props}>
+        <Component className={className} {...props}>
             {children}
-        </button>
+        </Component>
     );
 }
 

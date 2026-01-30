@@ -5,7 +5,7 @@ import './index.css'
 import { AuthProvider } from './context/AuthContext'
 import { DataProvider } from './context/DataContext'
 import { ToastProvider } from './context/ToastContext'
-import ToastContainer from './components/Toast/ToastContainer'
+import ToastContainer from './components/ui/Toast/ToastContainer'
 import App from './App'
 
 createRoot(document.getElementById('root')).render(
