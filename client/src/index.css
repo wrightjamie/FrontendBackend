@@ -1,13 +1,15 @@
-@import './styles/variables.css';
+/* Design System Imports */
+@import './styles/tokens.css';
 @import './styles/reset.css';
+@import './styles/components.css';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  line-height: var(--leading-normal);
+  font-weight: var(--font-normal);
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
 
   font-synthesis: none;
@@ -16,16 +18,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 a {
-  font-weight: 500;
-  color: #646cff;
+  font-weight: var(--font-medium);
+  color: var(--color-brand-primary);
   text-decoration: inherit;
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--color-primary-hover);
 }
 
 body {
@@ -33,42 +34,47 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
+h2 {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
+}
+
+h3 {
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-semibold);
+}
+
+/* 
+ * Default button styles - intentionally minimal
+ * 
+ * Components should define their own button styles or use .btn classes
+ * from components.css. These defaults only ensure buttons are at least
+ * clickable and visible.
+ */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  font-size: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+
+  /* No default colors - let components define them */
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
 }
 
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
+button:disabled {
+  cursor: not-allowed;
 }

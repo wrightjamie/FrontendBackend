@@ -159,8 +159,8 @@
 }
 
 .saveBtn {
-    background: #10b981;
-    color: white;
+    background: var(--color-success);
+    color: var(--color-text-inverse);
 }
 
 .cancelBtn {
@@ -174,11 +174,11 @@
 }
 
 .deleteBtn:hover {
-    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
+    background: color-mix(in oklch, var(--color-danger) 20%, transparent);
 }
 
 .saveBtn:hover {
-    background: #059669;
+    background: oklch(from var(--color-success) calc(l - 10%) c h);
 }
 
 .loading {

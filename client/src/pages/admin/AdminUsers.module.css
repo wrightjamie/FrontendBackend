@@ -90,12 +90,12 @@
 }
 
 .approveBtn {
-    background: #10b981;
-    color: white;
+    background: var(--color-success);
+    color: var(--color-text-inverse);
 }
 
 .approveBtn:hover:not(:disabled) {
-    background: #059669;
+    background: oklch(from var(--color-success) calc(l - 10%) c h);
 }
 
 .editBtn {
@@ -103,17 +103,13 @@
     color: var(--color-text-inverse);
 }
 
-.editBtn:hover:not(:disabled) {
-    background: var(--color-primary-hover);
-}
-
 .saveBtn {
-    background: #10b981;
-    color: white;
+    background: var(--color-success);
+    color: var(--color-text-inverse);
 }
 
 .saveBtn:hover:not(:disabled) {
-    background: #059669;
+    background: oklch(from var(--color-success) calc(l - 10%) c h);
 }
 
 .cancelBtn {
@@ -163,8 +159,9 @@
 }
 
 .badgeeditor {
-    background: color-mix(in oklch, #10b981 20%, transparent);
-    color: #10b981;
+    background: oklch(from var(--color-success) 95% calc(c / 2) h);
+    color: oklch(from var(--color-success) 35% c h);
+    border: 1px solid oklch(from var(--color-success) 80% c h);
 }
 
 .badgeviewer {
@@ -173,8 +170,9 @@
 }
 
 .badgeactive {
-    background: color-mix(in oklch, #10b981 20%, transparent);
-    color: #10b981;
+    background: oklch(from var(--color-success) 95% calc(c / 2) h);
+    color: oklch(from var(--color-success) 35% c h);
+    border: 1px solid oklch(from var(--color-success) 80% c h);
 }
 
 .badgepending {
