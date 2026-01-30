@@ -1,0 +1,84 @@
+/* Button.module.css */
+.btn {
+    --btn-color: var(--color-brand-primary);
+
+    /* Core Styles */
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    /* Added to prevent layout shift on outline */
+    font-weight: var(--font-semibold);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-family: inherit;
+    background: var(--btn-color);
+    color: oklch(from var(--btn-color) 100% 0 0);
+
+    &:hover:not(:disabled) {
+        background: oklch(from var(--btn-color) calc(l - 10%) c h);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* Sizes */
+    &.sm {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: var(--text-sm);
+    }
+
+    &.lg {
+        padding: var(--space-md) var(--space-lg);
+        font-size: var(--text-lg);
+    }
+
+    /* Color Intents */
+    &.secondary {
+        --btn-color: var(--color-brand-secondary);
+    }
+
+    &.success {
+        --btn-color: var(--color-success);
+    }
+
+    &.warning {
+        --btn-color: var(--color-warning);
+    }
+
+    &.danger {
+        --btn-color: var(--color-error);
+    }
+
+    &.info {
+        --btn-color: var(--color-info);
+    }
+
+    /* Visual Variants */
+    &.outline {
+        background: transparent;
+        color: var(--btn-color);
+        border-color: var(--btn-color);
+
+        &:hover:not(:disabled) {
+            background: oklch(from var(--btn-color) 95% calc(c / 3) h);
+        }
+    }
+
+    &.ghost {
+        background: transparent;
+        color: var(--btn-color);
+
+        &:hover:not(:disabled) {
+            background: oklch(from var(--btn-color) 95% calc(c / 3) h);
+        }
+    }
+}
