@@ -23,30 +23,11 @@
 }
 
 .regenerateBtn {
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     align-self: flex-start;
+    gap: 0.5rem;
 }
 
-.regenerateBtn:hover:not(:disabled) {
-    background: var(--color-bg-tertiary);
-    color: var(--color-text-primary);
-    border-color: var(--color-primary);
-}
-
-.regenerateBtn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+/* Button component handles these states */
 
 .header h2 {
     margin: 0;
@@ -91,7 +72,6 @@
 
 .imageWrapper img {
     max-width: 100%;
-    max-height: 100%;
     object-fit: contain;
 }
 
@@ -104,16 +84,24 @@
 }
 
 .actions button {
+    flex: 1;
+    /* Stretch to fill space */
     background: none;
     border: none;
     cursor: pointer;
     font-size: 1.1rem;
-    padding: 0.25rem;
-    border-radius: 4px;
+    padding: 0.75rem 0.25rem;
+    /* Larger touch area */
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.2s ease;
+    border-right: 1px solid var(--color-border);
+}
+
+.actions button:last-child {
+    border-right: none;
 }
 
 .spin {

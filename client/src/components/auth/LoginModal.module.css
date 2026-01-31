@@ -22,6 +22,12 @@
 
 .profileLink:hover {
     background: var(--color-bg-hover);
+    text-decoration: underline;
+}
+
+.logoutLink {
+    cursor: pointer;
+    color: var(--color-danger);
 }
 
 .form {
@@ -31,10 +37,7 @@
     min-width: 250px;
 }
 
-.logoutBtn {
-    margin-top: 0.5rem;
-    justify-content: flex-start !important;
-}
+/* Removed .logoutBtn */
 
 .inputGroup {
     display: flex;

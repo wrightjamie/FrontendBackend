@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { Pencil, Library, Upload, Check } from 'lucide-react';
 import apiClient from '../../api/apiClient';
 import { useToast } from '../../context/ToastContext';

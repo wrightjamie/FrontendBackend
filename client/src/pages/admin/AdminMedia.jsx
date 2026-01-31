@@ -4,6 +4,7 @@ import apiClient from '../../api/apiClient';
 import { useToast } from '../../context/ToastContext';
 import styles from './AdminMedia.module.css';
 import ImageUpload from '../../components/form/ImageUpload';
+import { Button } from '../../components/ui/Button';
 
 const AdminMedia = () => {
     const [images, setImages] = useState([]);
@@ -88,14 +89,16 @@ const AdminMedia = () => {
             <div className={styles.header}>
                 <div className={styles.titleInfo}>
                     <h2>Media Library</h2>
-                    <button
+                    <Button
                         onClick={handleRegenerate}
-                        className={styles.regenerateBtn}
                         disabled={regenerating || loading}
+                        className={styles.regenerateBtn}
+                        intent="secondary"
+                        size="sm"
                     >
-                        <RefreshCw size={16} className={regenerating ? styles.spin : ''} />
+                        <RefreshCw size={14} className={regenerating ? styles.spin : ''} />
                         <span>{regenerating ? 'Regenerating...' : 'Regenerate Thumbnails'}</span>
-                    </button>
+                    </Button>
                 </div>
                 <div className={styles.uploader}>
                     <ImageUpload

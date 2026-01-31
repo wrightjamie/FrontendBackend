@@ -5,6 +5,10 @@
 
 ## 📋 Priority Backlog
 <!-- Immediate next steps or user-highlighted features -->
+- [ ] **B-041**: Refine `TabNavigation.jsx` visual cues
+  - Improve contrast for active, hover, and inactive states.
+  - Specifically focus on the usage in `AdminLayout.jsx`.
+  - Ensure strong visual distinction (e.g., thicker borders, color shifts).
 - [ ] **B-028**: Implement Testing Infrastructure
   - [ ] Set up Vitest and React Testing Library
   - [ ] Configure test scripts in `package.json`
@@ -73,6 +77,12 @@
   - [x] Integrated `lucide-react` library
   - [x] Replaced generic text/unicode with premium icons
   - [x] Standardized usage across Admin, Forms, and Toasts
+  - [x] Transitioned Admin Media Library to full SVG icons
+
+- [x] **D-033**: Refine Login Page Layout
+  - [x] Stacked header and subtext vertically
+  - [x] Left-aligned content per user preference
+  - [x] Cleaned up CardHeader styling for login context
 
 ### 🏗️ Phase 1-4: Foundation & Infrastructure
 - [x] **D-028**: Logout Success Feedback (B-018)

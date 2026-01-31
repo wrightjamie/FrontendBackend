@@ -41,10 +41,10 @@ const LoginModal = () => {
                         <UserIcon size={16} />
                         <span>My Profile</span>
                     </Link>
-                    <Button onClick={handleLogout} intent="danger" variant="ghost" className={styles.logoutBtn}>
+                    <div className={`${styles.profileLink} ${styles.logoutLink}`} onClick={handleLogout}>
                         <LogOut size={16} />
                         <span>Logout</span>
-                    </Button>
+                    </div>
                 </div>
             ) : (
                 <div className={styles.form}>
