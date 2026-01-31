@@ -226,8 +226,8 @@ const DynamicDataTable = ({ type }) => {
                                     <Td className={styles.orderCell}>
                                         {type.permissions.canReorder && (
                                             <div className={styles.orderBtns}>
-                                                <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="sm" style={{ padding: '2px 4px', minHeight: 'auto' }}>↑</Button>
-                                                <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="sm" style={{ padding: '2px 4px', minHeight: 'auto' }}>↓</Button>
+                                                <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="xs">↑</Button>
+                                                <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="xs">↓</Button>
                                             </div>
                                         )}
                                         <span>{idx + 1}</span>

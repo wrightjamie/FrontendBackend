@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../api/apiClient';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/form/Input';
+import CenteredLayout from '../layouts/CenteredLayout';
+import { Card, CardHeader, CardBody, CardFooter } from '../components/ui/Card';
 import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {
@@ -67,103 +69,107 @@ const RegisterPage = () => {
 
     if (success) {
         return (
-            <div className={styles.container}>
-                <div className={styles.successCard}>
-                    <div className={styles.successIcon}>✓</div>
-                    <h1>Registration Successful!</h1>
-                    <p>Your account has been created and is pending admin approval.</p>
-                    <p>You will be able to log in once an administrator activates your account.</p>
-                    <Button as={Link} to="/login" className={styles.loginLink}>
-                        Return to Login
-                    </Button>
-                </div>
-            </div>
+            <CenteredLayout>
+                <Card className={styles.successCard}>
+                    <CardBody>
+                        <div className={styles.successIcon}>✓</div>
+                        <h1>Registration Successful!</h1>
+                        <p>Your account has been created and is pending admin approval.</p>
+                        <p>You will be able to log in once an administrator activates your account.</p>
+                        <Button as={Link} to="/login" className={styles.loginLink}>
+                            Return to Login
+                        </Button>
+                    </CardBody>
+                </Card>
+            </CenteredLayout>
         );
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.registerCard}>
-                <div className={styles.header}>
+        <CenteredLayout>
+            <Card className={styles.registerCard}>
+                <CardHeader>
                     <h1>Create Account</h1>
                     <p>Register for a new account</p>
-                </div>
+                </CardHeader>
 
-                <form onSubmit={handleSubmit} className={styles.form}>
-                    {error && <p className={styles.error}>{error}</p>}
+                <CardBody>
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                        {error && <p className={styles.error}>{error}</p>}
 
-                    <Input
-                        id="username"
-                        name="username"
-                        label="Username *"
-                        type="text"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                    />
+                        <Input
+                            id="username"
+                            name="username"
+                            label="Username *"
+                            type="text"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                            disabled={loading}
+                        />
 
-                    <Input
-                        id="name"
-                        name="name"
-                        label="Full Name *"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                    />
+                        <Input
+                            id="name"
+                            name="name"
+                            label="Full Name *"
+                            type="text"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            disabled={loading}
+                        />
 
-                    <Input
-                        id="email"
-                        name="email"
-                        label="Email *"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                    />
+                        <Input
+                            id="email"
+                            name="email"
+                            label="Email *"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            disabled={loading}
+                        />
 
-                    <Input
-                        id="password"
-                        name="password"
-                        label="Password *"
-                        type="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                        minLength={6}
-                    />
+                        <Input
+                            id="password"
+                            name="password"
+                            label="Password *"
+                            type="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            disabled={loading}
+                            minLength={6}
+                        />
 
-                    <Input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        label="Confirm Password *"
-                        type="password"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                        minLength={6}
-                    />
+                        <Input
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            label="Confirm Password *"
+                            type="password"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                            disabled={loading}
+                            minLength={6}
+                        />
 
-                    <Button type="submit" disabled={loading} className={styles.submitBtn}>
-                        {loading ? 'Creating Account...' : 'Register'}
-                    </Button>
-                </form>
+                        <Button type="submit" disabled={loading} className={styles.submitBtn}>
+                            {loading ? 'Creating Account...' : 'Register'}
+                        </Button>
+                    </form>
+                </CardBody>
 
-                <div className={styles.footer}>
-                    <p>
+                <CardFooter>
+                    <p className={styles.footerText}>
                         Already have an account?{' '}
                         <Link to="/login" className={styles.link}>
                             Sign in
                         </Link>
                     </p>
-                </div>
-            </div>
-        </div>
+                </CardFooter>
+            </Card>
+        </CenteredLayout>
     );
 };
 

@@ -10,9 +10,15 @@ export function Button({
     children,
     ...props
 }) {
+    const sizeClasses = {
+        sm: styles.sm,
+        xs: styles.xs,
+        md: styles.md,
+        lg: styles.lg
+    };
     const className = [
         styles.btn,
-        styles[size],
+        sizeClasses[size],
         styles[intent],
         variant !== 'solid' && styles[variant],
         flat && styles.flat,

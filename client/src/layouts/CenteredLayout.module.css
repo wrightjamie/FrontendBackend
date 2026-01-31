@@ -1,0 +1,11 @@
+/* CenteredLayout.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+    /* Account for header/footer approximately */
+    padding: var(--space-md);
+    background-color: transparent;
+    /* Assuming main app background handles this, or set specific if needed */
+}

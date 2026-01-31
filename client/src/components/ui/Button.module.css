@@ -47,7 +47,13 @@
     }
 
     /* Sizes */
-    &.sm {
+    &.xs {
+        padding: 0.125rem 0.5rem;
+        font-size: 0.75rem;
+        height: 1.5rem;
+    }
+
+    .sm {
         padding: var(--space-xs) var(--space-sm);
         font-size: var(--text-sm);
     }

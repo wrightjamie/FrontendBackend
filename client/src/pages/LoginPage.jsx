@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import LoginForm from '../components/auth/LoginForm';
+import CenteredLayout from '../layouts/CenteredLayout';
+import { Card, CardHeader, CardBody } from '../components/ui/Card';
 import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
@@ -26,16 +28,17 @@ const LoginPage = () => {
     if (loading) return <div className={styles.loading}>Checking authentication...</div>;
 
     return (
-        <div className={styles.container}>
-            <div className={styles.loginCard}>
-                <div className={styles.header}>
+        <CenteredLayout>
+            <Card className={styles.loginCard}>
+                <CardHeader>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to continue</p>
-                </div>
-                <LoginForm onSuccess={handleLoginSuccess} />
-
-            </div>
-        </div>
+                </CardHeader>
+                <CardBody>
+                    <LoginForm onSuccess={handleLoginSuccess} />
+                </CardBody>
+            </Card>
+        </CenteredLayout>
     );
 };
 
