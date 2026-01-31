@@ -1,0 +1,37 @@
+/* Popover.module.css */
+.popover {
+    /* Popover API defaults */
+    position: absolute;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-lg);
+    min-width: 250px;
+    z-index: var(--z-popover);
+
+    /* Reset margins */
+    margin: 0;
+
+    /* Reset UA defaults */
+    left: auto;
+    bottom: auto;
+
+    /* Transition for smooth appearance (if supported by browser/CSS) */
+    opacity: 0;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    transform: translateY(-10px);
+
+    &:popover-open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Backdrop */
+.popover::backdrop {
+    background-color: oklch(0% 0 0 / 0.2);
+    backdrop-filter: blur(2px);
+    transition: all var(--transition-base);
+}

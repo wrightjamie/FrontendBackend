@@ -1,5 +1,8 @@
+import React, { useState } from 'react';
+import apiClient from '../../api/apiClient';
 import styles from './ChangePassword.module.css';
 import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
 
 /**
  * ChangePassword: Component for users to change their own password
@@ -89,49 +92,40 @@ const ChangePassword = ({ onSuccess, onCancel }) => {
             <form onSubmit={handleSubmit} className={styles.form}>
                 {error && <div className={styles.error}>{error}</div>}
 
-                <div className={styles.inputGroup}>
-                    <label htmlFor="currentPassword">Current Password</label>
-                    <input
-                        id="currentPassword"
-                        name="currentPassword"
-                        type="password"
-                        className={styles.input}
-                        value={formData.currentPassword}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                    />
-                </div>
+                <Input
+                    id="currentPassword"
+                    name="currentPassword"
+                    label="Current Password"
+                    type="password"
+                    value={formData.currentPassword}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                />
 
-                <div className={styles.inputGroup}>
-                    <label htmlFor="newPassword">New Password</label>
-                    <input
-                        id="newPassword"
-                        name="newPassword"
-                        type="password"
-                        className={styles.input}
-                        value={formData.newPassword}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                        minLength={6}
-                    />
-                </div>
+                <Input
+                    id="newPassword"
+                    name="newPassword"
+                    label="New Password"
+                    type="password"
+                    value={formData.newPassword}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                    minLength={6}
+                />
 
-                <div className={styles.inputGroup}>
-                    <label htmlFor="confirmPassword">Confirm New Password</label>
-                    <input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        className={styles.input}
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                        minLength={6}
-                    />
-                </div>
+                <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    label="Confirm New Password"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                    minLength={6}
+                />
 
                 <div className={styles.actions}>
                     <Button type="submit" disabled={loading} className={styles.submitBtn}>

@@ -1,7 +1,9 @@
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import LoginForm from './LoginForm';
 import { Button } from '../ui/Button';
+import { Popover } from '../ui/Popover';
 import styles from './LoginModal.module.css';
 
 const LoginModal = () => {
@@ -21,9 +23,8 @@ const LoginModal = () => {
     const currentUsername = user?.username;
 
     return (
-        <div
+        <Popover
             id="login-popover"
-            popover="auto"
             className={styles.popover}
         >
             {isLoggedIn ? (
@@ -47,7 +48,7 @@ const LoginModal = () => {
                     <LoginForm onSuccess={closeModal} onRegisterClick={closeModal} />
                 </div>
             )}
-        </div>
+        </Popover>
     );
 };
 

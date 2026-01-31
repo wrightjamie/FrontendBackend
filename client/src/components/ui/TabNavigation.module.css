@@ -1,3 +1,4 @@
+/* TabNavigation.module.css */
 .tabsContainer {
     display: flex;
     gap: 1rem;
@@ -17,26 +18,53 @@
     width: 100%;
 }
 
+.tabsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+/* Base Tab Styles */
 .tab {
     padding: 0.75rem 1.5rem;
     text-decoration: none;
     color: var(--color-text-secondary);
-    border-bottom: 3px solid transparent;
-    width: auto;
-    font-weight: bold;
+    font-weight: 500;
     white-space: nowrap;
-    /* Prevent individual tabs from breaking */
+    transition: all var(--transition-base);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: var(--text-base);
 }
 
 .tab:hover {
     color: var(--color-primary-hover);
 }
 
-.activeTab {
+/* Variant: Underline (Default) */
+.underline {
+    border-bottom: 3px solid transparent;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.underline.active {
     color: var(--color-primary);
     border-bottom-color: var(--color-primary);
 }
 
-.tabsContainer::-webkit-scrollbar {
-    display: none;
+/* Variant: Pill */
+.pill {
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+}
+
+.pill:hover {
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+}
+
+.pill.active {
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
 }

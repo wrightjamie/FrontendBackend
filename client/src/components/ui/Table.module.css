@@ -1,0 +1,53 @@
+/* Table.module.css */
+.tableContainer {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    background: var(--color-bg-primary);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    text-align: left;
+}
+
+.thead {
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.th {
+    padding: var(--space-md) var(--space-lg);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.tbody tr {
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-fast);
+}
+
+.tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tbody tr:hover {
+    background-color: var(--color-bg-secondary);
+}
+
+.td {
+    padding: var(--space-md) var(--space-lg);
+    color: var(--color-text-primary);
+    vertical-align: middle;
+}
+
+/* Optional: Dense variant for compact tables */
+.dense .th,
+.dense .td {
+    padding: var(--space-sm) var(--space-md);
+}

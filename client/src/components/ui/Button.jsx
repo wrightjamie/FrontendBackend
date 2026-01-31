@@ -1,10 +1,11 @@
-import styles from './Buttons.module.css';
+import styles from './Button.module.css';
 
 export function Button({
     as: Component = 'button',
     variant = 'solid', // 'solid' | 'outline' | 'ghost'
     intent = 'primary', // 'primary' | 'secondary' | 'danger' etc.
     size = 'md',      // 'sm' | 'md' | 'lg'
+    flat = false,     // Disable hover translation/lift
     className: customClassName,
     children,
     ...props
@@ -14,6 +15,7 @@ export function Button({
         styles[size],
         styles[intent],
         variant !== 'solid' && styles[variant],
+        flat && styles.flat,
         customClassName
     ].filter(Boolean).join(' ');
 

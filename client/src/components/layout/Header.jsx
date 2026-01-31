@@ -1,11 +1,14 @@
 import React from 'react';
-import UserButton from '../auth/UserButton';
+import { Button } from '../ui/Button';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useSiteMeta } from '../../hooks/useSiteMeta';
+import { useAuth } from '../../context/AuthContext';
 
 const Header = () => {
+    const { user } = useAuth();
     const { meta } = useSiteMeta();
+    const isLoggedIn = !!user;
 
     return (
         <header className={styles.header}>
@@ -23,7 +26,14 @@ const Header = () => {
                     <span className={styles.logoText}>{meta.title}</span>
                 </Link>
                 <div className={styles.actions}>
-                    <UserButton />
+                    <Button
+                        className={styles.userBtn}
+                        popoverTarget="login-popover"
+                        size="sm"
+                        flat
+                    >
+                        {isLoggedIn ? user.username || 'User' : 'Login'}
+                    </Button>
                 </div>
             </div>
         </header>

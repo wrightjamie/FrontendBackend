@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useToast } from '../../context/ToastContext';
+import { useToast } from '../../../context/ToastContext';
 import styles from './Toast.module.css';
 
 /**

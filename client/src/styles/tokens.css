@@ -173,25 +173,25 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Background colors - darker palette */
+        /* Background colors - Reverted to subtle dark grey/blue palette */
         --color-bg-primary: oklch(20% 0.01 264);
         --color-bg-secondary: oklch(17% 0.01 264);
         --color-bg-tertiary: oklch(24% 0.01 264);
 
-        /* Text colors - lighter palette */
+        /* Text colors - Reverted to high-contrast palette */
         --color-text-primary: oklch(95% 0 0);
         --color-text-secondary: oklch(70% 0.01 264);
         --color-text-tertiary: oklch(55% 0.01 264);
-        --color-text-inverse: oklch(20% 0 0);
 
-        /* Border colors - lighter for dark mode */
+        /* Border colors - Reverted to subtle palette */
         --color-border: oklch(35% 0.01 264);
         --color-border-hover: oklch(45% 0.02 264);
 
-        /* Adjust shadows for dark mode */
-        --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3);
-        --shadow-md: 0 4px 6px oklch(0% 0 0 / 0.4);
-        --shadow-lg: 0 10px 15px oklch(0% 0 0 / 0.5);
-        --shadow-xl: 0 20px 25px oklch(0% 0 0 / 0.6);
+        /* Adjust shadows for dark mode - Subtle colorful depth */
+        --shadow-color-dark: oklch(0% 0.05 264);
+        --shadow-sm: 0 1px 2px oklch(from var(--shadow-color-dark) l c h / 0.3);
+        --shadow-md: 0 4px 6px oklch(from var(--shadow-color-dark) l c h / 0.4);
+        --shadow-lg: 0 10px 15px oklch(from var(--shadow-color-dark) l c h / 0.5);
+        --shadow-xl: 0 20px 25px oklch(from var(--shadow-color-dark) l c h / 0.6);
     }
 }

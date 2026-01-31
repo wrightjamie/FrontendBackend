@@ -1,6 +1,9 @@
+import React, { useState } from 'react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
+import { Table, Thead, Tbody, Tr, Th, Td } from '../ui/Table';
 
 /**
  * DynamicDataTable: A reusable component to render and manage data for a specific DataType.
@@ -116,10 +119,9 @@ const DynamicDataTable = ({ type }) => {
                 );
             case 'number':
                 return (
-                    <input
+                    <Input
                         id={id}
                         type="number"
-                        className={styles.input}
                         value={value ?? ''}
                         onChange={(e) => onChange(Number(e.target.value))}
                         required={field.required}
@@ -127,10 +129,9 @@ const DynamicDataTable = ({ type }) => {
                 );
             case 'date':
                 return (
-                    <input
+                    <Input
                         id={id}
                         type="date"
-                        className={styles.input}
                         value={value ?? ''}
                         onChange={(e) => onChange(e.target.value)}
                         required={field.required}
@@ -138,10 +139,9 @@ const DynamicDataTable = ({ type }) => {
                 );
             default: // text
                 return (
-                    <input
+                    <Input
                         id={id}
                         type="text"
-                        className={styles.input}
                         value={value ?? ''}
                         onChange={(e) => onChange(e.target.value)}
                         required={field.required}
@@ -169,38 +169,38 @@ const DynamicDataTable = ({ type }) => {
             </div>
 
             <div className={styles.tableWrapper}>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            {type.isOrdered && <th>Order</th>}
-                            {headers.map(h => <th key={h}>{h}</th>)}
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table>
+                    <Thead>
+                        <Tr>
+                            {type.isOrdered && <Th>Order</Th>}
+                            {headers.map(h => <Th key={h}>{h}</Th>)}
+                            <Th>Actions</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
                         {/* Adding Row */}
                         {isAdding && (
-                            <tr className={styles.editRow}>
-                                {type.isOrdered && <td>-</td>}
+                            <Tr className={styles.editRow}>
+                                {type.isOrdered && <Td>-</Td>}
                                 {type.fields.map(field => (
-                                    <td key={field.name}>
+                                    <Td key={field.name}>
                                         {renderInput(field, formData[field.name], (val) => setFormData({ ...formData, [field.name]: val }))}
-                                    </td>
+                                    </Td>
                                 ))}
-                                <td>
+                                <Td>
                                     <div className={styles.actions}>
                                         <Button onClick={handleSave} intent="success" size="sm">Save</Button>
                                         <Button onClick={handleCancel} variant="outline" size="sm">Cancel</Button>
                                     </div>
-                                </td>
-                            </tr>
+                                </Td>
+                            </Tr>
                         )}
 
                         {/* Data Rows */}
                         {entities?.map((entity, idx) => (
-                            <tr key={entity._id}>
+                            <Tr key={entity._id}>
                                 {type.isOrdered && (
-                                    <td className={styles.orderCell}>
+                                    <Td className={styles.orderCell}>
                                         {type.permissions.canReorder && (
                                             <div className={styles.orderBtns}>
                                                 <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="sm" style={{ padding: '2px 4px', minHeight: 'auto' }}>↑</Button>
@@ -208,18 +208,18 @@ const DynamicDataTable = ({ type }) => {
                                             </div>
                                         )}
                                         <span>{idx + 1}</span>
-                                    </td>
+                                    </Td>
                                 )}
                                 {type.fields.map(field => (
-                                    <td key={field.name}>
+                                    <Td key={field.name}>
                                         {editingId === entity._id ? (
                                             renderInput(field, formData[field.name], (val) => setFormData({ ...formData, [field.name]: val }))
                                         ) : (
                                             field.type === 'boolean' ? (entity[field.name] ? 'Yes' : 'No') : String(entity[field.name] ?? '')
                                         )}
-                                    </td>
+                                    </Td>
                                 ))}
-                                <td className={styles.actionsCell}>
+                                <Td className={styles.actionsCell}>
                                     <div className={styles.actions}>
                                         {editingId === entity._id ? (
                                             <>
@@ -229,19 +229,19 @@ const DynamicDataTable = ({ type }) => {
                                         ) : (
                                             <>
                                                 {type.permissions.canEdit && (
-                                                    <Button onClick={() => handleEdit(entity)} variant="outline" size="sm">Edit</Button>
+                                                    <Button onClick={() => handleEdit(entity)} size="sm">Edit</Button>
                                                 )}
                                                 {type.permissions.canDelete && (
-                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" variant="outline" size="sm">Delete</Button>
+                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" size="sm">Delete</Button>
                                                 )}
                                             </>
                                         )}
                                     </div>
-                                </td>
-                            </tr>
+                                </Td>
+                            </Tr>
                         ))}
-                    </tbody>
-                </table>
+                    </Tbody>
+                </Table>
             </div>
         </div>
     );

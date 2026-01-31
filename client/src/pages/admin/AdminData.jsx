@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDataTypes } from '../../hooks/useDynamicData';
 import DynamicDataTable from '../../components/admin/DynamicDataTable';
+import TabNavigation from '../../components/ui/TabNavigation';
 import styles from './AdminData.module.css';
 
 /**
@@ -68,19 +69,14 @@ const AdminData = () => {
                 </div>
             )}
 
-            <div className={styles.tabsContainer}>
-                <div className={styles.tabs}>
-                    {types?.map(type => (
-                        <button
-                            key={type._id}
-                            className={`${styles.tab} ${activeTypeId === type._id ? styles.activeTab : ''}`}
-                            onClick={() => setActiveTypeId(type._id)}
-                        >
-                            {type.name}
-                        </button>
-                    ))}
-                </div>
-            </div>
+            {types && (
+                <TabNavigation
+                    tabs={types.map(t => ({ path: t._id, label: t.name }))}
+                    variant="pill"
+                    activeTab={activeTypeId}
+                    onTabClick={setActiveTypeId}
+                />
+            )}
 
             <div className={styles.content}>
                 {activeType ? (

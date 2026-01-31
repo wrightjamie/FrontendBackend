@@ -26,11 +26,11 @@
 
 
 
-- [ ] **B-012**: Standardize Base Styles & Core Components
-  - [ ] Define global design tokens (OKLCH colors, spacing, typography, shadows)
-  - [ ] Create standardized component styles (Buttons, Input fields, Selects, Cards)
-  - [ ] Standardize Table UI (header, rows, hover states, pagination layout)
-  - [ ] Ensure full dark mode compatibility across all core components
+- [x] **B-012**: Standardize Base Styles & Core Components
+  - [x] Define global design tokens (OKLCH colors, spacing, typography, shadows)
+  - [x] Create standardized component styles (Buttons, Input fields, Selects, Cards)
+  - [x] Standardize Table UI (header, rows, hover states, pagination layout)
+  - [x] Ensure full dark mode compatibility across all core components
 
 - [ ] **B-023**: Implement SVG Icon System
   - [ ] Research and choose solution (pre-built vs self-built)

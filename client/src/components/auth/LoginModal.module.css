@@ -1,30 +1,12 @@
 .popover {
-    /* Popover API defaults */
-    position: absolute;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    background: var(--color-bg-primary);
-    color: var(--color-text-primary);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    min-width: 250px;
-
     /* Anchor Positioning */
     position-anchor: --user-btn;
     top: calc(anchor(bottom) + 0.5rem);
     right: anchor(right);
 
-    /* Reset margins */
-    margin: 0;
-
     /* Reset UA defaults */
     left: auto;
     bottom: auto;
-}
-
-/* Backdrop */
-.popover::backdrop {
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .form {

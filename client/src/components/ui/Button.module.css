@@ -15,14 +15,30 @@
     background: var(--btn-color);
     color: oklch(from var(--btn-color) 100% 0 0);
 
+    --btn-shadow: var(--shadow-md);
+
     &:hover:not(:disabled) {
         background: oklch(from var(--btn-color) calc(l - .1) c h);
         transform: translateY(-1px);
-        box-shadow: var(--shadow-md);
+        box-shadow:
+            var(--btn-shadow),
+            0 6px 15px oklch(from var(--btn-color) 40% 0.05 h / 0.1);
     }
 
     &:active:not(:disabled) {
         transform: translateY(0);
+    }
+
+    /* Dark mode - Convert shadow to colorful halo/glow */
+    :global(.dark) &:hover:not(:disabled) {
+        box-shadow:
+            var(--btn-shadow),
+            0 0 20px oklch(from var(--btn-color) 60% 0.2 h / 0.4);
+    }
+
+    &.flat:hover:not(:disabled) {
+        transform: none;
+        box-shadow: none;
     }
 
     &:disabled {
