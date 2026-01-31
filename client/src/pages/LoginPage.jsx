@@ -30,7 +30,7 @@ const LoginPage = () => {
     return (
         <CenteredLayout>
             <Card className={styles.loginCard}>
-                <CardHeader>
+                <CardHeader className={styles.cardHeader}>
                     <h1>Welcome Back</h1>
                     <p>Please sign in to continue</p>
                 </CardHeader>

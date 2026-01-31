@@ -3,6 +3,7 @@
 
     display: inline-flex;
     align-items: center;
+    gap: 0.35rem;
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-pill);
     font-size: var(--text-xs);

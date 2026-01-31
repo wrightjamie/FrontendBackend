@@ -3,6 +3,7 @@ import styles from './Badge.module.css';
 
 export function Badge({
     variant = 'default', // 'default' | 'success' | 'warning' | 'danger' | 'info'
+    icon: Icon,
     children,
     className: customClassName,
     ...props
@@ -15,7 +16,8 @@ export function Badge({
 
     return (
         <span className={className} {...props}>
-            {children}
+            {Icon && <Icon size={12} className={styles.icon} />}
+            <span>{children}</span>
         </span>
     );
 }

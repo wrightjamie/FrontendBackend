@@ -31,6 +31,9 @@
     color: var(--color-text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     align-self: flex-start;
 }
 
@@ -107,7 +110,24 @@
     font-size: 1.1rem;
     padding: 0.25rem;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background 0.2s ease;
+}
+
+.spin {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .copyBtn:hover {
@@ -166,4 +186,9 @@
     padding: 3rem;
     color: var(--color-text-secondary);
     font-style: italic;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }

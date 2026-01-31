@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSiteMeta, useSiteMetaMutations } from '../../hooks/useSiteMeta';
 import { useToast } from '../../context/ToastContext';
+import { Settings } from 'lucide-react';
 import ImageSelect from '../../components/form/ImageSelect';
 import styles from './AdminSettings.module.css';
 
@@ -49,7 +50,10 @@ const AdminSettings = () => {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>System Settings</h2>
+            <h2 className={styles.title}>
+                <Settings size={28} />
+                <span>System Settings</span>
+            </h2>
 
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.field}>

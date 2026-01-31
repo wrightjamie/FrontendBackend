@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, ArrowDown, Pencil, Trash2 } from 'lucide-react';
+import { ArrowUp, ArrowDown, Pencil, Trash2, Check, X, Plus } from 'lucide-react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 import { Button } from '../ui/Button';
@@ -187,7 +187,8 @@ const DynamicDataTable = ({ type }) => {
                         onClick={() => { setIsAdding(true); setFormData({}); }}
                         disabled={isAdding || !!editingId}
                     >
-                        + Add Record
+                        <Plus size={16} />
+                        <span>Add Record</span>
                     </Button>
                 )}
             </div>
@@ -213,8 +214,12 @@ const DynamicDataTable = ({ type }) => {
                                 ))}
                                 <Td>
                                     <div className={styles.actions}>
-                                        <Button onClick={handleSave} intent="success" size="sm">Save</Button>
-                                        <Button onClick={handleCancel} variant="outline" size="sm">Cancel</Button>
+                                        <Button onClick={handleSave} intent="success" size="sm" title="Save">
+                                            <Check size={16} />
+                                        </Button>
+                                        <Button onClick={handleCancel} variant="outline" size="sm" title="Cancel">
+                                            <X size={16} />
+                                        </Button>
                                     </div>
                                 </Td>
                             </Tr>
@@ -251,8 +256,12 @@ const DynamicDataTable = ({ type }) => {
                                     <div className={styles.actions}>
                                         {editingId === entity._id ? (
                                             <>
-                                                <Button onClick={handleSave} intent="success" size="sm">Save</Button>
-                                                <Button onClick={handleCancel} variant="outline" size="sm">Cancel</Button>
+                                                <Button onClick={handleSave} intent="success" size="sm" title="Save">
+                                                    <Check size={16} />
+                                                </Button>
+                                                <Button onClick={handleCancel} variant="outline" size="sm" title="Cancel">
+                                                    <X size={16} />
+                                                </Button>
                                             </>
                                         ) : (
                                             <>

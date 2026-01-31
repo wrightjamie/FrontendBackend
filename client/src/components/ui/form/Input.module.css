@@ -52,6 +52,25 @@
     }
 }
 
+.iconContainer {
+    position: absolute;
+    left: var(--space-md);
+    color: var(--color-text-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: color var(--transition-base);
+}
+
+.hasIcon .input {
+    padding-left: calc(var(--space-md) * 2 + 18px);
+}
+
+.inputWrapper:focus-within .iconContainer {
+    color: var(--color-brand-primary);
+}
+
 /* Error State */
 .hasError .input {
     border-color: var(--color-error);

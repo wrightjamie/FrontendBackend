@@ -4,7 +4,8 @@ import apiClient from '../api/apiClient';
 import ChangePassword from '../components/auth/ChangePassword';
 import { Button } from '../components/ui/Button';
 import styles from './UserProfile.module.css';
-import { useState, useEffect } from 'react'; // Added useState and useEffect imports
+import { User, ShieldCheck, Mail, LogOut, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 /**
  * UserProfile: User profile page for managing personal information
@@ -75,12 +76,18 @@ const UserProfile = () => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1>My Profile</h1>
+                <h1>
+                    <User size={32} />
+                    <span>My Profile</span>
+                </h1>
                 <p>Manage your personal information and security settings</p>
             </div>
 
             <div className={styles.section}>
-                <h2>Personal Information</h2>
+                <h2>
+                    <User size={20} />
+                    <span>Personal Information</span>
+                </h2>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.inputGroup}>
                         <label htmlFor="username">Username</label>
@@ -140,7 +147,10 @@ const UserProfile = () => {
             <div className={styles.separator}></div>
 
             <div className={styles.section}>
-                <h2>Security</h2>
+                <h2>
+                    <ShieldCheck size={20} />
+                    <span>Security</span>
+                </h2>
                 <ChangePassword onSuccess={handlePasswordChangeSuccess} />
             </div>
         </div>

@@ -6,6 +6,18 @@ import { Badge } from '../../components/ui/Badge';
 import { Input } from '../../components/ui/form/Input';
 import { Select } from '../../components/ui/form/Select';
 import { Table, Thead, Tbody, Tr, Th, Td } from '../../components/ui/Table';
+import {
+    Users,
+    UserCheck,
+    UserMinus,
+    Clock,
+    Pencil,
+    Trash2,
+    Key,
+    Check,
+    X,
+    ShieldCheck
+} from 'lucide-react';
 import TabNavigation from '../../components/ui/TabNavigation';
 import styles from './AdminUsers.module.css';
 
@@ -23,10 +35,10 @@ const AdminUsers = () => {
     const [filterStatus, setFilterStatus] = useState('all');
 
     const filterTabs = [
-        { value: 'all', label: 'All Users' },
-        { value: 'active', label: 'Active' },
-        { value: 'pending', label: 'Pending Approval' },
-        { value: 'suspended', label: 'Suspended' },
+        { value: 'all', label: 'All Users', icon: <Users size={16} /> },
+        { value: 'active', label: 'Active', icon: <ShieldCheck size={16} /> },
+        { value: 'pending', label: 'Pending Approval', icon: <Clock size={16} /> },
+        { value: 'suspended', label: 'Suspended', icon: <UserMinus size={16} /> },
     ];
 
     const handleEdit = (user) => {
@@ -187,8 +199,12 @@ const AdminUsers = () => {
                                                 </Td>
                                                 <Td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
-                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm">Save</Button>
-                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm">Cancel</Button>
+                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm" title="Save">
+                                                            <Check size={16} />
+                                                        </Button>
+                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm" title="Cancel">
+                                                            <X size={16} />
+                                                        </Button>
                                                     </div>
                                                 </Td>
                                             </>
@@ -198,31 +214,43 @@ const AdminUsers = () => {
                                                 <Td>{user.name}</Td>
                                                 <Td>{user.email}</Td>
                                                 <Td>
-                                                    <Badge variant={user.role === 'admin' ? 'info' : user.role === 'editor' ? 'success' : 'default'}>
+                                                    <Badge
+                                                        variant={user.role === 'admin' ? 'info' : user.role === 'editor' ? 'success' : 'default'}
+                                                        icon={user.role === 'admin' ? ShieldCheck : user.role === 'editor' ? Pencil : Users}
+                                                    >
                                                         {user.role}
                                                     </Badge>
                                                 </Td>
                                                 <Td>
-                                                    <Badge variant={user.status === 'active' ? 'success' : user.status === 'pending' ? 'warning' : 'danger'}>
+                                                    <Badge
+                                                        variant={user.status === 'active' ? 'success' : user.status === 'pending' ? 'warning' : 'danger'}
+                                                        icon={user.status === 'active' ? UserCheck : user.status === 'pending' ? Clock : UserMinus}
+                                                    >
                                                         {user.status}
                                                     </Badge>
                                                 </Td>
                                                 <Td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
                                                         {user.status === 'pending' && (
-                                                            <Button onClick={() => handleApprove(user._id)} intent="success" size="sm">Approve</Button>
+                                                            <Button onClick={() => handleApprove(user._id)} intent="success" size="sm" title="Approve">
+                                                                <UserCheck size={16} />
+                                                            </Button>
                                                         )}
-                                                        <Button onClick={() => handleEdit(user)} size="sm" variant="outline">Edit</Button>
-                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="ghost">Password</Button>
+                                                        <Button onClick={() => handleEdit(user)} size="sm" variant="outline" title="Edit">
+                                                            <Pencil size={16} />
+                                                        </Button>
+                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="ghost" title="Reset Password">
+                                                            <Key size={16} />
+                                                        </Button>
                                                         <Button
                                                             onClick={() => handleDelete(user._id)}
                                                             intent="danger"
                                                             size="sm"
                                                             variant="ghost"
                                                             disabled={isSelf}
-                                                            title={isSelf ? "You cannot delete your own account" : ""}
+                                                            title={isSelf ? "You cannot delete your own account" : "Delete User"}
                                                         >
-                                                            Delete
+                                                            <Trash2 size={16} />
                                                         </Button>
                                                     </div>
                                                 </Td>

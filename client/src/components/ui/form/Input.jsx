@@ -9,6 +9,7 @@ export const Input = forwardRef(({
     className,
     containerClassName,
     type = 'text',
+    icon: Icon,
     ...props
 }, ref) => {
     // Generate a unique ID if one isn't provided but a label is present
@@ -22,7 +23,12 @@ export const Input = forwardRef(({
                 </label>
             )}
 
-            <div className={styles.inputWrapper}>
+            <div className={`${styles.inputWrapper} ${Icon ? styles.hasIcon : ''}`}>
+                {Icon && (
+                    <div className={styles.iconContainer}>
+                        <Icon size={18} />
+                    </div>
+                )}
                 <input
                     ref={ref}
                     id={inputId}

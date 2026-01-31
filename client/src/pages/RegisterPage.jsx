@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CheckCircle } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
+import { CheckCircle, User, Mail, Lock, UserCircle } from 'lucide-react';
 import apiClient from '../api/apiClient';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/form/Input';
@@ -109,6 +109,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             required
                             disabled={loading}
+                            icon={User}
                         />
 
                         <Input
@@ -120,6 +121,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             required
                             disabled={loading}
+                            icon={UserCircle}
                         />
 
                         <Input
@@ -131,6 +133,7 @@ const RegisterPage = () => {
                             onChange={handleChange}
                             required
                             disabled={loading}
+                            icon={Mail}
                         />
 
                         <Input
@@ -143,6 +146,7 @@ const RegisterPage = () => {
                             required
                             disabled={loading}
                             minLength={6}
+                            icon={Lock}
                         />
 
                         <Input
@@ -155,6 +159,7 @@ const RegisterPage = () => {
                             required
                             disabled={loading}
                             minLength={6}
+                            icon={Lock}
                         />
 
                         <Button type="submit" disabled={loading} className={styles.submitBtn}>

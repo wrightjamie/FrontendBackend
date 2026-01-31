@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { Pencil, Library, Upload, Check } from 'lucide-react';
 import apiClient from '../../api/apiClient';
 import { useToast } from '../../context/ToastContext';
 import styles from './ImageSelect.module.css';
@@ -69,7 +69,10 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
                 {value ? (
                     <div className={styles.previewWrapper}>
                         <img src={`${value}?v=${Date.now()}`} alt="Selected" className={styles.selectedPreview} />
-                        <div className={styles.changeOverlay}>Change</div>
+                        <div className={styles.changeOverlay}>
+                            <Pencil size={18} />
+                            <span>Change</span>
+                        </div>
                     </div>
                 ) : (
                     <div className={styles.placeholder}>
@@ -86,13 +89,15 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
                                 className={`${styles.tab} ${tab === 'browse' ? styles.activeTab : ''}`}
                                 onClick={() => setTab('browse')}
                             >
-                                Browse Library
+                                <Library size={16} />
+                                <span>Browse Library</span>
                             </button>
                             <button
                                 className={`${styles.tab} ${tab === 'upload' ? styles.activeTab : ''}`}
                                 onClick={() => setTab('upload')}
                             >
-                                Upload New
+                                <Upload size={16} />
+                                <span>Upload New</span>
                             </button>
                         </div>
                     </div>
@@ -113,6 +118,11 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
                                             title={img.title || img.filename}
                                         >
                                             <img src={img.thumbnailUrl || img.url} alt={img.title} />
+                                            {value === img.url && (
+                                                <div className={styles.selectedOverlay}>
+                                                    <Check size={20} />
+                                                </div>
+                                            )}
                                         </div>
                                     ))
                                 )}

@@ -9,6 +9,10 @@
     /* Added to prevent layout shift on outline */
     font-weight: var(--font-semibold);
     font-size: var(--text-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     cursor: pointer;
     transition: all var(--transition-base);
     font-family: inherit;

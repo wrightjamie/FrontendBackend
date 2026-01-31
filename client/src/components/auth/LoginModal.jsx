@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import LoginForm from './LoginForm';
 import { Button } from '../ui/Button';
 import { Popover } from '../ui/Popover';
+import { LayoutDashboard, User as UserIcon, LogOut } from 'lucide-react';
 import styles from './LoginModal.module.css';
 
 const LoginModal = () => {
@@ -32,14 +33,17 @@ const LoginModal = () => {
                     <h3>Hello, {currentUsername || 'User'}</h3>
                     {user?.role === 'admin' && (
                         <Link to="/admin" className={styles.profileLink} onClick={closeModal}>
-                            Admin Dashboard
+                            <LayoutDashboard size={16} />
+                            <span>Admin Dashboard</span>
                         </Link>
                     )}
                     <Link to="/profile" className={styles.profileLink} onClick={closeModal}>
-                        My Profile
+                        <UserIcon size={16} />
+                        <span>My Profile</span>
                     </Link>
                     <Button onClick={handleLogout} intent="danger" variant="ghost" className={styles.logoutBtn}>
-                        Logout
+                        <LogOut size={16} />
+                        <span>Logout</span>
                     </Button>
                 </div>
             ) : (

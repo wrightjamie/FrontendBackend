@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link as LinkIcon, Trash2, RefreshCw, Copy, Loader2 } from 'lucide-react';
 import apiClient from '../../api/apiClient';
 import { useToast } from '../../context/ToastContext';
 import styles from './AdminMedia.module.css';
@@ -92,7 +93,8 @@ const AdminMedia = () => {
                         className={styles.regenerateBtn}
                         disabled={regenerating || loading}
                     >
-                        {regenerating ? 'Regenerating...' : 'Regenerate Thumbnails'}
+                        <RefreshCw size={16} className={regenerating ? styles.spin : ''} />
+                        <span>{regenerating ? 'Regenerating...' : 'Regenerate Thumbnails'}</span>
                     </button>
                 </div>
                 <div className={styles.uploader}>
@@ -105,7 +107,10 @@ const AdminMedia = () => {
             </div>
 
             {loading ? (
-                <div className={styles.loading}>Loading library...</div>
+                <div className={styles.loading}>
+                    <Loader2 size={32} className={styles.spin} />
+                    <span>Loading library...</span>
+                </div>
             ) : (
                 <div className={styles.grid}>
                     {images.length === 0 ? (
@@ -126,14 +131,14 @@ const AdminMedia = () => {
                                         className={styles.copyBtn}
                                         title="Copy Full URL"
                                     >
-                                        🔗
+                                        <Copy size={16} />
                                     </button>
                                     <button
                                         onClick={() => handleDelete(img._id)}
                                         className={styles.deleteBtn}
                                         title="Delete"
                                     >
-                                        🗑️
+                                        <Trash2 size={16} />
                                     </button>
                                 </div>
                                 <div className={styles.titleArea}>

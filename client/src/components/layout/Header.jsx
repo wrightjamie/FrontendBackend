@@ -1,4 +1,5 @@
 import React from 'react';
+import { Zap, User as UserIcon } from 'lucide-react';
 import { Button } from '../ui/Button';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ const Header = () => {
                             className={styles.logoImage}
                         />
                     ) : (
-                        <span className={styles.logoIcon}>⚡</span>
+                        <span className={styles.logoIcon}><Zap size={24} fill="var(--color-primary)" /></span>
                     )}
                     <span className={styles.logoText}>{meta.title}</span>
                 </Link>
@@ -32,7 +33,8 @@ const Header = () => {
                         size="sm"
                         flat
                     >
-                        {isLoggedIn ? user.username || 'User' : 'Login'}
+                        <UserIcon size={16} />
+                        <span>{isLoggedIn ? user.username || 'User' : 'Login'}</span>
                     </Button>
                 </div>
             </div>

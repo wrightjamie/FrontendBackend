@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDataTypes } from '../../hooks/useDynamicData';
 import DynamicDataTable from '../../components/admin/DynamicDataTable';
 import TabNavigation from '../../components/ui/TabNavigation';
+import { Info } from 'lucide-react';
 import styles from './AdminData.module.css';
 
 /**
@@ -37,7 +38,8 @@ const AdminData = () => {
                     className={styles.guideToggle}
                     onClick={() => setShowGuide(!showGuide)}
                 >
-                    {showGuide ? 'Hide Schema Guide' : 'Show Schema Guide'}
+                    <Info size={16} />
+                    <span>{showGuide ? 'Hide Schema Guide' : 'Show Schema Guide'}</span>
                 </button>
             </div>
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { User, Lock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/form/Input';
@@ -47,6 +48,7 @@ const LoginForm = ({ onSuccess, onRegisterClick }) => {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     disabled={loading}
+                    icon={User}
                 />
                 <Input
                     id="password"
@@ -56,6 +58,7 @@ const LoginForm = ({ onSuccess, onRegisterClick }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     disabled={loading}
+                    icon={Lock}
                 />
                 <Button type="submit" disabled={loading} className={styles.submitBtn}>
                     {loading ? 'Signing In...' : 'Sign In'}
