@@ -1,0 +1,94 @@
+/* CheckboxRadio.module.css */
+.container {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    cursor: pointer;
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    user-select: none;
+}
+
+.input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.25em;
+    height: 1.25em;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    /* Rounded for checkbox */
+    background: var(--color-bg-primary);
+    margin-top: 0.125em;
+    /* Optical alignment with text */
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: all var(--transition-base);
+
+    /* Radio specific override */
+    &[type="radio"] {
+        border-radius: 50%;
+    }
+
+    &:checked {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+
+    &:checked::before {
+        content: "";
+        width: 0.75em;
+        height: 0.75em;
+        transform: scale(1);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 1em 1em white;
+        /* White check/dot */
+    }
+
+    /* Checkbox icon (check mark shape could be SVG, but simple box/clip-path works too) */
+    &[type="checkbox"]:checked::before {
+        transform-origin: bottom left;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        background-color: white;
+        /* Only background-color needed if clip-path used */
+        box-shadow: none;
+    }
+
+    /* Radio icon (circle) */
+    &[type="radio"]:checked::before {
+        border-radius: 50%;
+        background-color: white;
+        box-shadow: none;
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    }
+
+    &:disabled {
+        background: var(--color-bg-secondary);
+        border-color: var(--color-border);
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+}
+
+.label {
+    line-height: var(--leading-normal);
+}
+
+.error {
+    color: var(--color-danger);
+}
+
+.input.error {
+    border-color: var(--color-danger);
+}
+
+.description {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+}

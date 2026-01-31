@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../api/apiClient';
 import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/form/Input';
 import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {
@@ -91,77 +92,62 @@ const RegisterPage = () => {
                 <form onSubmit={handleSubmit} className={styles.form}>
                     {error && <p className={styles.error}>{error}</p>}
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="username">Username *</label>
-                        <input
-                            id="username"
-                            name="username"
-                            type="text"
-                            className={styles.input}
-                            value={formData.username}
-                            onChange={handleChange}
-                            required
-                            disabled={loading}
-                        />
-                    </div>
+                    <Input
+                        id="username"
+                        name="username"
+                        label="Username *"
+                        type="text"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                    />
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="name">Full Name *</label>
-                        <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            className={styles.input}
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            disabled={loading}
-                        />
-                    </div>
+                    <Input
+                        id="name"
+                        name="name"
+                        label="Full Name *"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                    />
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="email">Email *</label>
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            className={styles.input}
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            disabled={loading}
-                        />
-                    </div>
+                    <Input
+                        id="email"
+                        name="email"
+                        label="Email *"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                    />
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="password">Password *</label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            className={styles.input}
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            disabled={loading}
-                            minLength={6}
-                        />
-                    </div>
+                    <Input
+                        id="password"
+                        name="password"
+                        label="Password *"
+                        type="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                        minLength={6}
+                    />
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="confirmPassword">Confirm Password *</label>
-                        <input
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            type="password"
-                            className={styles.input}
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            required
-                            disabled={loading}
-                            minLength={6}
-                        />
-                    </div>
+                    <Input
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        label="Confirm Password *"
+                        type="password"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                        minLength={6}
+                    />
 
                     <Button type="submit" disabled={loading} className={styles.submitBtn}>
                         {loading ? 'Creating Account...' : 'Register'}

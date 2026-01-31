@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 import { Button } from '../ui/Button';
-import { Input } from '../ui/Input';
+import { useAuth } from '../../context/AuthContext';
 import { Table, Thead, Tbody, Tr, Th, Td } from '../ui/Table';
+import { Input } from '../ui/form/Input';
+import { Checkbox } from '../ui/form/Checkbox';
+import { RadioGroup } from '../ui/form/RadioGroup';
 
 /**
  * DynamicDataTable: A reusable component to render and manage data for a specific DataType.
@@ -105,16 +108,36 @@ const DynamicDataTable = ({ type }) => {
     /**
      * renderInput: Helper to render appropriate input field based on schema type.
      */
-    const renderInput = (field, value, onChange) => {
-        const id = `field-${field.name}`;
+    /**
+     * renderInput: Helper to render appropriate input field based on schema type.
+     * Includes demo logic for Checkbox and Radio buttons.
+     */
+    const renderInput = (field, value, onChange, index = 0) => {
+        const id = `field-${field.name}-${index}`;
         switch (field.type) {
             case 'boolean':
                 return (
-                    <input
+                    <Checkbox
                         id={id}
-                        type="checkbox"
                         checked={!!value}
                         onChange={(e) => onChange(e.target.checked)}
+                    />
+                );
+            case 'radio':
+                // Fields with options like ['red', 'blue', 'green']
+                const options = field.options || [];
+                // Normalize options to {label, value} format if they are strings
+                const radioOptions = options.map(opt =>
+                    typeof opt === 'object' ? opt : { label: opt.charAt(0).toUpperCase() + opt.slice(1), value: opt }
+                );
+
+                return (
+                    <RadioGroup
+                        name={`${id}-group`}
+                        direction="row"
+                        value={value}
+                        onChange={onChange}
+                        options={radioOptions}
                     />
                 );
             case 'number':
@@ -184,7 +207,7 @@ const DynamicDataTable = ({ type }) => {
                                 {type.isOrdered && <Td>-</Td>}
                                 {type.fields.map(field => (
                                     <Td key={field.name}>
-                                        {renderInput(field, formData[field.name], (val) => setFormData({ ...formData, [field.name]: val }))}
+                                        {renderInput(field, formData[field.name], (val) => setFormData({ ...formData, [field.name]: val }), 999)}
                                     </Td>
                                 ))}
                                 <Td>
@@ -213,7 +236,7 @@ const DynamicDataTable = ({ type }) => {
                                 {type.fields.map(field => (
                                     <Td key={field.name}>
                                         {editingId === entity._id ? (
-                                            renderInput(field, formData[field.name], (val) => setFormData({ ...formData, [field.name]: val }))
+                                            renderInput(field, formData[field.name], (val) => setFormData({ ...formData, [field.name]: val }), idx)
                                         ) : (
                                             field.type === 'boolean' ? (entity[field.name] ? 'Yes' : 'No') : String(entity[field.name] ?? '')
                                         )}

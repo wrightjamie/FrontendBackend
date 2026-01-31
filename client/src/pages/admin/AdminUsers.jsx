@@ -3,6 +3,10 @@ import { useAuth } from '../../context/AuthContext';
 import { useUsers, useUserMutations } from '../../hooks/useUsers';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
+import { Input } from '../../components/ui/form/Input';
+import { Select } from '../../components/ui/form/Select';
+import { Table, Thead, Tbody, Tr, Th, Td } from '../../components/ui/Table';
+import TabNavigation from '../../components/ui/TabNavigation';
 import styles from './AdminUsers.module.css';
 
 /**
@@ -16,7 +20,14 @@ const AdminUsers = () => {
 
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState({});
-    const [passwordForm, setPasswordForm] = useState({ userId: null, password: '', confirmPassword: '' });
+    const [filterStatus, setFilterStatus] = useState('all');
+
+    const filterTabs = [
+        { value: 'all', label: 'All Users' },
+        { value: 'active', label: 'Active' },
+        { value: 'pending', label: 'Pending Approval' },
+        { value: 'suspended', label: 'Suspended' },
+    ];
 
     const handleEdit = (user) => {
         setEditingId(user._id);
@@ -84,8 +95,11 @@ const AdminUsers = () => {
     if (loading && !users) return <div className={styles.loading}>Loading users...</div>;
     if (error) return <div className={styles.error}>Error: {error.message}</div>;
 
-    const pendingUsers = users?.filter(u => u.status === 'pending') || [];
-    const activeUsers = users?.filter(u => u.status !== 'pending') || [];
+    const filteredUsers = users?.filter(u => {
+        if (filterStatus === 'all') return true;
+        if (filterStatus === 'active') return u.status === 'active' || u.status === 'admin'; // 'active' might need to cover both
+        return u.status === filterStatus;
+    }) || [];
 
     return (
         <div className={styles.container}>
@@ -96,173 +110,130 @@ const AdminUsers = () => {
                 </div>
             </div>
 
-            {/* Pending Users Section */}
-            {pendingUsers.length > 0 && (
-                <div className={styles.section}>
-                    <h3 className={styles.sectionTitle}>
-                        Pending Approval ({pendingUsers.length})
-                    </h3>
-                    <div className={styles.tableWrapper}>
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Username</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Registered</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {pendingUsers.map(user => (
-                                    <tr key={user._id} className={styles.pendingRow}>
-                                        <td>{user.username}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
-                                        <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-                                        <td className={styles.actionsCell}>
-                                            <div className={styles.actions}>
-                                                <Button
-                                                    onClick={() => handleApprove(user._id)}
-                                                    intent="success"
-                                                    size="sm"
-                                                >
-                                                    Approve
-                                                </Button>
-                                                <Button
-                                                    onClick={() => handleDelete(user._id)}
-                                                    intent="danger"
-                                                    size="sm"
-                                                >
-                                                    Reject
-                                                </Button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            )}
+            <TabNavigation
+                tabs={filterTabs}
+                variant="pill"
+                activeTab={filterStatus}
+                onTabClick={setFilterStatus}
+            />
 
-            {/* Active Users Section */}
-            <div className={styles.section}>
-                <h3 className={styles.sectionTitle}>All Users ({activeUsers.length})</h3>
-                <div className={styles.tableWrapper}>
-                    <table className={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {activeUsers.map(user => {
+            <div className={styles.tableWrapper}>
+                <Table>
+                    <Thead>
+                        <Tr>
+                            <Th>Username</Th>
+                            <Th>Name</Th>
+                            <Th>Email</Th>
+                            <Th>Role</Th>
+                            <Th>Status</Th>
+                            <Th>Actions</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {filteredUsers.length === 0 ? (
+                            <Tr>
+                                <Td colSpan={6} style={{ textAlign: 'center', color: 'var(--color-text-secondary)' }}>
+                                    No users found matching this filter.
+                                </Td>
+                            </Tr>
+                        ) : (
+                            filteredUsers.map(user => {
                                 const isSelf = currentUser?._id === user._id;
+                                const isEditing = editingId === user._id;
+
                                 return (
-                                    <tr key={user._id}>
-                                        {editingId === user._id ? (
+                                    <Tr key={user._id} className={user.status === 'pending' ? styles.pendingRow : ''}>
+                                        {isEditing ? (
                                             <>
-                                                <td>{user.username}</td>
-                                                <td>
-                                                    <input
-                                                        type="text"
-                                                        className={styles.input}
+                                                <Td>{user.username}</Td>
+                                                <Td>
+                                                    <Input
                                                         value={editForm.name}
                                                         onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                                                        dense
                                                     />
-                                                </td>
-                                                <td>
-                                                    <input
+                                                </Td>
+                                                <Td>
+                                                    <Input
                                                         type="email"
-                                                        className={styles.input}
                                                         value={editForm.email}
                                                         onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                                                        dense
                                                     />
-                                                </td>
-                                                <td>
-                                                    <select
-                                                        className={styles.select}
+                                                </Td>
+                                                <Td>
+                                                    <Select
                                                         value={editForm.role}
                                                         onChange={(e) => setEditForm({ ...editForm, role: e.target.value })}
+                                                        options={[
+                                                            { value: 'viewer', label: 'Viewer' },
+                                                            { value: 'editor', label: 'Editor' },
+                                                            { value: 'admin', label: 'Admin' }
+                                                        ]}
                                                         disabled={isSelf}
-                                                        title={isSelf ? "You cannot change your own role" : ""}
-                                                    >
-                                                        <option value="viewer">Viewer</option>
-                                                        <option value="editor">Editor</option>
-                                                        <option value="admin">Admin</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select
-                                                        className={styles.select}
+                                                    />
+                                                </Td>
+                                                <Td>
+                                                    <Select
                                                         value={editForm.status}
                                                         onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                                                        options={[
+                                                            { value: 'active', label: 'Active' },
+                                                            { value: 'suspended', label: 'Suspended' },
+                                                            { value: 'pending', label: 'Pending' }
+                                                        ]}
                                                         disabled={isSelf}
-                                                        title={isSelf ? "You cannot change your own status" : ""}
-                                                    >
-                                                        <option value="active">Active</option>
-                                                        <option value="suspended">Suspended</option>
-                                                    </select>
-                                                </td>
-                                                <td className={styles.actionsCell}>
+                                                    />
+                                                </Td>
+                                                <Td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
-                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm">
-                                                            Save
-                                                        </Button>
-                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm">
-                                                            Cancel
-                                                        </Button>
+                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm">Save</Button>
+                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm">Cancel</Button>
                                                     </div>
-                                                </td>
+                                                </Td>
                                             </>
                                         ) : (
                                             <>
-                                                <td>{user.username}</td>
-                                                <td>{user.name}</td>
-                                                <td>{user.email}</td>
-                                                <td>
+                                                <Td>{user.username}</Td>
+                                                <Td>{user.name}</Td>
+                                                <Td>{user.email}</Td>
+                                                <Td>
                                                     <Badge variant={user.role === 'admin' ? 'info' : user.role === 'editor' ? 'success' : 'default'}>
                                                         {user.role}
                                                     </Badge>
-                                                </td>
-                                                <td>
+                                                </Td>
+                                                <Td>
                                                     <Badge variant={user.status === 'active' ? 'success' : user.status === 'pending' ? 'warning' : 'danger'}>
                                                         {user.status}
                                                     </Badge>
-                                                </td>
-                                                <td className={styles.actionsCell}>
+                                                </Td>
+                                                <Td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
-                                                        <Button onClick={() => handleEdit(user)} size="sm">
-                                                            Edit
-                                                        </Button>
-                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm">
-                                                            Reset Password
-                                                        </Button>
+                                                        {user.status === 'pending' && (
+                                                            <Button onClick={() => handleApprove(user._id)} intent="success" size="sm">Approve</Button>
+                                                        )}
+                                                        <Button onClick={() => handleEdit(user)} size="sm" variant="outline">Edit</Button>
+                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="ghost">Password</Button>
                                                         <Button
                                                             onClick={() => handleDelete(user._id)}
                                                             intent="danger"
                                                             size="sm"
+                                                            variant="ghost"
                                                             disabled={isSelf}
                                                             title={isSelf ? "You cannot delete your own account" : ""}
                                                         >
                                                             Delete
                                                         </Button>
                                                     </div>
-                                                </td>
+                                                </Td>
                                             </>
                                         )}
-                                    </tr>
+                                    </Tr>
                                 );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                            })
+                        )}
+                    </Tbody>
+                </Table>
             </div>
         </div>
     );

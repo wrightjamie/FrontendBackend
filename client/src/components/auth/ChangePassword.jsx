@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import apiClient from '../../api/apiClient';
 import styles from './ChangePassword.module.css';
 import { Button } from '../ui/Button';
-import { Input } from '../ui/Input';
+import { Input } from '../ui/form/Input';
 
 /**
  * ChangePassword: Component for users to change their own password

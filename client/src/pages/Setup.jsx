@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/form/Input';
 import styles from './Setup.module.css';
 
 const Setup = () => {
@@ -59,42 +61,35 @@ const Setup = () => {
             <p>Create the primary administrator account.</p>
 
             <form onSubmit={handleSubmit} className={styles.form}>
-                <div>
-                    <label className={styles.inputLabel}>Username</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    <label className={styles.inputLabel}>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    <label className={styles.inputLabel}>Confirm Password</label>
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                        className={styles.input}
-                    />
-                </div>
+                <Input
+                    label="Username"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+
+                <Input
+                    label="Password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+
+                <Input
+                    label="Confirm Password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                />
 
                 {error && <p className={styles.error}>{error}</p>}
 
-                <button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading} className={styles.submitBtn}>
                     {isLoading ? 'Creating Admin...' : 'Finish Setup'}
-                </button>
+                </Button>
             </form>
         </div>
     );

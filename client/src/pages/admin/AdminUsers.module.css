@@ -31,71 +31,7 @@
     font-weight: 600;
 }
 
-.tableWrapper {
-    overflow-x: auto;
-    border-radius: 8px;
-    border: 1px solid var(--color-border);
-}
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--color-bg-secondary);
-}
-
-.table thead {
-    background: var(--color-bg-tertiary);
-}
-
-.table th {
-    text-align: left;
-    padding: 1rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    border-bottom: 2px solid var(--color-border);
-}
-
-.table td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-text-primary);
-}
-
-.table tbody tr:hover {
-    background: var(--color-bg-tertiary);
-}
-
-.pendingRow {
-    background: color-mix(in oklch, var(--color-warning) 5%, transparent);
-}
-
-.actionsCell {
-    white-space: nowrap;
-}
-
-.actions {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.input,
-.select {
-    padding: 0.4rem 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background: var(--color-bg-primary);
-    color: var(--color-text-primary);
-    font-size: 0.9rem;
-    width: 100%;
-    min-width: 100px;
-}
-
-.input:focus,
-.select:focus {
-    outline: none;
-    border-color: var(--color-primary);
-}
 
 .loading,
 .error {
