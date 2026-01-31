@@ -25,7 +25,8 @@ const TabNavigation = ({ tabs, variant = 'underline', activeTab, onTabClick }) =
                             onClick={() => onTabClick(key)}
                             type="button"
                         >
-                            {tab.label}
+                            {tab.icon && <span className={styles.icon}>{tab.icon}</span>}
+                            <span>{tab.label}</span>
                         </button>
                     );
                 }
@@ -39,7 +40,8 @@ const TabNavigation = ({ tabs, variant = 'underline', activeTab, onTabClick }) =
                             `${styles.tab} ${styles[variant]} ${isActive ? styles.active : ''}`
                         }
                     >
-                        {tab.label}
+                        {tab.icon && <span className={styles.icon}>{tab.icon}</span>}
+                        <span>{tab.label}</span>
                     </NavLink>
                 );
             })}

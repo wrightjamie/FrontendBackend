@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CheckCircle } from 'lucide-react';
 import apiClient from '../../api/apiClient';
 import styles from './ChangePassword.module.css';
 import { Button } from '../ui/Button';
@@ -79,7 +80,9 @@ const ChangePassword = ({ onSuccess, onCancel }) => {
     if (success) {
         return (
             <div className={styles.successMessage}>
-                <div className={styles.successIcon}>✓</div>
+                <div className={styles.successIcon}>
+                    <CheckCircle size={48} />
+                </div>
                 <h3>Password Changed Successfully</h3>
                 <p>Your password has been updated.</p>
             </div>

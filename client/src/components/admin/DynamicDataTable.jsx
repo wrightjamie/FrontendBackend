@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowUp, ArrowDown, Pencil, Trash2 } from 'lucide-react';
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 import { Button } from '../ui/Button';
@@ -226,8 +227,12 @@ const DynamicDataTable = ({ type }) => {
                                     <Td className={styles.orderCell}>
                                         {type.permissions.canReorder && (
                                             <div className={styles.orderBtns}>
-                                                <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="xs">↑</Button>
-                                                <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="xs">↓</Button>
+                                                <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="xs">
+                                                    <ArrowUp size={14} />
+                                                </Button>
+                                                <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="xs">
+                                                    <ArrowDown size={14} />
+                                                </Button>
                                             </div>
                                         )}
                                         <span>{idx + 1}</span>
@@ -252,10 +257,14 @@ const DynamicDataTable = ({ type }) => {
                                         ) : (
                                             <>
                                                 {type.permissions.canEdit && (
-                                                    <Button onClick={() => handleEdit(entity)} size="sm">Edit</Button>
+                                                    <Button onClick={() => handleEdit(entity)} size="sm" title="Edit">
+                                                        <Pencil size={16} />
+                                                    </Button>
                                                 )}
                                                 {type.permissions.canDelete && (
-                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" size="sm">Delete</Button>
+                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" size="sm" title="Delete">
+                                                        <Trash2 size={16} />
+                                                    </Button>
                                                 )}
                                             </>
                                         )}

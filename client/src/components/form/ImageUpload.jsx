@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { X, Upload, Image as ImageIcon } from 'lucide-react';
 import apiClient from '../../api/apiClient';
 import styles from './ImageUpload.module.css';
 
@@ -85,12 +86,13 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPrevi
                             className={styles.removeBtn}
                             title="Remove image"
                         >
-                            ×
+                            <X size={14} />
                         </button>
                     </div>
                 ) : (
                     <div className={styles.placeholder}>
-                        {uploading ? 'Uploading...' : 'Click to Upload'}
+                        <Upload size={24} className={styles.uploadIcon} />
+                        <span>{uploading ? 'Uploading...' : 'Click to Upload'}</span>
                     </div>
                 )}
             </div>

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { CheckCircle, AlertCircle, Info, X } from 'lucide-react';
 import { useToast } from '../../../context/ToastContext';
 import styles from './Toast.module.css';
 
@@ -67,6 +68,14 @@ const Toast = ({ id, message, type }) => {
         };
     }, [startX, offsetX]);
 
+    const getIcon = () => {
+        switch (type) {
+            case 'success': return <CheckCircle size={20} />;
+            case 'error': return <AlertCircle size={20} />;
+            default: return <Info size={20} />;
+        }
+    };
+
     return (
         <div
             ref={toastRef}
@@ -80,6 +89,9 @@ const Toast = ({ id, message, type }) => {
                 '--toast-opacity': opacity
             }}
         >
+            <div className={styles.iconWrapper}>
+                {getIcon()}
+            </div>
             <span className={styles.message}>{message}</span>
             <button
                 className={styles.closeBtn}
@@ -89,7 +101,7 @@ const Toast = ({ id, message, type }) => {
                     removeToast(id);
                 }}
             >
-                &times;
+                <X size={18} />
             </button>
         </div>
     );

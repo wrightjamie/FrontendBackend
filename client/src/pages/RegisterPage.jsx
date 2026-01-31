@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CheckCircle } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../api/apiClient';
 import { Button } from '../components/ui/Button';
@@ -72,7 +73,9 @@ const RegisterPage = () => {
             <CenteredLayout>
                 <Card className={styles.successCard}>
                     <CardBody>
-                        <div className={styles.successIcon}>✓</div>
+                        <div className={styles.successIcon}>
+                            <CheckCircle size={48} strokeWidth={2.5} />
+                        </div>
                         <h1>Registration Successful!</h1>
                         <p>Your account has been created and is pending admin approval.</p>
                         <p>You will be able to log in once an administrator activates your account.</p>

@@ -1,15 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { Users, Database, Image as ImageIcon, Settings, TestTube } from 'lucide-react';
 import TabNavigation from '../components/ui/TabNavigation';
 import styles from './AdminLayout.module.css';
 
 const AdminLayout = () => {
     const adminTabs = [
-        { path: 'users', label: 'Users' },
-        { path: 'data', label: 'Data' },
-        { path: 'media', label: 'Media' },
-        { path: 'settings', label: 'Settings' },
-        { path: 'test-toasts', label: 'Test Toasts' },
+        { path: 'users', label: 'Users', icon: <Users size={18} /> },
+        { path: 'data', label: 'Data', icon: <Database size={18} /> },
+        { path: 'media', label: 'Media', icon: <ImageIcon size={18} /> },
+        { path: 'settings', label: 'Settings', icon: <Settings size={18} /> },
+        { path: 'test-toasts', label: 'Test Toasts', icon: <TestTube size={18} /> },
     ];
 
     return (

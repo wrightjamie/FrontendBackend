@@ -2,78 +2,87 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 100%;
-    max-width: 300px;
 }
 
 .label {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
 }
 
 .uploadArea {
+    width: 100%;
+    height: 150px;
     border: 2px dashed var(--color-border);
-    border-radius: 8px;
-    padding: 0.5rem;
-    min-height: 150px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-bg-secondary);
-    transition: all 0.2s ease;
     cursor: pointer;
+    background: var(--color-bg-secondary);
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
 }
 
 .uploadArea:hover {
     border-color: var(--color-primary);
-    background: color-mix(in srgb, var(--color-primary) 5%, var(--color-bg-secondary));
+    background: color-mix(in oklch, var(--color-primary) 5%, var(--color-bg-secondary));
 }
 
 .placeholder {
-    color: var(--color-text-tertiary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
     font-size: 0.9rem;
-    text-align: center;
+}
+
+.uploadIcon {
+    color: var(--color-text-tertiary);
+    transition: color 0.2s;
+}
+
+.uploadArea:hover .uploadIcon {
+    color: var(--color-primary);
 }
 
 .previewContainer {
-    position: relative;
     width: 100%;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 4px;
+    height: 100%;
+    position: relative;
+    background: var(--color-bg-checker);
+    /* Optional pattern for transparency */
 }
 
 .preview {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    display: block;
 }
 
 .removeBtn {
     position: absolute;
     top: 5px;
     right: 5px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.2rem;
-    line-height: 1;
-    transition: background 0.2s ease;
+    transition: background 0.2s;
+    padding: 0;
 }
 
 .removeBtn:hover {
-    background: rgba(220, 38, 38, 0.8);
+    background: var(--color-danger);
 }
 
 .hiddenInput {
@@ -81,7 +90,7 @@
 }
 
 .error {
-    font-size: 0.8rem;
     color: var(--color-danger);
+    font-size: 0.85rem;
     margin-top: 0.25rem;
 }
