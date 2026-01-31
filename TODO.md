@@ -31,6 +31,8 @@
   - [x] Create standardized component styles (Buttons, Input fields, Selects, Cards)
   - [x] Standardize Table UI (header, rows, hover states, pagination layout)
   - [x] Ensure full dark mode compatibility across all core components
+  - [x] Consolidated form components into `components/ui/form` (`Input`, `Select`, `Checkbox`, `Radio`)
+  - [x] Created `CenteredLayout` for consistent Auth pages
 
 - [ ] **B-023**: Implement SVG Icon System
   - [ ] Research and choose solution (pre-built vs self-built)
@@ -38,10 +40,10 @@
   - [ ] Ensure ease of use across components
 
 
-- [ ] **B-005**: Refine Admin User Management UI
+- [x] **B-005**: Refine Admin User Management UI
   - [ ] Implement premium UI components (replace `window.confirm` and `prompt` with custom modals)
-  - [ ] Consolidate "Pending Approval" and "All Users" into a single unified table (TD-002)
-  - [ ] Add filtering/sorting for status and role
+  - [x] Consolidate "Pending Approval" and "All Users" into a single unified table (TD-002)
+  - [x] Add filtering/sorting for status and role
   - [x] Implement protection logic to prevent admins from de-activating themselves (TD-001)
 
 
@@ -79,6 +81,21 @@
   - [ ] Integrate into `DataTable` component
   - [ ] Purely frontend-based (filter visible rows) for snappy UX
 
+- [ ] **B-028**: Implement Testing Infrastructure
+  - [ ] Set up Vitest and React Testing Library
+  - [ ] Configure test scripts in `package.json`
+  - [ ] Write initial tests for core UI components (`Button`, `Input`)
+
+- [ ] **B-029**: Implement Component Explorer (Storybook)
+  - [ ] Install and configure Storybook
+  - [ ] Create stories for standard UI components (`components/ui`)
+  - [ ] Document usage guidelines
+
+- [ ] **B-031**: Enforce Best Practices (Strict Mode & A11y)
+  - [ ] Enable React Strict Mode
+  - [ ] Add `eslint-plugin-jsx-a11y` and fix reported issues
+
+
 
 
 
@@ -92,13 +109,13 @@
   - Currently redirected to Login page on logout instead of Home.
   - Potential race condition between `AuthContext` state update and `LoginModal` navigation.
   - Location: `client/src/context/AuthContext.jsx`, `client/src/components/LoginModal.jsx`, `client/src/components/ProtectedRoute.jsx`
-- [ ] **TD-002**: Simplify User Management UI
-  - Current: Separate "Pending Approval" and "All Users" tables
-  - Proposed: Single unified table with all users
-  - Approving should be an action button (not separate section)
-  - When user is approved, replace "Approve" button with "Suspend" button
-  - Benefits: Simpler UI, less code duplication, better UX
-  - Location: `client/src/pages/admin/AdminUsers.jsx`
+- [x] **TD-002**: Simplify User Management UI
+  - [x] Current: Separate "Pending Approval" and "All Users" tables
+  - [x] Proposed: Single unified table with all users
+  - [x] Approving should be an action button (not separate section)
+  - [x] When user is approved, replace "Approve" button with "Suspend" button
+  - [x] Benefits: Simpler UI, less code duplication, better UX
+  - [x] Location: `client/src/pages/admin/AdminUsers.jsx`
 
 
 ## 💡 Suggestions (Norm Updates)
@@ -203,3 +220,8 @@
 
 - [ ] **B-006 (Old)**: Drag-and-drop reordering for Data Tables
   - Note: Currently using arrow buttons, which is sufficient for current needs.
+
+- [ ] **B-030**: Improve Data Fetching Strategy (Low Priority)
+  - [ ] Integrate TanStack Query (React Query)
+  - [ ] Replace custom `useData` hooks with robust query management
+  - [ ] Implement optimistic UI updates
