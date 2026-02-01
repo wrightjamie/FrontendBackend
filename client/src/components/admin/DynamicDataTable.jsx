@@ -236,18 +236,20 @@ const DynamicDataTable = ({ type }) => {
                         {entities?.map((entity, idx) => (
                             <Tr key={entity._id}>
                                 {type.isOrdered && (
-                                    <Td className={styles.orderCell}>
-                                        {type.permissions.canReorder && (
-                                            <div className={styles.orderBtns}>
-                                                <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="xs">
-                                                    <ArrowUp size={14} />
-                                                </Button>
-                                                <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="xs">
-                                                    <ArrowDown size={14} />
-                                                </Button>
-                                            </div>
-                                        )}
-                                        <span>{idx + 1}</span>
+                                    <Td>
+                                        <div className={styles.orderCell}>
+                                            {type.permissions.canReorder && (
+                                                <>
+                                                    <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="xs">
+                                                        <ArrowUp size={14} />
+                                                    </Button>
+                                                    <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="xs">
+                                                        <ArrowDown size={14} />
+                                                    </Button>
+                                                </>
+                                            )}
+                                            <span>{idx + 1}</span>
+                                        </div>
                                     </Td>
                                 )}
                                 {type.fields.map(field => (

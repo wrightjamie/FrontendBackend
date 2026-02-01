@@ -34,13 +34,7 @@
 .orderCell {
     display: flex;
     align-items: center;
-    gap: 1rem;
-}
-
-.orderBtns {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    gap: 0.5rem;
 }
 
 .actionsCell {
