@@ -28,10 +28,6 @@
   - [x] Add toast confirmation on successful logout
   - [ ] Audit application for consistent user feedback (Success/Error/Warning)
   - [ ] Ensure API errors trigger appropriate error toasts
-- [ ] **B-020**: Generic Frontend Pagination
-  - [ ] Create reusable Pagination component
-  - [ ] Integrate into `DataTable` component
-
 ### ⚙️ Core Logic & Data
 - [ ] **B-024**: Implement Admin Password Management Flow
   - [ ] Admin can change any user's password (for recovery)
@@ -58,6 +54,13 @@
 - [ ] **S-002**: Add "Maintenance Mode" toggle in Admin Settings
 
 ## ✅ Done
+
+### 🛠️ Phase 10: Pagination & Large Datasets
+- [x] **D-034**: Generic Frontend & Backend Pagination (B-020)
+  - [x] Implemented `findPaginated` in `DataEntity` model
+  - [x] Added `page` and `limit` support to entities API
+  - [x] Created reusable `Pagination` UI component
+  - [x] Integrated pagination into `DynamicDataTable`
 
 ### 🛠️ Phase 5-6: Component Standardization & User Refinement
 - [x] **D-029**: Standardize Base Styles & Core Components (B-012)

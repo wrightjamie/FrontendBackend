@@ -8,6 +8,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '../ui/Table';
 import { Input } from '../ui/form/Input';
 import { Checkbox } from '../ui/form/Checkbox';
 import { RadioGroup } from '../ui/form/RadioGroup';
+import Pagination from '../ui/Pagination';
 
 /**
  * DynamicDataTable: A reusable component to render and manage data for a specific DataType.
@@ -15,7 +16,13 @@ import { RadioGroup } from '../ui/form/RadioGroup';
  * @param {object} props.type - The DataType configuration object.
  */
 const DynamicDataTable = ({ type }) => {
-    const { data: entities, loading, refresh } = useDataEntities(type._id);
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10;
+    const { data: response, loading, refresh } = useDataEntities(type._id, currentPage, limit);
+
+    // Normalize data based on whether it's paginated or not
+    const entities = response?.data || (Array.isArray(response) ? response : []);
+    const totalPages = response?.totalPages || 1;
     const { create, update, delete: del, reorder } = useDynamicDataMutations(type._id);
 
     const [isAdding, setIsAdding] = useState(false);
@@ -194,7 +201,7 @@ const DynamicDataTable = ({ type }) => {
             </div>
 
             <div className={styles.tableWrapper}>
-                <Table>
+                <Table dense={true}>
                     <Thead>
                         <Tr>
                             {type.isOrdered && <Th>Order</Th>}
@@ -284,6 +291,13 @@ const DynamicDataTable = ({ type }) => {
                     </Tbody>
                 </Table>
             </div>
+            {totalPages > 1 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+            )}
         </div>
     );
 };

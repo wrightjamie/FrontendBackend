@@ -130,7 +130,7 @@ const AdminUsers = () => {
             />
 
             <div className={styles.tableWrapper}>
-                <Table>
+                <Table dense={true}>
                     <Thead>
                         <Tr>
                             <Th>Username</Th>
@@ -239,14 +239,14 @@ const AdminUsers = () => {
                                                         <Button onClick={() => handleEdit(user)} size="sm" variant="outline" title="Edit">
                                                             <Pencil size={16} />
                                                         </Button>
-                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="ghost" title="Reset Password">
+                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="outline" title="Reset Password">
                                                             <Key size={16} />
                                                         </Button>
                                                         <Button
                                                             onClick={() => handleDelete(user._id)}
                                                             intent="danger"
                                                             size="sm"
-                                                            variant="ghost"
+                                                            variant="outline"
                                                             disabled={isSelf}
                                                             title={isSelf ? "You cannot delete your own account" : "Delete User"}
                                                         >

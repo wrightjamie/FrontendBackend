@@ -21,7 +21,7 @@
 }
 
 .th {
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
     font-weight: var(--font-semibold);
     color: var(--color-text-secondary);
     white-space: nowrap;
@@ -41,13 +41,14 @@
 }
 
 .td {
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
     color: var(--color-text-primary);
     vertical-align: middle;
 }
 
 /* Optional: Dense variant for compact tables */
+
 .dense .th,
 .dense .td {
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
 }

@@ -55,9 +55,24 @@ const DataEntity = {
     },
 
     /**
-     * reorder: Bulk update order indices for multiple records.
-     * @param {Array} updates - Array of { id, order } objects.
+     * findPaginated: Retrieve a page of records for a specific type.
      */
+    findPaginated: async (typeId, page = 1, limit = 10) => {
+        const skip = (page - 1) * limit;
+        const [data, total] = await Promise.all([
+            db.dataEntities.find({ typeId }).sort({ order: 1, createdAt: 1 }).skip(skip).limit(limit),
+            db.dataEntities.count({ typeId })
+        ]);
+
+        return {
+            data,
+            total,
+            page: parseInt(page),
+            limit: parseInt(limit),
+            totalPages: Math.ceil(total / limit)
+        };
+    },
+
     reorder: async (updates) => {
         const promises = updates.map(u =>
             db.dataEntities.update({ _id: u.id }, { $set: { order: u.order } })

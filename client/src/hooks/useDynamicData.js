@@ -12,8 +12,9 @@ export const useDataTypes = () => {
  * @param {string} typeId - The ID of the data type (DataType._id).
  * @returns {object} { data: entities[], loading, error, refresh }
  */
-export const useDataEntities = (typeId) => {
-    return useData(typeId ? `/data/entities/${typeId}` : null);
+export const useDataEntities = (typeId, page, limit) => {
+    const query = (page || limit) ? `?page=${page || 1}&limit=${limit || 10}` : '';
+    return useData(typeId ? `/data/entities/${typeId}${query}` : null);
 };
 
 /**

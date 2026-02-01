@@ -39,6 +39,15 @@ router.post('/types', isEditorOrAdmin, async (req, res) => {
  */
 router.get('/entities/:typeId', async (req, res) => {
     try {
+        const { page, limit } = req.query;
+        if (page || limit) {
+            const result = await DataEntity.findPaginated(
+                req.params.typeId,
+                parseInt(page) || 1,
+                parseInt(limit) || 10
+            );
+            return res.json(result);
+        }
         const entities = await DataEntity.findByType(req.params.typeId);
         res.json(entities);
     } catch (err) {
