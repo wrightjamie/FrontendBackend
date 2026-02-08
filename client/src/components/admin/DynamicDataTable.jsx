@@ -221,10 +221,10 @@ const DynamicDataTable = ({ type }) => {
                                 ))}
                                 <Td>
                                     <div className={styles.actions}>
-                                        <Button onClick={handleSave} intent="success" size="sm" title="Save">
+                                        <Button onClick={handleSave} intent="success" variant="outline" size="sm" title="Save" grouped>
                                             <Check size={16} />
                                         </Button>
-                                        <Button onClick={handleCancel} variant="outline" size="sm" title="Cancel">
+                                        <Button onClick={handleCancel} variant="outline" size="sm" title="Cancel" grouped>
                                             <X size={16} />
                                         </Button>
                                     </div>
@@ -240,10 +240,10 @@ const DynamicDataTable = ({ type }) => {
                                         <div className={styles.orderCell}>
                                             {type.permissions.canReorder && (
                                                 <>
-                                                    <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="ghost" size="xs">
+                                                    <Button onClick={() => handleMove(idx, -1)} disabled={idx === 0} variant="outline" size="sm" grouped>
                                                         <ArrowUp size={14} />
                                                     </Button>
-                                                    <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="ghost" size="xs">
+                                                    <Button onClick={() => handleMove(idx, 1)} disabled={idx === entities.length - 1} variant="outline" size="sm" grouped>
                                                         <ArrowDown size={14} />
                                                     </Button>
                                                 </>
@@ -265,22 +265,22 @@ const DynamicDataTable = ({ type }) => {
                                     <div className={styles.actions}>
                                         {editingId === entity._id ? (
                                             <>
-                                                <Button onClick={handleSave} intent="success" size="sm" title="Save">
+                                                <Button onClick={handleSave} intent="success" variant="outline" size="sm" title="Save" grouped>
                                                     <Check size={16} />
                                                 </Button>
-                                                <Button onClick={handleCancel} variant="outline" size="sm" title="Cancel">
+                                                <Button onClick={handleCancel} variant="outline" size="sm" title="Cancel" grouped>
                                                     <X size={16} />
                                                 </Button>
                                             </>
                                         ) : (
                                             <>
                                                 {type.permissions.canEdit && (
-                                                    <Button onClick={() => handleEdit(entity)} size="sm" title="Edit">
+                                                    <Button onClick={() => handleEdit(entity)} size="sm" variant="outline" title="Edit" grouped>
                                                         <Pencil size={16} />
                                                     </Button>
                                                 )}
                                                 {type.permissions.canDelete && (
-                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" size="sm" title="Delete">
+                                                    <Button onClick={() => handleDelete(entity._id)} intent="danger" size="sm" variant="outline" title="Delete" grouped>
                                                         <Trash2 size={16} />
                                                     </Button>
                                                 )}

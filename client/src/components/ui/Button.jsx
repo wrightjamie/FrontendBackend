@@ -6,6 +6,7 @@ export function Button({
     intent = 'primary', // 'primary' | 'secondary' | 'danger' etc.
     size = 'md',      // 'sm' | 'md' | 'lg'
     flat = false,     // Disable hover translation/lift
+    grouped = false,  // For buttons in a group (seamless edges)
     className: customClassName,
     children,
     ...props
@@ -22,6 +23,7 @@ export function Button({
         styles[intent],
         variant !== 'solid' && styles[variant],
         flat && styles.flat,
+        grouped && styles.grouped,
         customClassName
     ].filter(Boolean).join(' ');
 

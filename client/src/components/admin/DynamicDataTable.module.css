@@ -34,7 +34,13 @@
 .orderCell {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0;
+}
+
+.orderCell span {
+    margin-left: 0.5rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-secondary);
 }
 
 .actionsCell {
@@ -44,7 +50,7 @@
 
 .actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0;
     white-space: nowrap;
 }
 

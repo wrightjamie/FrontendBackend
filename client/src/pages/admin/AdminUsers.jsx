@@ -199,10 +199,10 @@ const AdminUsers = () => {
                                                 </Td>
                                                 <Td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
-                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm" title="Save">
+                                                        <Button onClick={() => handleSaveEdit(user._id)} intent="success" size="sm" title="Save" grouped>
                                                             <Check size={16} />
                                                         </Button>
-                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm" title="Cancel">
+                                                        <Button onClick={handleCancelEdit} variant="outline" size="sm" title="Cancel" grouped>
                                                             <X size={16} />
                                                         </Button>
                                                     </div>
@@ -232,14 +232,14 @@ const AdminUsers = () => {
                                                 <Td className={styles.actionsCell}>
                                                     <div className={styles.actions}>
                                                         {user.status === 'pending' && (
-                                                            <Button onClick={() => handleApprove(user._id)} intent="success" size="sm" title="Approve">
+                                                            <Button onClick={() => handleApprove(user._id)} intent="success" variant="outline" size="sm" title="Approve" grouped>
                                                                 <UserCheck size={16} />
                                                             </Button>
                                                         )}
-                                                        <Button onClick={() => handleEdit(user)} size="sm" variant="outline" title="Edit">
+                                                        <Button onClick={() => handleEdit(user)} size="sm" variant="outline" title="Edit" grouped>
                                                             <Pencil size={16} />
                                                         </Button>
-                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="outline" title="Reset Password">
+                                                        <Button onClick={() => handleResetPassword(user._id)} intent="warning" size="sm" variant="outline" title="Reset Password" grouped>
                                                             <Key size={16} />
                                                         </Button>
                                                         <Button
@@ -249,6 +249,7 @@ const AdminUsers = () => {
                                                             variant="outline"
                                                             disabled={isSelf}
                                                             title={isSelf ? "You cannot delete your own account" : "Delete User"}
+                                                            grouped
                                                         >
                                                             <Trash2 size={16} />
                                                         </Button>
