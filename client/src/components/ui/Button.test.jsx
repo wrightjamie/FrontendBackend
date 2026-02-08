@@ -1,3 +1,13 @@
+/**
+ * @file Button.test.jsx
+ * @description Unit tests for the Button component.
+ * 
+ * @tests
+ * 1. Renders with default props (class, intent, size).
+ * 2. Renders with custom intent (e.g., 'danger').
+ * 3. Handles click events.
+ * 4. Renders 'grouped' variant correctly.
+ */
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Button } from './Button';

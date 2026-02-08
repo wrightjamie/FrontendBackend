@@ -1,3 +1,13 @@
+/**
+ * @file Badge.test.jsx
+ * @description Unit tests for the Badge component.
+ * 
+ * @tests
+ * 1. Renders children content.
+ * 2. Applies default variant class.
+ * 3. Applies specific variant classes (e.g., 'success').
+ * 4. Renders with optional Icon.
+ */
 import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Badge } from './Badge';

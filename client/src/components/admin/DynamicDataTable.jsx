@@ -182,7 +182,7 @@ const DynamicDataTable = ({ type }) => {
         }
     };
 
-    if (loading && !entities) return <div className={styles.loading}>Loading data...</div>;
+    if (loading && entities.length === 0) return <div className={styles.loading}>Loading data...</div>;
 
     return (
         <div className={styles.container}>

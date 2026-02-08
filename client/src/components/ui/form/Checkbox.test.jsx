@@ -1,3 +1,13 @@
+/**
+ * @file Checkbox.test.jsx
+ * @description Unit tests for the Checkbox component.
+ * 
+ * @tests
+ * 1. Renders with label, ID, and type="checkbox".
+ * 2. Handles user interactions (click/change).
+ * 3. Renders optional description text.
+ * 4. Displays error styling and aria-invalid state.
+ */
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Checkbox } from './Checkbox';

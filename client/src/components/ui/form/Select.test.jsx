@@ -1,3 +1,14 @@
+/**
+ * @file Select.test.jsx
+ * @description Unit tests for the Select component.
+ * 
+ * @tests
+ * 1. Renders with label and ID.
+ * 2. Renders options correctly from array.
+ * 3. Renders placeholder option (disabled).
+ * 4. Handles selection changes.
+ * 5. Displays error message and invalid state.
+ */
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Select } from './Select';

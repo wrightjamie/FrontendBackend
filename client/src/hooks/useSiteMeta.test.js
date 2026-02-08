@@ -1,3 +1,12 @@
+/**
+ * @file useSiteMeta.test.js
+ * @description Unit tests for the useSiteMeta hook.
+ * 
+ * @tests
+ * 1. Returns default metadata when data is loading or missing.
+ * 2. Returns fetched metadata when available.
+ * 3. Mocks the underlying useData hook.
+ */
 import { renderHook, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { useSiteMeta } from './useSiteMeta';

@@ -1,3 +1,16 @@
+/**
+ * @file Input.test.jsx
+ * @description Unit tests for the Input component.
+ * 
+ * @tests
+ * 1. Renders with label and unique ID.
+ * 2. Renders without label (placeholder only).
+ * 3. Displays error message and invalid state.
+ * 4. Displays helper text (when no error).
+ * 5. Does not display helper text when error is present.
+ * 6. Renders with an optional Icon.
+ * 7. Handles user interaction (typing).
+ */
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Input } from './Input';
