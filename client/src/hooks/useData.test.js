@@ -63,7 +63,8 @@ describe('useData Hook', () => {
     });
 
     it('returns cached data immediately', async () => {
-        const cachedData = { data: { id: 1, name: 'Cached' }, timestamp: Date.now() };
+        // Use a timestamp that's guaranteed to be fresh (within staleTime)
+        const cachedData = { data: { id: 1, name: 'Cached' }, timestamp: Date.now() - 1000 };
         mockGetCache.mockReturnValue(cachedData);
 
         const { result } = renderHook(() => useData('/test'));
@@ -85,12 +86,15 @@ describe('useData Hook', () => {
         // Should show stale data first but trigger fetch
         expect(result.current.data).toEqual({ id: 1, name: 'Stale' });
 
+        // Wait for API call
         await waitFor(() => {
             expect(apiClient).toHaveBeenCalledWith('/test');
         });
 
-        // Should eventually update to fresh data
-        expect(result.current.data).toEqual({ id: 1, name: 'Fresh' });
+        // Wait for fresh data to be set
+        await waitFor(() => {
+            expect(result.current.data).toEqual({ id: 1, name: 'Fresh' });
+        });
     });
 
     it('handles errors', async () => {
