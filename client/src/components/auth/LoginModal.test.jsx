@@ -61,9 +61,9 @@ vi.mock('../ui/Popover', () => ({
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
-    LayoutDashboard: () => <span>DashboardIcon</span>,
-    User: () => <span>UserIcon</span>,
-    LogOut: () => <span>LogOutIcon</span>
+    LayoutDashboard: () => <span data-test-icon="dashboard">Icon-Dashboard</span>,
+    User: () => <span data-test-icon="user">Icon-User</span>,
+    LogOut: () => <span data-test-icon="logout">Icon-Logout</span>
 }));
 
 describe('LoginModal', () => {
@@ -92,7 +92,7 @@ describe('LoginModal', () => {
         mockUser = null;
         renderLoginModal();
 
-        expect(screen.getByText(/login/i)).toBeInTheDocument();
+        expect(screen.getByText(/^login$/i)).toBeInTheDocument();
         expect(screen.getByTestId('login-form')).toBeInTheDocument();
     });
 
@@ -101,8 +101,8 @@ describe('LoginModal', () => {
         renderLoginModal();
 
         expect(screen.getByText(/hello, testuser/i)).toBeInTheDocument();
-        expect(screen.getByText(/my profile/i)).toBeInTheDocument();
-        expect(screen.getByText(/logout/i)).toBeInTheDocument();
+        expect(screen.getByText(/^my profile$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^logout$/i)).toBeInTheDocument();
     });
 
     it('shows admin dashboard link for admin users', () => {
@@ -123,7 +123,7 @@ describe('LoginModal', () => {
         mockUser = { username: 'testuser', role: 'user' };
         renderLoginModal();
 
-        const logoutButton = screen.getByText(/logout/i).closest('div');
+        const logoutButton = screen.getByText(/^logout$/i).closest('div');
         fireEvent.click(logoutButton);
 
         expect(mockLogout).toHaveBeenCalled();
@@ -133,6 +133,6 @@ describe('LoginModal', () => {
         mockUser = { role: 'user' };
         renderLoginModal();
 
-        expect(screen.getByText(/hello, user/i)).toBeInTheDocument();
+        expect(screen.getByText(/^hello, user$/i)).toBeInTheDocument();
     });
 });

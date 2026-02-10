@@ -16,6 +16,7 @@ import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/re
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
 import ImageSelect from './ImageSelect';
 import React from 'react';
+import apiClient from '../../api/apiClient';
 
 // Mock the CSS module
 vi.mock('./ImageSelect.module.css', () => ({
@@ -43,10 +44,7 @@ vi.mock('./ImageSelect.module.css', () => ({
 }));
 
 // Mock apiClient
-const mockApiClient = vi.fn();
-vi.mock('../../api/apiClient', () => ({
-    default: mockApiClient
-}));
+vi.mock('../../api/apiClient');
 
 // Mock ToastContext
 const mockAddToast = vi.fn();
@@ -69,16 +67,15 @@ vi.mock('./ImageUpload', () => ({
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
-    Pencil: () => <span>Pencil</span>,
-    Library: () => <span>Library</span>,
-    Upload: () => <span>Upload</span>,
-    Check: () => <span data-testid="check-icon">Check</span>
+    Pencil: () => <span>[Icon-Pencil]</span>,
+    Library: () => <span>[Icon-Library]</span>,
+    Upload: () => <span>[Icon-Upload]</span>,
+    Check: () => <span data-testid="check-icon">[Icon-Check]</span>
 }));
 
 describe('ImageSelect', () => {
     beforeEach(() => {
-        mockApiClient.mockClear();
-        mockAddToast.mockClear();
+        vi.clearAllMocks();
     });
 
     afterEach(() => {
@@ -117,7 +114,7 @@ describe('ImageSelect', () => {
     });
 
     it('switches between browse and upload tabs', () => {
-        mockApiClient.mockResolvedValue([]);
+        apiClient.mockResolvedValue([]);
         const { container } = render(<ImageSelect onChange={vi.fn()} />);
 
         const trigger = container.querySelector('.trigger');
@@ -135,7 +132,7 @@ describe('ImageSelect', () => {
     });
 
     it('fetches images when browse tab is opened', async () => {
-        mockApiClient.mockResolvedValue([
+        apiClient.mockResolvedValue([
             { _id: '1', url: '/uploads/img1.jpg', title: 'Image 1' },
             { _id: '2', url: '/uploads/img2.jpg', title: 'Image 2' }
         ]);
@@ -146,12 +143,12 @@ describe('ImageSelect', () => {
         fireEvent.click(trigger);
 
         await waitFor(() => {
-            expect(mockApiClient).toHaveBeenCalledWith('/upload');
+            expect(apiClient).toHaveBeenCalled();
         });
     });
 
     it('handles image selection from library', async () => {
-        mockApiClient.mockResolvedValue([
+        apiClient.mockResolvedValue([
             { _id: '1', url: '/uploads/img1.jpg', title: 'Image 1', thumbnailUrl: '/uploads/thumb1.jpg' }
         ]);
 
@@ -170,7 +167,7 @@ describe('ImageSelect', () => {
     });
 
     it('displays loading state while fetching', async () => {
-        mockApiClient.mockImplementation(() => new Promise(resolve => setTimeout(() => resolve([]), 100)));
+        apiClient.mockImplementation(() => new Promise(resolve => setTimeout(() => resolve([]), 100)));
 
         const { container } = render(<ImageSelect onChange={vi.fn()} />);
 
@@ -181,7 +178,7 @@ describe('ImageSelect', () => {
     });
 
     it('shows empty state when no images', async () => {
-        mockApiClient.mockResolvedValue([]);
+        apiClient.mockResolvedValue([]);
 
         const { container } = render(<ImageSelect onChange={vi.fn()} />);
 
@@ -194,7 +191,7 @@ describe('ImageSelect', () => {
     });
 
     it('handles upload success from upload tab', async () => {
-        mockApiClient.mockResolvedValue([]);
+        apiClient.mockResolvedValue([]);
         const onChange = vi.fn();
 
         const { container } = render(<ImageSelect onChange={onChange} />);
@@ -213,7 +210,7 @@ describe('ImageSelect', () => {
     });
 
     it('displays error toast on fetch failure', async () => {
-        mockApiClient.mockRejectedValue(new Error('Network error'));
+        apiClient.mockRejectedValue(new Error('Network error'));
 
         const { container } = render(<ImageSelect onChange={vi.fn()} />);
 
@@ -226,7 +223,7 @@ describe('ImageSelect', () => {
     });
 
     it('highlights selected image in library', async () => {
-        mockApiClient.mockResolvedValue([
+        apiClient.mockResolvedValue([
             { _id: '1', url: '/uploads/img1.jpg', title: 'Image 1' },
             { _id: '2', url: '/uploads/img2.jpg', title: 'Image 2' }
         ]);

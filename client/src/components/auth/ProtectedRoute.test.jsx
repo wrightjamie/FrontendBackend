@@ -12,7 +12,7 @@
  */
 import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import React from 'react';
 
@@ -37,12 +37,12 @@ describe('ProtectedRoute', () => {
         cleanup();
     });
 
-    const renderProtectedRoute = (allowedRoles = []) => {
+    const renderProtectedRoute = (allowedRoles = [], initialPath = '/') => {
         return render(
-            <BrowserRouter>
+            <MemoryRouter initialEntries={[initialPath]}>
                 <Routes>
                     <Route
-                        path="/"
+                        path="/protected"
                         element={
                             <ProtectedRoute allowedRoles={allowedRoles}>
                                 <div>Protected Content</div>
@@ -50,14 +50,15 @@ describe('ProtectedRoute', () => {
                         }
                     />
                     <Route path="/login" element={<div>Login Page</div>} />
+                    <Route path="/" element={<div>Home Page</div>} />
                 </Routes>
-            </BrowserRouter>
+            </MemoryRouter>
         );
     };
 
     it('shows loading state while authentication is loading', () => {
         mockLoading = true;
-        renderProtectedRoute();
+        renderProtectedRoute([], '/protected');
 
         expect(screen.getByText(/loading/i)).toBeInTheDocument();
         expect(screen.queryByText(/protected content/i)).not.toBeInTheDocument();
@@ -66,7 +67,7 @@ describe('ProtectedRoute', () => {
     it('redirects to login when user is not authenticated', () => {
         mockUser = null;
         mockLoading = false;
-        renderProtectedRoute();
+        renderProtectedRoute([], '/protected');
 
         expect(screen.getByText(/login page/i)).toBeInTheDocument();
         expect(screen.queryByText(/protected content/i)).not.toBeInTheDocument();
@@ -75,7 +76,7 @@ describe('ProtectedRoute', () => {
     it('renders children when user is authenticated', () => {
         mockUser = { username: 'testuser', role: 'user' };
         mockLoading = false;
-        renderProtectedRoute();
+        renderProtectedRoute([], '/protected');
 
         expect(screen.getByText(/protected content/i)).toBeInTheDocument();
     });
@@ -83,7 +84,7 @@ describe('ProtectedRoute', () => {
     it('allows access when user has allowed role', () => {
         mockUser = { username: 'admin', role: 'admin' };
         mockLoading = false;
-        renderProtectedRoute(['admin']);
+        renderProtectedRoute(['admin'], '/protected');
 
         expect(screen.getByText(/protected content/i)).toBeInTheDocument();
     });
@@ -92,32 +93,16 @@ describe('ProtectedRoute', () => {
         mockUser = { username: 'testuser', role: 'user' };
         mockLoading = false;
 
-        render(
-            <BrowserRouter>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <ProtectedRoute allowedRoles={['admin']}>
-                                <div>Protected Content</div>
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route path="/login" element={<div>Login Page</div>} />
-                </Routes>
-            </BrowserRouter>
-        );
+        renderProtectedRoute(['admin'], '/protected');
 
-        // When user doesn't have the required role, they get redirected to "/"
-        // Since we're already at "/", the ProtectedRoute will redirect them
-        // In a real app this would show the home page, but in our test it just doesn't show protected content
+        expect(screen.getByText(/home page/i)).toBeInTheDocument();
         expect(screen.queryByText(/protected content/i)).not.toBeInTheDocument();
     });
 
     it('allows access when no roles are specified', () => {
         mockUser = { username: 'testuser', role: 'user' };
         mockLoading = false;
-        renderProtectedRoute([]);
+        renderProtectedRoute([], '/protected');
 
         expect(screen.getByText(/protected content/i)).toBeInTheDocument();
     });
@@ -125,7 +110,7 @@ describe('ProtectedRoute', () => {
     it('allows access when user role is in allowed roles list', () => {
         mockUser = { username: 'testuser', role: 'user' };
         mockLoading = false;
-        renderProtectedRoute(['user', 'admin']);
+        renderProtectedRoute(['user', 'admin'], '/protected');
 
         expect(screen.getByText(/protected content/i)).toBeInTheDocument();
     });

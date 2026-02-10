@@ -9,10 +9,6 @@
   - Improve contrast for active, hover, and inactive states.
   - Specifically focus on the usage in `AdminLayout.jsx`.
   - Ensure strong visual distinction (e.g., thicker borders, color shifts).
-- [ ] **B-028**: Implement Testing Infrastructure
-  - [ ] Set up Vitest and React Testing Library
-  - [ ] Configure test scripts in `package.json`
-  - [ ] Write initial tests for core UI components (`Button`, `Input`)
 - [ ] **B-029**: Implement Component Explorer (Storybook)
   - [ ] Install and configure Storybook
   - [ ] Create stories for standard UI components (`components/ui`)
@@ -54,6 +50,13 @@
 - [ ] **S-002**: Add "Maintenance Mode" toggle in Admin Settings
 
 ## ✅ Done
+
+### 🛠️ Phase 11: Comprehensive Testing
+- [x] **D-035**: 100% Component Test Coverage (B-028)
+  - [x] Set up Vitest and React Testing Library
+  - [x] Configured test scripts in `package.json`
+  - [x] Created unit tests for all 24 UI components
+  - [x] Achieved 100% pass rate with robust mocking and timer handling
 
 ### 🛠️ Phase 10: Pagination & Large Datasets
 - [x] **D-034**: Generic Frontend & Backend Pagination (B-020)

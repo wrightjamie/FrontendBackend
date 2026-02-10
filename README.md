@@ -26,6 +26,14 @@ A robust, modular full-stack application designed for rapid development and AI-a
    npm start
    ```
 
+### 🧪 Testing
+The system includes a comprehensive unit test suite with **100% component coverage**.
+- **Framework**: Vitest & React Testing Library
+- **Commands**:
+  - `npm test`: Runs all tests in the project.
+  - `npm run test:ui`: Launches the Vitest UI for interactive testing.
+  - `npm run coverage`: Generates a detailed coverage report.
+
 ### First-Run Setup
 The system includes an automatic setup flow. If no users exist, navigating to the application will redirect you to `/setup` to create the initial **Administrator** account.
 

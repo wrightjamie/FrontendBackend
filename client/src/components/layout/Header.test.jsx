@@ -47,13 +47,16 @@ vi.mock('../../hooks/useSiteMeta', () => ({
 
 // Mock Button component
 vi.mock('../ui/Button', () => ({
-    Button: ({ children, ...props }) => <button {...props}>{children}</button>
+    // Filter out non-DOM props to avoid React warnings
+    Button: ({ children, intent, size, flat, grouped, popoverTarget, ...props }) => (
+        <button {...props} popovertarget={popoverTarget}>{children}</button>
+    )
 }));
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
-    Zap: () => <span data-testid="zap-icon">Zap</span>,
-    User: () => <span data-testid="user-icon">User</span>
+    Zap: () => <span data-testid="zap-icon">Icon-Zap</span>,
+    User: () => <span data-testid="user-icon">Icon-User</span>
 }));
 
 describe('Header', () => {
@@ -108,14 +111,15 @@ describe('Header', () => {
         mockUser = { username: 'testuser', role: 'user' };
         renderHeader();
 
-        expect(screen.getByText(/testuser/i)).toBeInTheDocument();
+        expect(screen.getByText(/^testuser$/i)).toBeInTheDocument();
     });
 
     it('shows default "User" text when logged in without username', () => {
         mockUser = { role: 'user' };
         renderHeader();
 
-        expect(screen.getByText(/user/i)).toBeInTheDocument();
+        // Use exact check to avoid matching icon text
+        expect(screen.getByText(/^user$/i)).toBeInTheDocument();
     });
 
     it('renders home link with correct path', () => {

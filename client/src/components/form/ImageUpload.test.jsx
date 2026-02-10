@@ -34,9 +34,9 @@ vi.mock('./ImageUpload.module.css', () => ({
 
 // Mock lucide-react icons
 vi.mock('lucide-react', () => ({
-    X: () => <span>X</span>,
-    Upload: () => <span data-testid="upload-icon">Upload</span>,
-    Image: () => <span>Image</span>
+    X: () => <span>[Icon-X]</span>,
+    Upload: () => <span data-testid="upload-icon">[Icon-Upload]</span>,
+    Image: () => <span>[Icon-Image]</span>
 }));
 
 // Mock fetch
@@ -156,7 +156,7 @@ describe('ImageUpload', () => {
         const onUpload = vi.fn();
         render(<ImageUpload currentImage="/uploads/existing.jpg" onUpload={onUpload} />);
 
-        const removeButton = screen.getByRole('button', { name: /remove image/i });
+        const removeButton = screen.getByTitle(/remove image/i);
         fireEvent.click(removeButton);
 
         expect(onUpload).toHaveBeenCalledWith(null);

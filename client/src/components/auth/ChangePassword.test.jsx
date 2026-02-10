@@ -15,6 +15,7 @@ import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/re
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
 import ChangePassword from './ChangePassword';
 import React from 'react';
+import apiClient from '../../api/apiClient';
 
 // Mock the CSS module
 vi.mock('./ChangePassword.module.css', () => ({
@@ -35,12 +36,14 @@ vi.mock('../../api/apiClient');
 
 // Mock Button component
 vi.mock('../ui/Button', () => ({
-    Button: ({ children, ...props }) => <button {...props}>{children}</button>
+    Button: ({ children, intent, size, flat, grouped, ...props }) => (
+        <button {...props}>{children}</button>
+    )
 }));
 
 // Mock Input component
 vi.mock('../ui/form/Input', () => ({
-    Input: ({ label, id, name, ...props }) => (
+    Input: ({ label, id, name, helperText, error, icon, ...props }) => (
         <div>
             <label htmlFor={id || name}>{label}</label>
             <input id={id || name} name={name} {...props} />
@@ -54,14 +57,8 @@ vi.mock('lucide-react', () => ({
 }));
 
 describe('ChangePassword', () => {
-    let mockApiClient;
-
-    beforeEach(async () => {
-        // Import the mocked module
-        const apiClientModule = await import('../../api/apiClient');
-        mockApiClient = apiClientModule.default;
-        mockApiClient.mockClear();
-        vi.useFakeTimers();
+    beforeEach(() => {
+        vi.clearAllMocks();
     });
 
     afterEach(() => {
@@ -98,10 +95,9 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText(/new passwords do not match/i)).toBeInTheDocument();
-        });
-        expect(mockApiClient).not.toHaveBeenCalled();
+        // Check if the error message is displayed
+        expect(await screen.findByText(/^new passwords do not match$/i)).toBeInTheDocument();
+        expect(apiClient).not.toHaveBeenCalled();
     });
 
     it('validates minimum password length', async () => {
@@ -112,10 +108,8 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText(/must be at least 6 characters/i)).toBeInTheDocument();
-        });
-        expect(mockApiClient).not.toHaveBeenCalled();
+        expect(await screen.findByText(/must be at least 6 characters/i)).toBeInTheDocument();
+        expect(apiClient).not.toHaveBeenCalled();
     });
 
     it('validates that new password differs from current', async () => {
@@ -126,14 +120,13 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText(/must be different from current password/i)).toBeInTheDocument();
-        });
-        expect(mockApiClient).not.toHaveBeenCalled();
+        expect(await screen.findByText(/must be different from current password/i)).toBeInTheDocument();
+        expect(apiClient).not.toHaveBeenCalled();
     });
 
     it('handles successful password change', async () => {
-        mockApiClient.mockResolvedValue({ success: true });
+        vi.useFakeTimers();
+        apiClient.mockResolvedValue({ success: true });
         const onSuccess = vi.fn();
 
         render(<ChangePassword onSuccess={onSuccess} />);
@@ -143,26 +136,25 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(mockApiClient).toHaveBeenCalledWith('/auth/change-password', {
-                method: 'POST',
-                body: {
-                    currentPassword: 'oldpass123',
-                    newPassword: 'newpass123'
-                }
-            });
+        // Advance timers and microtasks
+        await vi.runAllTimersAsync();
+
+        expect(screen.getByText(/password changed successfully/i)).toBeInTheDocument();
+
+        // Verify API was called correctly
+        expect(apiClient).toHaveBeenCalledWith('/auth/change-password', {
+            method: 'POST',
+            body: {
+                currentPassword: 'oldpass123',
+                newPassword: 'newpass123'
+            }
         });
 
-        // Fast-forward timers to trigger onSuccess callback
-        vi.advanceTimersByTime(1500);
-
-        await waitFor(() => {
-            expect(onSuccess).toHaveBeenCalled();
-        });
+        expect(onSuccess).toHaveBeenCalled();
     });
 
     it('displays error on API failure', async () => {
-        mockApiClient.mockRejectedValue({ message: 'Current password is incorrect' });
+        apiClient.mockRejectedValueOnce({ message: 'Current password is incorrect' });
 
         render(<ChangePassword />);
 
@@ -171,13 +163,11 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText(/current password is incorrect/i)).toBeInTheDocument();
-        });
+        expect(await screen.findByText(/current password is incorrect/i)).toBeInTheDocument();
     });
 
     it('shows success message after password change', async () => {
-        mockApiClient.mockResolvedValue({ success: true });
+        apiClient.mockResolvedValueOnce({ success: true });
 
         render(<ChangePassword />);
 
@@ -186,9 +176,7 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText(/password changed successfully/i)).toBeInTheDocument();
-        });
+        expect(await screen.findByText(/password changed successfully/i)).toBeInTheDocument();
     });
 
     it('renders cancel button when onCancel is provided', () => {
@@ -210,9 +198,7 @@ describe('ChangePassword', () => {
         const submitButton = screen.getByRole('button', { name: /change password/i });
         fireEvent.click(submitButton);
 
-        await waitFor(() => {
-            expect(screen.getByText(/must be at least 6 characters/i)).toBeInTheDocument();
-        });
+        expect(await screen.findByText(/must be at least 6 characters/i)).toBeInTheDocument();
 
         // Type in the current password field
         fireEvent.change(screen.getByLabelText(/current password/i), {
