@@ -28,9 +28,6 @@
 - [ ] **B-024**: Implement Admin Password Management Flow
   - [ ] Admin can change any user's password (for recovery)
   - [ ] Implement secure reset flow without external STMP if possible
-- [ ] **B-025**: Multiple Image Sizes for Responsive Images
-  - [ ] Extend `sharp` processing to generate variants (sm, md, lg)
-  - [ ] Implement frontend `srcset` support
 
 ### 🎨 Metadata & Assets
 - [ ] **B-011 (Part 2)**: Advanced Media Features
@@ -56,6 +53,12 @@
   - [x] Added `maintenanceMode` and `maintenanceMessage` to `SiteMeta`
   - [x] Created `MaintenancePage` UI with automatic redirection
   - [x] Implemented bypass for admins and essential API/upload paths
+- [x] **D-037**: Multiple Image Sizes for Responsive Images (B-025)
+  - [x] Configured backend image processing sizes (sm, md, lg)
+  - [x] Updated upload route to generate and store optimized variants
+  - [x] Exposed media configuration via `SiteMeta` API
+  - [x] Created reusable `ResponsiveImage` component with dynamic `srcset`
+  - [x] Implemented fully documented unit tests and fixed regressions
 - [x] **D-035**: 100% Component Test Coverage (B-028)
   - [x] Set up Vitest and React Testing Library
   - [x] Configured test scripts in `package.json`
