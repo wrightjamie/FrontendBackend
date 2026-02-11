@@ -12,7 +12,9 @@ export const useSiteMeta = () => {
     const meta = useMemo(() => ({
         title: data?.title || 'App Name',
         description: data?.description || 'Welcome to the application',
-        logo: data?.logo || null
+        logo: data?.logo || null,
+        maintenanceMode: data?.maintenanceMode ?? false,
+        maintenanceMessage: data?.maintenanceMessage || 'The site is currently under maintenance. Please try again later.'
     }), [data]);
 
     return { meta, loading, error, refresh };

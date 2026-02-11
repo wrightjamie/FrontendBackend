@@ -16,7 +16,6 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-
 // Session
 const session = require('express-session');
 app.use(session({
@@ -28,6 +27,8 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 // 24 hours
   }
 }));
+
+app.use(require('./middleware/maintenance'));
 
 app.use('/uploads', express.static('public/uploads'));
 

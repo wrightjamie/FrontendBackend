@@ -11,7 +11,20 @@ const SiteMeta = {
     async get() {
         // We only ever want one record
         const meta = await siteMetaDb.findOne({});
-        return meta || { title: 'App Name', description: 'Welcome to the application' };
+        const defaults = {
+            title: 'App Name',
+            description: 'Welcome to the application',
+            maintenanceMode: false,
+            maintenanceMessage: 'The site is currently under maintenance. Please try again later.'
+        };
+
+        if (!meta) return defaults;
+
+        // Ensure maintenance fields are present even in old records
+        return {
+            ...defaults,
+            ...meta
+        };
     },
 
     async update(data) {

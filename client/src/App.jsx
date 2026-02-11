@@ -11,12 +11,14 @@ import AdminSettings from './pages/admin/AdminSettings';
 import ToastPlayground from './pages/admin/ToastPlayground';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import { useSiteMeta } from './hooks/useSiteMeta';
 import Setup from './pages/Setup';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserProfile from './pages/UserProfile';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import MaintenancePage from './pages/MaintenancePage';
 import styles from './App.module.css';
 
 function App() {
@@ -31,7 +33,16 @@ function App() {
     }
   }, [needsSetup, loading, location.pathname, navigate]);
 
-  if (loading) return <div>Loading...</div>;
+  const { meta, loading: loadingMeta } = useSiteMeta();
+  const isAdmin = user?.role === 'admin';
+
+  if (loading || loadingMeta) return <div>Loading...</div>;
+
+  // Maintenance Mode Redirect Logic
+  // Show maintenance page if active and user is not an admin
+  if (meta.maintenanceMode && !isAdmin && location.pathname !== '/login') {
+    return <MaintenancePage />;
+  }
 
   const isSetupPage = location.pathname === '/setup';
 

@@ -14,6 +14,8 @@ const AdminSettings = () => {
         title: '',
         description: '',
         logo: '',
+        maintenanceMode: false,
+        maintenanceMessage: ''
     });
     const [isDirty, setIsDirty] = useState(false);
 
@@ -24,6 +26,8 @@ const AdminSettings = () => {
                 title: meta.title || '',
                 description: meta.description || '',
                 logo: meta.logo || '',
+                maintenanceMode: meta.maintenanceMode ?? false,
+                maintenanceMessage: meta.maintenanceMessage || '',
             });
         }
     }, [meta]);
@@ -90,6 +94,39 @@ const AdminSettings = () => {
                             setFormData(prev => ({ ...prev, logo: url }));
                             setIsDirty(true);
                         }}
+                    />
+                </div>
+
+                <div className={styles.sectionDivider}>Maintenance Mode</div>
+
+                <div className={styles.field}>
+                    <div className={styles.toggleRow}>
+                        <label className={styles.label} htmlFor="maintenanceMode">Enable Maintenance Mode</label>
+                        <input
+                            id="maintenanceMode"
+                            name="maintenanceMode"
+                            type="checkbox"
+                            className={styles.toggle}
+                            checked={formData.maintenanceMode}
+                            onChange={(e) => {
+                                setFormData(prev => ({ ...prev, maintenanceMode: e.target.checked }));
+                                setIsDirty(true);
+                            }}
+                        />
+                    </div>
+                    <p className={styles.hint}>When enabled, non-admin users will be redirected to a maintenance landing page.</p>
+                </div>
+
+                <div className={styles.field}>
+                    <label className={styles.label} htmlFor="maintenanceMessage">Maintenance Message</label>
+                    <textarea
+                        id="maintenanceMessage"
+                        name="maintenanceMessage"
+                        className={styles.textarea}
+                        value={formData.maintenanceMessage}
+                        onChange={handleChange}
+                        placeholder="Customize the message shown to users"
+                        disabled={!formData.maintenanceMode}
                     />
                 </div>
 
