@@ -47,11 +47,15 @@
 ## 💡 Suggestions (AI-generated)
 <!-- AI proposals for improvements. Prefix: S-### -->
 - [ ] **S-001**: Implement Role-based Sidebar navigation (instead of just Tabs)
-- [ ] **S-002**: Add "Maintenance Mode" toggle in Admin Settings
 
 ## ✅ Done
 
-### 🛠️ Phase 11: Comprehensive Testing
+### 🛠️ Phase 12: Maintenance & Operations
+- [x] **D-036**: Maintenance Mode (S-002)
+  - [x] Implemented server-side `maintenanceMiddleware`
+  - [x] Added `maintenanceMode` and `maintenanceMessage` to `SiteMeta`
+  - [x] Created `MaintenancePage` UI with automatic redirection
+  - [x] Implemented bypass for admins and essential API/upload paths
 - [x] **D-035**: 100% Component Test Coverage (B-028)
   - [x] Set up Vitest and React Testing Library
   - [x] Configured test scripts in `package.json`

@@ -1,5 +1,6 @@
 const Datastore = require('nedb-promises');
 const path = require('path');
+const mediaConfig = require('../config/mediaConfig');
 
 // Site meta is stored in its own small DB
 const siteMetaDb = Datastore.create({
@@ -20,10 +21,13 @@ const SiteMeta = {
 
         if (!meta) return defaults;
 
-        // Ensure maintenance fields are present even in old records
+        // Ensure maintenance fields and media config are present
         return {
             ...defaults,
-            ...meta
+            ...meta,
+            mediaConfig: {
+                responsive: mediaConfig.responsive
+            }
         };
     },
 

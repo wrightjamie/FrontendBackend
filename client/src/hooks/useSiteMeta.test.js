@@ -42,7 +42,9 @@ describe('useSiteMeta', () => {
         expect(result.current.meta).toEqual({
             title: 'App Name',
             description: 'Welcome to the application',
-            logo: null
+            logo: null,
+            maintenanceMode: false,
+            maintenanceMessage: 'The site is currently under maintenance. Please try again later.'
         });
     });
 
@@ -66,7 +68,9 @@ describe('useSiteMeta', () => {
         expect(result.current.meta).toEqual({
             title: 'My Custom Site',
             description: 'The Best Site',
-            logo: 'logo.png'
+            logo: 'logo.png',
+            maintenanceMode: false,
+            maintenanceMessage: 'The site is currently under maintenance. Please try again later.'
         });
     });
 });

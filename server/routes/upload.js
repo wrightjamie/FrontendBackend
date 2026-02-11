@@ -71,6 +71,25 @@ router.post('/', async (req, res) => {
                 .webp({ quality: mediaConfig.thumbnails.quality }) // Optional: standardized format
                 .toFile(thumbPath);
 
+            // Generate responsive variants
+            const variantData = {};
+            const responsiveDir = path.join(__dirname, '../public/uploads/responsive');
+            if (!fs.existsSync(responsiveDir)) fs.mkdirSync(responsiveDir, { recursive: true });
+
+            const baseFilename = path.parse(filename).name;
+
+            for (const [sizeName, width] of Object.entries(mediaConfig.responsive.sizes)) {
+                const variantFilename = `${baseFilename}-${sizeName}.${mediaConfig.responsive.format}`;
+                const variantPath = path.join(responsiveDir, variantFilename);
+
+                await sharp(originalPath)
+                    .resize(width, null, { withoutEnlargement: true })
+                    .toFormat(mediaConfig.responsive.format, { quality: mediaConfig.responsive.quality })
+                    .toFile(variantPath);
+
+                variantData[sizeName] = `/uploads/responsive/${variantFilename}`;
+            }
+
             // Save to DB
             const media = await Media.create({
                 filename: filename,
@@ -79,6 +98,7 @@ router.post('/', async (req, res) => {
                 size: req.file.size,
                 url: `/uploads/${filename}`,
                 thumbnailUrl: `/uploads/thumbs/${thumbFilename}`,
+                variants: variantData, // Store variants
                 title: req.file.originalname // Default title
             });
 
@@ -135,6 +155,14 @@ router.delete('/:id', async (req, res) => {
         // Delete files
         if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
         if (fs.existsSync(thumbPath)) fs.unlinkSync(thumbPath);
+
+        // Delete responsive variants
+        if (media.variants) {
+            Object.values(media.variants).forEach(variantUrl => {
+                const variantPath = path.join(__dirname, '../public', variantUrl);
+                if (fs.existsSync(variantPath)) fs.unlinkSync(variantPath);
+            });
+        }
 
         // Remove from DB
         await Media.remove(req.params.id);
@@ -198,6 +226,7 @@ router.post('/regenerate-thumbs', async (req, res) => {
 
             if (fs.existsSync(originalPath)) {
                 try {
+                    // 1. Regenerate Thumbnail
                     await sharp(originalPath)
                         .resize(
                             mediaConfig.thumbnails.width,
@@ -206,9 +235,29 @@ router.post('/regenerate-thumbs', async (req, res) => {
                         )
                         .webp({ quality: mediaConfig.thumbnails.quality })
                         .toFile(thumbPath);
+
+                    // 2. Regenerate Responsive Variants
+                    const variantData = {};
+                    const baseFilename = path.parse(asset.filename).name;
+
+                    for (const [sizeName, width] of Object.entries(mediaConfig.responsive.sizes)) {
+                        const variantFilename = `${baseFilename}-${sizeName}.${mediaConfig.responsive.format}`;
+                        const vPath = path.join(responsiveDir, variantFilename);
+
+                        await sharp(originalPath)
+                            .resize(width, null, { withoutEnlargement: true })
+                            .toFormat(mediaConfig.responsive.format, { quality: mediaConfig.responsive.quality })
+                            .toFile(vPath);
+
+                        variantData[sizeName] = `/uploads/responsive/${variantFilename}`;
+                    }
+
+                    // 3. Update DB
+                    await Media.update(asset._id, { variants: variantData });
+
                     results.success++;
                 } catch (err) {
-                    console.error(`Failed to regenerate thumb for ${asset.filename}:`, err);
+                    console.error(`Failed to regenerate assets for ${asset.filename}:`, err);
                     results.failed++;
                 }
             } else {
