@@ -2,7 +2,9 @@ const Datastore = require('nedb-promises');
 const path = require('path');
 
 const dbPath = path.join(__dirname, '../data/media.db');
-const mediaDb = Datastore.create(dbPath);
+const mediaDb = process.env.NODE_ENV === 'test'
+    ? Datastore.create({ inMemoryOnly: true })
+    : Datastore.create(dbPath);
 
 const Media = {
     async create(data) {

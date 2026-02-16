@@ -44,7 +44,8 @@ describe('useSiteMeta', () => {
             description: 'Welcome to the application',
             logo: null,
             maintenanceMode: false,
-            maintenanceMessage: 'The site is currently under maintenance. Please try again later.'
+            maintenanceMessage: 'The site is currently under maintenance. Please try again later.',
+            media: { responsive: { sizes: {} } }
         });
     });
 
@@ -70,7 +71,8 @@ describe('useSiteMeta', () => {
             description: 'The Best Site',
             logo: 'logo.png',
             maintenanceMode: false,
-            maintenanceMessage: 'The site is currently under maintenance. Please try again later.'
+            maintenanceMessage: 'The site is currently under maintenance. Please try again later.',
+            media: { responsive: { sizes: {} } }
         });
     });
 });

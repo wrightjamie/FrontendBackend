@@ -4,6 +4,12 @@ const path = require('path');
 const DATA_DIR = path.join(__dirname, '../data');
 
 const createDatastore = (filename) => {
+    if (process.env.NODE_ENV === 'test') {
+        return Datastore.create({
+            inMemoryOnly: true,
+            timestampData: true
+        });
+    }
     return Datastore.create({
         filename: path.join(DATA_DIR, filename),
         autoload: true,

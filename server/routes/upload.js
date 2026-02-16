@@ -8,13 +8,16 @@ const Media = require('../models/Media');
 const mediaConfig = require('../config/mediaConfig');
 
 // Configure storage
+const UPLOAD_ROOT = process.env.NODE_ENV === 'test'
+    ? path.join(__dirname, '../tests/uploads')
+    : path.join(__dirname, '../public/uploads');
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../public/uploads');
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
+        if (!fs.existsSync(UPLOAD_ROOT)) {
+            fs.mkdirSync(UPLOAD_ROOT, { recursive: true });
         }
-        cb(null, uploadDir);
+        cb(null, UPLOAD_ROOT);
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -55,7 +58,7 @@ router.post('/', async (req, res) => {
             const originalPath = req.file.path;
             const filename = req.file.filename;
             const thumbFilename = `thumb-${filename}`;
-            const thumbPath = path.join(__dirname, '../public/uploads/thumbs', thumbFilename);
+            const thumbPath = path.join(UPLOAD_ROOT, 'thumbs', thumbFilename);
 
             // Ensure thumb dir exists
             const thumbDir = path.dirname(thumbPath);
@@ -73,7 +76,7 @@ router.post('/', async (req, res) => {
 
             // Generate responsive variants
             const variantData = {};
-            const responsiveDir = path.join(__dirname, '../public/uploads/responsive');
+            const responsiveDir = path.join(UPLOAD_ROOT, 'responsive');
             if (!fs.existsSync(responsiveDir)) fs.mkdirSync(responsiveDir, { recursive: true });
 
             const baseFilename = path.parse(filename).name;
@@ -148,7 +151,7 @@ router.delete('/:id', async (req, res) => {
         if (!media) return res.status(404).json({ message: 'Media not found' });
 
         // Paths
-        const uploadDir = path.join(__dirname, '../public/uploads');
+        const uploadDir = UPLOAD_ROOT;
         const filePath = path.join(uploadDir, media.filename);
         const thumbPath = path.join(uploadDir, 'thumbs', `thumb-${media.filename}`);
 
@@ -159,7 +162,10 @@ router.delete('/:id', async (req, res) => {
         // Delete responsive variants
         if (media.variants) {
             Object.values(media.variants).forEach(variantUrl => {
-                const variantPath = path.join(__dirname, '../public', variantUrl);
+                // For deletion, we need to map the URL back to the file system
+                // URL: /uploads/responsive/... -> FS: UPLOAD_ROOT/responsive/...
+                const relativePath = variantUrl.replace(/^\/uploads\//, '');
+                const variantPath = path.join(UPLOAD_ROOT, relativePath);
                 if (fs.existsSync(variantPath)) fs.unlinkSync(variantPath);
             });
         }
@@ -216,7 +222,7 @@ router.post('/regenerate-thumbs', async (req, res) => {
             skipped: 0
         };
 
-        const uploadDir = path.join(__dirname, '../public/uploads');
+        const uploadDir = UPLOAD_ROOT;
         const thumbDir = path.join(uploadDir, 'thumbs');
         const responsiveDir = path.join(uploadDir, 'responsive');
 

@@ -3,10 +3,12 @@ const path = require('path');
 const mediaConfig = require('../config/mediaConfig');
 
 // Site meta is stored in its own small DB
-const siteMetaDb = Datastore.create({
-    filename: path.join(__dirname, '../data/sitemeta.db'),
-    autoload: true,
-});
+const siteMetaDb = process.env.NODE_ENV === 'test'
+    ? Datastore.create({ inMemoryOnly: true })
+    : Datastore.create({
+        filename: path.join(__dirname, '../data/sitemeta.db'),
+        autoload: true,
+    });
 
 const SiteMeta = {
     async get() {
