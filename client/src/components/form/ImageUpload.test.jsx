@@ -79,7 +79,10 @@ describe('ImageUpload', () => {
     it('handles successful file upload', async () => {
         global.fetch.mockResolvedValue({
             ok: true,
-            json: async () => ({ url: '/uploads/test.jpg', filename: 'test.jpg' })
+            json: async () => ({
+                message: 'Upload successful',
+                results: [{ url: '/uploads/test.jpg', filename: 'test.jpg' }]
+            })
         });
 
         const onUpload = vi.fn();
@@ -92,7 +95,7 @@ describe('ImageUpload', () => {
 
         await waitFor(() => {
             expect(global.fetch).toHaveBeenCalledWith('/api/upload', expect.any(Object));
-            expect(onUpload).toHaveBeenCalledWith({ url: '/uploads/test.jpg', filename: 'test.jpg' });
+            expect(onUpload).toHaveBeenCalledWith([{ url: '/uploads/test.jpg', filename: 'test.jpg' }]);
         });
     });
 
@@ -117,7 +120,10 @@ describe('ImageUpload', () => {
     it('shows preview after upload when showPreview is true', async () => {
         global.fetch.mockResolvedValue({
             ok: true,
-            json: async () => ({ url: '/uploads/test.jpg', filename: 'test.jpg' })
+            json: async () => ({
+                message: 'Upload successful',
+                results: [{ url: '/uploads/test.jpg', filename: 'test.jpg' }]
+            })
         });
 
         const { container } = render(<ImageUpload showPreview={true} />);
@@ -137,7 +143,10 @@ describe('ImageUpload', () => {
     it('does not show preview when showPreview is false', async () => {
         global.fetch.mockResolvedValue({
             ok: true,
-            json: async () => ({ url: '/uploads/test.jpg', filename: 'test.jpg' })
+            json: async () => ({
+                message: 'Upload successful',
+                results: [{ url: '/uploads/test.jpg', filename: 'test.jpg' }]
+            })
         });
 
         const { container } = render(<ImageUpload showPreview={false} />);
@@ -174,7 +183,7 @@ describe('ImageUpload', () => {
     it('shows uploading state during upload', async () => {
         global.fetch.mockImplementation(() => new Promise(resolve => setTimeout(() => resolve({
             ok: true,
-            json: async () => ({ url: '/uploads/test.jpg' })
+            json: async () => ({ results: [{ url: '/uploads/test.jpg' }] })
         }), 100)));
 
         const { container } = render(<ImageUpload />);

@@ -30,8 +30,11 @@
   - [ ] Implement secure reset flow without external STMP if possible
 
 ### 🎨 Metadata & Assets
-- [ ] **B-011 (Part 2)**: Advanced Media Features
-  - [ ] Allow multiple file uploads at once
+- [x] **B-011**: Multi-file Uploads
+  - [x] Update server endpoint to accept `upload.array`
+  - [x] Update `FileUpload` component for drag-and-drop array support
+  - [x] Update frontend hooks to send FormData with multiple files
+- [ ] **B-042**: Image Cropping/Editing Preview
   - [ ] Implement image cropping/editing preview
 
 ## 🧾 Technical Debt

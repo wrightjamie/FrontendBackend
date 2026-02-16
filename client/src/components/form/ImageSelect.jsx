@@ -55,8 +55,9 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
     };
 
     const handleUploadSuccess = (data) => {
-        if (data) {
-            onChange(data.url);
+        const uploaded = Array.isArray(data) ? data[0] : data;
+        if (uploaded) {
+            onChange(uploaded.url);
             setIsOpen(false);
             addToast('Image uploaded and selected', 'success');
         }

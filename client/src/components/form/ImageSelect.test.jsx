@@ -58,7 +58,7 @@ vi.mock('../../context/ToastContext', () => ({
 vi.mock('./ImageUpload', () => ({
     default: ({ onUpload }) => (
         <div data-testid="image-upload">
-            <button onClick={() => onUpload({ url: '/uploads/new.jpg' })}>
+            <button onClick={() => onUpload([{ url: '/uploads/new.jpg' }])}>
                 Mock Upload
             </button>
         </div>

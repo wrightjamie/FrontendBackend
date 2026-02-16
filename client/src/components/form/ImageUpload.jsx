@@ -9,21 +9,23 @@ import styles from './ImageUpload.module.css';
  * @param {string} currentImage - URL of currently selected/uploaded image.
  * @param {boolean} showPreview - Whether to show the uploaded image in the box after success.
  */
-const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPreview = true }) => {
+const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPreview = true, multiple = false }) => {
     const [preview, setPreview] = useState(currentImage || '');
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState('');
     const fileInputRef = useRef(null);
 
     const handleFileChange = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
 
         setError('');
         setUploading(true);
 
         const formData = new FormData();
-        formData.append('image', file);
+        Array.from(files).forEach(file => {
+            formData.append('image', file);
+        });
 
         try {
             // Use fetch directly for FormData as apiClient handles JSON
@@ -38,14 +40,21 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPrevi
                 throw new Error(data.message || 'Upload failed');
             }
 
-            setPreview(data.url);
-            if (onUpload) {
-                onUpload(data);
-            }
-            if (showPreview) {
-                setPreview(data.url);
-            } else {
-                setPreview('');
+            // data.results is the array of uploaded media
+            if (data.results && data.results.length > 0) {
+                // For single file preview (backward compat or just showing the first one)
+                const lastUrl = data.results[data.results.length - 1].url;
+                setPreview(lastUrl);
+
+                if (onUpload) {
+                    onUpload(data.results);
+                }
+
+                if (showPreview) {
+                    setPreview(lastUrl);
+                } else {
+                    setPreview('');
+                }
             }
         } catch (err) {
             setError(err.message);
@@ -102,6 +111,7 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPrevi
                 ref={fileInputRef}
                 onChange={handleFileChange}
                 accept="image/*"
+                multiple={multiple}
                 className={styles.hiddenInput}
                 disabled={uploading}
             />

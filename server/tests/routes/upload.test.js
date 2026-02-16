@@ -50,18 +50,34 @@ describe('Upload Routes', () => {
                 .attach('image', dummyImage, 'test-image.png');
 
             expect(res.statusCode).toEqual(200);
-            expect(res.body).toHaveProperty('filename');
-            expect(res.body.variants).toHaveProperty('sm');
-            expect(res.body.variants).toHaveProperty('md');
+            expect(res.statusCode).toEqual(200);
+            expect(res.body.results).toHaveLength(1);
+            const media = res.body.results[0];
+            expect(media).toHaveProperty('filename');
+            expect(media.variants).toHaveProperty('sm');
+            expect(media.variants).toHaveProperty('md');
 
             // Verify file existence
-            const filePath = path.join(TEST_UPLOAD_DIR, res.body.filename);
+            const filePath = path.join(TEST_UPLOAD_DIR, media.filename);
             expect(fs.existsSync(filePath)).toBe(true);
 
             // Verify thumb existence
-            const thumbName = `thumb-${res.body.filename}`;
+            const thumbName = `thumb-${media.filename}`;
             const thumbPath = path.join(TEST_UPLOAD_DIR, 'thumbs', thumbName);
             expect(fs.existsSync(thumbPath)).toBe(true);
+        });
+
+        it('should upload multiple images', async () => {
+            const res = await request(app)
+                .post('/api/upload')
+                .set('Cookie', adminCookie)
+                .attach('image', dummyImage, 'multi-1.png')
+                .attach('image', dummyImage, 'multi-2.png');
+
+            expect(res.statusCode).toEqual(200);
+            expect(res.body.results).toHaveLength(2);
+            expect(res.body.results[0].originalName).toBe('multi-1.png');
+            expect(res.body.results[1].originalName).toBe('multi-2.png');
         });
 
         it('should reject non-image files', async () => {
@@ -84,8 +100,8 @@ describe('Upload Routes', () => {
                 .set('Cookie', adminCookie)
                 .attach('image', dummyImage, 'delete-me.png');
 
-            const mediaId = uploadRes.body._id;
-            const filename = uploadRes.body.filename;
+            const mediaId = uploadRes.body.results[0]._id;
+            const filename = uploadRes.body.results[0].filename;
 
             // Delete
             const res = await request(app)

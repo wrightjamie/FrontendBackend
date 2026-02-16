@@ -48,76 +48,112 @@ router.post('/', async (req, res) => {
         return res.status(401).json({ message: 'Authentication required' });
     }
 
-    const uploadSingle = upload.single('image');
+    const uploadMultiple = upload.array('image');
 
-    uploadSingle(req, res, async function (err) {
+    uploadMultiple(req, res, async function (err) {
         if (err) return res.status(400).json({ message: err.message });
-        if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
 
-        try {
-            const originalPath = req.file.path;
-            const filename = req.file.filename;
-            const thumbFilename = `thumb-${filename}`;
-            const thumbPath = path.join(UPLOAD_ROOT, 'thumbs', thumbFilename);
+        // Multer puts files in req.files for array(), or req.file for single()
+        // We can handle both if we normalize
+        const files = req.files || (req.file ? [req.file] : []);
 
-            // Ensure thumb dir exists
-            const thumbDir = path.dirname(thumbPath);
-            if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
-
-            // Generate thumbnail
-            await sharp(originalPath)
-                .resize(
-                    mediaConfig.thumbnails.width,
-                    mediaConfig.thumbnails.height,
-                    { fit: mediaConfig.thumbnails.fit }
-                )
-                .webp({ quality: mediaConfig.thumbnails.quality }) // Optional: standardized format
-                .toFile(thumbPath);
-
-            // Generate responsive variants
-            const variantData = {};
-            const responsiveDir = path.join(UPLOAD_ROOT, 'responsive');
-            if (!fs.existsSync(responsiveDir)) fs.mkdirSync(responsiveDir, { recursive: true });
-
-            const baseFilename = path.parse(filename).name;
-
-            for (const [sizeName, width] of Object.entries(mediaConfig.responsive.sizes)) {
-                const variantFilename = `${baseFilename}-${sizeName}.${mediaConfig.responsive.format}`;
-                const variantPath = path.join(responsiveDir, variantFilename);
-
-                await sharp(originalPath)
-                    .resize(width, null, { withoutEnlargement: true })
-                    .toFormat(mediaConfig.responsive.format, { quality: mediaConfig.responsive.quality })
-                    .toFile(variantPath);
-
-                variantData[sizeName] = `/uploads/responsive/${variantFilename}`;
-            }
-
-            // Save to DB
-            const media = await Media.create({
-                filename: filename,
-                originalName: req.file.originalname,
-                mimetype: req.file.mimetype,
-                size: req.file.size,
-                url: `/uploads/${filename}`,
-                thumbnailUrl: `/uploads/thumbs/${thumbFilename}`,
-                variants: variantData, // Store variants
-                title: req.file.originalname // Default title
-            });
-
-            res.json({
-                message: 'Upload successful',
-                ...media
-            });
-
-        } catch (error) {
-            // Clean up if DB save or resize fails
-            if (req.file && fs.existsSync(req.file.path)) {
-                fs.unlinkSync(req.file.path);
-            }
-            console.error('Upload Error:', error);
-            res.status(500).json({ message: 'Failed to process image' });
+        if (!files || files.length === 0) {
+            return res.status(400).json({ message: 'No files uploaded' });
         }
+
+        const uploadedMedia = [];
+        const errors = [];
+
+        for (const file of files) {
+            try {
+                const originalPath = file.path;
+                const filename = file.filename;
+                const thumbFilename = `thumb-${filename}`;
+                const thumbPath = path.join(UPLOAD_ROOT, 'thumbs', thumbFilename);
+
+                // Ensure thumb dir exists
+                const thumbDir = path.dirname(thumbPath);
+                if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
+
+                // Generate thumbnail
+                await sharp(originalPath)
+                    .resize(
+                        mediaConfig.thumbnails.width,
+                        mediaConfig.thumbnails.height,
+                        { fit: mediaConfig.thumbnails.fit }
+                    )
+                    .webp({ quality: mediaConfig.thumbnails.quality })
+                    .toFile(thumbPath);
+
+                // Generate responsive variants
+                const variantData = {};
+                const responsiveDir = path.join(UPLOAD_ROOT, 'responsive');
+                if (!fs.existsSync(responsiveDir)) fs.mkdirSync(responsiveDir, { recursive: true });
+
+                const baseFilename = path.parse(filename).name;
+
+                for (const [sizeName, width] of Object.entries(mediaConfig.responsive.sizes)) {
+                    const variantFilename = `${baseFilename}-${sizeName}.${mediaConfig.responsive.format}`;
+                    const variantPath = path.join(responsiveDir, variantFilename);
+
+                    await sharp(originalPath)
+                        .resize(width, null, { withoutEnlargement: true })
+                        .toFormat(mediaConfig.responsive.format, { quality: mediaConfig.responsive.quality })
+                        .toFile(variantPath);
+
+                    variantData[sizeName] = `/uploads/responsive/${variantFilename}`;
+                }
+
+                // Save to DB
+                const media = await Media.create({
+                    filename: filename,
+                    originalName: file.originalname,
+                    mimetype: file.mimetype,
+                    size: file.size,
+                    url: `/uploads/${filename}`,
+                    thumbnailUrl: `/uploads/thumbs/${thumbFilename}`,
+                    variants: variantData,
+                    title: file.originalname
+                });
+
+                uploadedMedia.push(media);
+
+            } catch (error) {
+                console.error(`Error processing file ${file.originalname}:`, error);
+                errors.push({ file: file.originalname, error: error.message });
+
+                // Cleanup this specific file if it failed
+                if (file && fs.existsSync(file.path)) {
+                    fs.unlinkSync(file.path);
+                }
+            }
+        }
+
+        if (uploadedMedia.length === 0 && errors.length > 0) {
+            return res.status(500).json({ message: 'Failed to process uploads', errors });
+        }
+
+        // Return the array of created media objects
+        // If it was a single file upload request (conceptually), the client might expect an object,
+        // but our new contract says we return an array or a standardized structure.
+        // To maintain backward compatibility with `ImageUpload.jsx` (which expects a single object if updated poorly),
+        // we should be careful. However, we are updating the client too.
+        // Let's return { message: '...', media: [...] } but also spread the first one if length is 1?
+        // No, let's result a standard structure: { message: '...', results: [...] }
+
+        // Wait, the client looks for `data.url`.
+        // If we change the response structure, we MUST update the client simultaneously.
+        // The implementation plan says "Update `ImageUpload.jsx`... handle array response".
+
+        res.json({
+            message: 'Upload successful',
+            results: uploadedMedia,
+            errors: errors.length > 0 ? errors : undefined,
+            // For backward compat (if any single-upload consumers exist unchanged), 
+            // we could expose the first file's props, but better to break cleanly if we are updating everything.
+            // But `ImageUpload` in current form does: `setPreview(data.url)`. 
+            // We'll update the client to look for `results[0].url` or similar.
+        });
     });
 });
 

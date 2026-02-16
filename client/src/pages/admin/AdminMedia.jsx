@@ -61,9 +61,10 @@ const AdminMedia = () => {
         }
     };
 
-    const handleUploadSuccess = (newImage) => {
-        addToast('Image uploaded successfully', 'success');
-        setImages(prev => [newImage, ...prev]);
+    const handleUploadSuccess = (newImages) => {
+        const imagesToAdd = Array.isArray(newImages) ? newImages : [newImages];
+        addToast(`${imagesToAdd.length} image(s) uploaded successfully`, 'success');
+        setImages(prev => [...imagesToAdd, ...prev]);
     };
 
     const handleRegenerate = async () => {
@@ -103,8 +104,9 @@ const AdminMedia = () => {
                 <div className={styles.uploader}>
                     <ImageUpload
                         onUpload={handleUploadSuccess}
-                        label="Upload New Image"
+                        label="Upload New Image(s)"
                         showPreview={false}
+                        multiple={true}
                     />
                 </div>
             </div>
