@@ -218,7 +218,10 @@ router.post('/regenerate-thumbs', async (req, res) => {
 
         const uploadDir = path.join(__dirname, '../public/uploads');
         const thumbDir = path.join(uploadDir, 'thumbs');
+        const responsiveDir = path.join(uploadDir, 'responsive');
+
         if (!fs.existsSync(thumbDir)) fs.mkdirSync(thumbDir, { recursive: true });
+        if (!fs.existsSync(responsiveDir)) fs.mkdirSync(responsiveDir, { recursive: true });
 
         for (const asset of assets) {
             const originalPath = path.join(uploadDir, asset.filename);
