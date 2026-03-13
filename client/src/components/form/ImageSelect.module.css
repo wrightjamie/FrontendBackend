@@ -7,8 +7,8 @@
 }
 
 .label {
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
     color: var(--color-text-secondary);
 }
 
@@ -55,8 +55,8 @@
     gap: 0.5rem;
     opacity: 0;
     transition: opacity 0.2s ease;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
 }
 
 .previewWrapper:hover .changeOverlay {
@@ -65,7 +65,7 @@
 
 .placeholder {
     color: var(--color-text-tertiary);
-    font-size: 0.8rem;
+    font-size: var(--text-xs);
     text-align: center;
     padding: 1rem;
 }
@@ -121,8 +121,8 @@
     border: none;
     background: transparent;
     border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
     color: var(--color-text-secondary);
     cursor: pointer;
     display: flex;
@@ -193,7 +193,7 @@
     text-align: center;
     padding: 2rem;
     color: var(--color-text-tertiary);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     font-style: italic;
 }
 

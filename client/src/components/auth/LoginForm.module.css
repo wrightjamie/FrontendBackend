@@ -10,7 +10,7 @@
     background: color-mix(in srgb, var(--color-danger) 10%, transparent);
     padding: 0.75rem;
     border-radius: 8px;
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     margin: 0;
 }
 
@@ -20,14 +20,14 @@
     display: flex;
     justify-content: center;
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     color: var(--color-text-secondary);
 }
 
 .link {
     color: var(--color-primary);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: var(--font-medium);
     margin-left: 0.25rem;
 }
 

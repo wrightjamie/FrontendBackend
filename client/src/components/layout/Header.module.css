@@ -27,8 +27,8 @@
     gap: 0.5rem;
     text-decoration: none;
     color: var(--color-text-primary);
-    font-weight: 700;
-    font-size: 1.25rem;
+    font-weight: var(--font-bold);
+    font-size: var(--text-xl);
     transition: transform 0.2s ease;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .logoIcon {
-    font-size: 1.5rem;
+    font-size: var(--text-2xl);
 }
 
 .logoImage {

@@ -29,8 +29,8 @@
 }
 
 .cardHeader h1 {
-    font-size: 2.25rem;
-    font-weight: 800;
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
     margin: 0 0 0.5rem 0;
     color: var(--color-text-primary);
     letter-spacing: -0.025em;
@@ -40,13 +40,13 @@
 .cardHeader p {
     color: var(--color-text-secondary);
     margin: 0;
-    font-size: 1.1rem;
+    font-size: var(--text-lg);
 }
 
 .footer {
     margin-top: 2rem;
     text-align: center;
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     color: var(--color-text-secondary);
 }
 

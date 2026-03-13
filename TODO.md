@@ -43,6 +43,9 @@
 ## ✅ Done
 
 ### 🛠️ Phase 12: Maintenance & Operations
+- [x] **D-041**: Standardized Typography Tokens (T-043)
+  - [x] Replaced hardcoded `font-size` values with `var(--text-*)`
+  - [x] Replaced hardcoded `font-weight` values with `var(--font-*)`
 - [x] **D-040**: Refined TabNavigation Visual Cues (B-041)
   - [x] Improved contrast for active, hover, and inactive states.
   - [x] Enhanced `AdminLayout.jsx` experience with thicker borders and color shifts.

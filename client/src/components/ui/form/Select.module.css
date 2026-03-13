@@ -59,7 +59,7 @@
     right: var(--space-md);
     pointer-events: none;
     color: var(--color-text-tertiary);
-    font-size: 0.8em;
+    font-size: var(--text-xs);
 }
 
 /* Error State */

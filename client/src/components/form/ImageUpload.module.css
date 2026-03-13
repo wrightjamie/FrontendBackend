@@ -5,8 +5,8 @@
 }
 
 .label {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
     color: var(--color-text-primary);
 }
 
@@ -36,7 +36,7 @@
     align-items: center;
     gap: 0.5rem;
     color: var(--color-text-secondary);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
 }
 
 .uploadIcon {
@@ -91,6 +91,6 @@
 
 .error {
     color: var(--color-danger);
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     margin-top: 0.25rem;
 }

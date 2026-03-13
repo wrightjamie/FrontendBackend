@@ -11,7 +11,7 @@
 .header h1 {
     margin: 0 0 0.5rem 0;
     color: var(--color-text-primary);
-    font-size: 2rem;
+    font-size: var(--text-3xl);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -20,7 +20,7 @@
 .header p {
     margin: 0;
     color: var(--color-text-secondary);
-    font-size: 1rem;
+    font-size: var(--text-base);
 }
 
 .section {
@@ -34,7 +34,7 @@
 .section h2 {
     margin: 0 0 1.5rem 0;
     color: var(--color-text-primary);
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -55,8 +55,8 @@
 }
 
 .inputGroup label {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
     color: var(--color-text-primary);
 }
 
@@ -66,7 +66,7 @@
     border-radius: 8px;
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
-    font-size: 1rem;
+    font-size: var(--text-base);
     transition: all 0.2s;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .hint {
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     color: var(--color-text-secondary);
     font-style: italic;
 }

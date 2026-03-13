@@ -26,8 +26,8 @@
     background: var(--color-bg-primary);
     color: var(--color-text-secondary);
     border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
     cursor: pointer;
     transition: all 0.2s;
 }

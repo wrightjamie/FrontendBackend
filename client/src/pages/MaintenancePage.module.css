@@ -40,8 +40,8 @@
 }
 
 .title {
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     background: linear-gradient(to right, #fff, #a1a1aa);
@@ -51,15 +51,15 @@
 }
 
 .message {
-    font-size: 1.125rem;
+    font-size: var(--text-lg);
     line-height: 1.75;
     color: #a1a1aa;
     margin-bottom: 3rem;
 }
 
 .footer {
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #4b5563;
@@ -76,7 +76,7 @@
 .recoveryLink {
     color: #6366f1;
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     opacity: 0.6;
     transition: opacity 0.2s;
 }
@@ -103,6 +103,6 @@
     }
 
     .title {
-        font-size: 2rem;
+        font-size: var(--text-3xl);
     }
 }
