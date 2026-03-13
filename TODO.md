@@ -5,10 +5,6 @@
 
 ## 📋 Priority Backlog
 <!-- Immediate next steps or user-highlighted features -->
-- [ ] **B-041**: Refine `TabNavigation.jsx` visual cues
-  - Improve contrast for active, hover, and inactive states.
-  - Specifically focus on the usage in `AdminLayout.jsx`.
-  - Ensure strong visual distinction (e.g., thicker borders, color shifts).
 - [ ] **B-031**: Enforce Best Practices (Strict Mode & A11y)
   - [ ] Enable React Strict Mode
   - [ ] Add `eslint-plugin-jsx-a11y` and fix reported issues
@@ -47,6 +43,9 @@
 ## ✅ Done
 
 ### 🛠️ Phase 12: Maintenance & Operations
+- [x] **D-040**: Refined TabNavigation Visual Cues (B-041)
+  - [x] Improved contrast for active, hover, and inactive states.
+  - [x] Enhanced `AdminLayout.jsx` experience with thicker borders and color shifts.
 - [x] **D-039**: Implement Component Explorer (Storybook) (B-029)
   - [x] Installed and configured Storybook
   - [x] Created stories for standard UI components building a component explorer
