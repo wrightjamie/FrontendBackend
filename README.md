@@ -34,6 +34,11 @@ The system includes a comprehensive unit test suite with **100% component covera
   - `npm run test:ui`: Launches the Vitest UI for interactive testing.
   - `npm run coverage`: Generates a detailed coverage report.
 
+### 📚 Component Explorer (Storybook)
+The client project includes a Storybook installation to view, document, and test UI components in isolation.
+- **Run Locally**: `npm run storybook` from the project root.
+- **Build Static**: `npm run build-storybook` inside the `client` folder.
+
 ### First-Run Setup
 The system includes an automatic setup flow. If no users exist, navigating to the application will redirect you to `/setup` to create the initial **Administrator** account.
 

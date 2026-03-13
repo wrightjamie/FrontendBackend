@@ -9,10 +9,6 @@
   - Improve contrast for active, hover, and inactive states.
   - Specifically focus on the usage in `AdminLayout.jsx`.
   - Ensure strong visual distinction (e.g., thicker borders, color shifts).
-- [ ] **B-029**: Implement Component Explorer (Storybook)
-  - [ ] Install and configure Storybook
-  - [ ] Create stories for standard UI components (`components/ui`)
-  - [ ] Document usage guidelines
 - [ ] **B-031**: Enforce Best Practices (Strict Mode & A11y)
   - [ ] Enable React Strict Mode
   - [ ] Add `eslint-plugin-jsx-a11y` and fix reported issues
@@ -51,6 +47,11 @@
 ## ✅ Done
 
 ### 🛠️ Phase 12: Maintenance & Operations
+- [x] **D-039**: Implement Component Explorer (Storybook) (B-029)
+  - [x] Installed and configured Storybook
+  - [x] Created stories for standard UI components building a component explorer
+  - [x] Updated root and client build scripts
+
 - [x] **D-036**: Maintenance Mode (S-002)
   - [x] Implemented server-side `maintenanceMiddleware`
   - [x] Added `maintenanceMode` and `maintenanceMessage` to `SiteMeta`

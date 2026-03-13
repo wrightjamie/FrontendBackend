@@ -56,6 +56,7 @@ Backlog is read-only. Ready is the execution gate.
 - Verify acceptance criteria
 - **Documentation Update**: Update `README.md` and any other relevant docs to reflect changes.
 - Ensure technical documentation and tests are complete
+- **Storybook**: Ensure UI components have corresponding stories and verify they load in the Explorer
 - Add brief notes to the task if useful
 - Move the task to **Done**, or **Review** if human confirmation is needed
 - When criteria are met and tests pass: **stop work**
@@ -84,6 +85,7 @@ Preferred formats:
 - Every task that introduces or changes behavior must include tests
 - Tests must be deterministic, clear, and describe observable behavior
 - Regression tests for bug fixes; unit + basic integration for new features
+- **Storybook**: All new UI components in `client/src/components/ui` must include a corresponding `.stories.jsx` file to ensure they are available in the Component Explorer.
 
 ---
 
