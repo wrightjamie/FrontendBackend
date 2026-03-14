@@ -1,0 +1,121 @@
+[90m│[39m
+[33m▲[39m  No story files found for the specified pattern: [34msrc\**\*.mdx[39m
+
+[1m[46m RUN [49m[22m [36mv4.1.0 [39m[90mC:/Users/wrigh/Documents/WebProjects/FrontendBackend/client[39m
+
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Table.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Radio.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Checkbox.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/FileUpload.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Popover.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/ResponsiveImage.stories.jsx [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 149[2mms[22m[39m
+[31m   [31m×[31m Default[39m[32m 147[2mms[22m[39m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Toast/Toast.stories.jsx [2m([22m[2m3 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 350[2mms[22m[39m
+[31m   [31m×[31m Success[39m[32m 209[2mms[22m[39m
+[31m   [31m×[31m Error State[39m[32m 20[2mms[22m[39m
+[31m   [31m×[31m Warning[39m[32m 118[2mms[22m[39m
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/RadioGroup.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Card.stories.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 580[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 380[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Pagination.stories.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 556[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 346[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Select.stories.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 361[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Input.stories.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 657[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 399[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Button.stories.jsx [2m([22m[2m6 tests[22m[2m)[22m[33m 809[2mms[22m[39m
+   [33m[2m✓[22m[39m Primary [33m 388[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Badge.stories.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 579[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 332[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/TabNavigation.stories.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 254[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/Popover.stories.jsx[2m [ src/components/ui/Popover.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/Popover.stories.jsx[39m
+[31m[1mCaused by: SyntaxError[22m: The requested module '/src/components/ui/Popover.jsx' does not provide an export named 'default'[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/Table.stories.jsx[2m [ src/components/ui/Table.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/Table.stories.jsx[39m
+[31m[1mCaused by: SyntaxError[22m: The requested module '/src/components/ui/Table.jsx' does not provide an export named 'default'[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Checkbox.stories.jsx[2m [ src/components/ui/form/Checkbox.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/form/Checkbox.stories.jsx[39m
+[31m[1mCaused by: SyntaxError[22m: The requested module '/src/components/ui/form/Checkbox.jsx' does not provide an export named 'default'[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/FileUpload.stories.jsx[2m [ src/components/ui/form/FileUpload.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/form/FileUpload.stories.jsx[39m
+[31m[1mCaused by: SyntaxError[22m: The requested module '/src/components/ui/form/FileUpload.jsx' does not provide an export named 'default'[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Radio.stories.jsx[2m [ src/components/ui/form/Radio.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/form/Radio.stories.jsx[39m
+[31m[1mCaused by: SyntaxError[22m: The requested module '/src/components/ui/form/Radio.jsx' does not provide an export named 'default'[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/RadioGroup.stories.jsx[2m [ src/components/ui/form/RadioGroup.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/form/RadioGroup.stories.jsx[39m
+[31m[1mCaused by: SyntaxError[22m: The requested module '/src/components/ui/form/Radio.jsx' does not provide an export named 'default'[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯[22m[39m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 4 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/ResponsiveImage.stories.jsx[2m > [22mDefault
+[31m[1mError[22m: 
+[34mClick to debug the error directly in Storybook: http://localhost:6006/?path=/story/ui-responsiveimage--default&addonPanel=storybook/interactions/panel[31m
+
+useDataEngine must be used within a DataProvider[39m
+[36m [2m❯[22m useDataEngine src/context/DataContext.jsx:[2m67:14[22m[39m
+    [90m 65|[39m     [35mconst[39m context [33m=[39m [34museContext[39m([33mDataContext[39m)[33m;[39m
+    [90m 66|[39m     [35mif[39m ([33m![39mcontext) {
+    [90m 67|[39m         throw new Error('useDataEngine must be used within a DataProvi…
+    [90m   |[39m              [31m^[39m
+    [90m 68|[39m     }
+    [90m 69|[39m     [35mreturn[39m context[33m;[39m
+[90m [2m❯[22m useData src/hooks/useData.js:[2m12:50[22m[39m
+[90m [2m❯[22m useSiteMeta src/hooks/useSiteMeta.js:[2m9:47[22m[39m
+[90m [2m❯[22m ResponsiveImage src/components/ui/ResponsiveImage.jsx:[2m12:21[22m[39m
+[90m [2m❯[22m Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:[2m25904:19[22m[39m
+[90m [2m❯[22m renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:[2m7662:21[22m[39m
+[90m [2m❯[22m updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:[2m10166:18[22m[39m
+[90m [2m❯[22m beginWork node_modules/react-dom/cjs/react-dom-client.development.js:[2m11778:17[22m[39m
+[90m [2m❯[22m runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:[2m871:29[22m[39m
+[90m [2m❯[22m performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:[2m17641:21[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/Toast/Toast.stories.jsx[2m > [22mSuccess
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/Toast/Toast.stories.jsx[2m > [22mError State
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/Toast/Toast.stories.jsx[2m > [22mWarning
+[31m[1mError[22m: 
+[34mClick to debug the error directly in Storybook: http://localhost:6006/?path=/story/ui-toast--success&addonPanel=storybook/interactions/panel[31m
+
+useToast must be used within a ToastProvider[39m
+[36m [2m❯[22m useToast src/context/ToastContext.jsx:[2m7:24[22m[39m
+    [90m  5|[39m [35mexport[39m [35mconst[39m useToast [33m=[39m () [33m=>[39m {
+    [90m  6|[39m     [35mconst[39m context [33m=[39m [34museContext[39m([33mToastContext[39m)[33m;[39m
+    [90m  7|[39m     if (!context) throw new Error('useToast must be used within a Toas…
+    [90m   |[39m                        [31m^[39m
+    [90m  8|[39m     [35mreturn[39m context[33m;[39m
+    [90m  9|[39m }[33m;[39m
+[90m [2m❯[22m Toast src/components/ui/Toast/Toast.jsx:[2m14:28[22m[39m
+[90m [2m❯[22m Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:[2m25904:19[22m[39m
+[90m [2m❯[22m renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:[2m7662:21[22m[39m
+[90m [2m❯[22m updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:[2m10166:18[22m[39m
+[90m [2m❯[22m beginWork node_modules/react-dom/cjs/react-dom-client.development.js:[2m11778:17[22m[39m
+[90m [2m❯[22m runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:[2m871:29[22m[39m
+[90m [2m❯[22m performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:[2m17641:21[22m[39m
+[90m [2m❯[22m workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:[2m17469:40[22m[39m
+[90m [2m❯[22m renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:[2m17450:10[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m8 failed[39m[22m[2m | [22m[1m[32m7 passed[39m[22m[90m (15)[39m
+[2m      Tests [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m26 passed[39m[22m[90m (30)[39m
+[2m   Start at [22m 23:54:57
+[2m   Duration [22m 5.31s[2m (transform 0ms, setup 9.60s, import 1.90s, tests 4.30s, environment 0ms)[22m
+

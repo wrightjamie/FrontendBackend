@@ -43,6 +43,8 @@
 ## ✅ Done
 
 ### 🛠️ Phase 12: Maintenance & Operations
+- [x] **D-042**: Added Missing Storybook Components (T-044)
+  - [x] Added stories for `Pagination`, `Popover`, `ResponsiveImage`, `Table`, `Checkbox`, `Radio`, `RadioGroup`, `FileUpload`, and `Toast`.
 - [x] **D-041**: Standardized Typography Tokens (T-043)
   - [x] Replaced hardcoded `font-size` values with `var(--text-*)`
   - [x] Replaced hardcoded `font-weight` values with `var(--font-*)`

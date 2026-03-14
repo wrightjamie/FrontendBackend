@@ -1,0 +1,75 @@
+[90m│[39m
+[33m▲[39m  No story files found for the specified pattern: [34msrc\**\*.mdx[39m
+
+[1m[46m RUN [49m[22m [36mv4.1.0 [39m[90mC:/Users/wrigh/Documents/WebProjects/FrontendBackend/client[39m
+
+[2m23:56:43[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "../../context/ToastContext" from "src/components/ui/Toast/Toast.stories.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/Toast/Toast.stories.jsx[39m:3:30
+[33m  4  |  import React from "react";
+  5  |  import Toast from "./Toast";
+  6  |  import { ToastProvider } from "../../context/ToastContext";
+     |                                 ^
+  7  |  const _meta = {
+  8  |    title: "UI/Toast",[39m
+      at TransformPluginContext._formatLog (file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:28999:43)
+      at TransformPluginContext.error (file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:28996:14)
+      at normalizeUrl (file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:27119:18)
+      at processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:27177:32
+      at async Promise.all (index 5)
+      at TransformPluginContext.transform (file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:27145:4)
+      at EnvironmentPluginContainer.transform (file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:28797:14)
+      at loadAndTransform (file:///C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/node_modules/vite/dist/node/chunks/config.js:22670:26)
+ [31m❯[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Toast/Toast.stories.jsx [2m([22m[2m0 test[22m[2m)[22m
+[90mstderr[2m | src/components/ui/form/FileUpload.stories.jsx[2m > [22m[2mDefault
+[22m[39mUnknown event handler property `onFileSelect`. It will be ignored.
+[2m23:56:44[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/site/meta[39m
+AggregateError: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[90mstderr[2m | src/components/ui/ResponsiveImage.stories.jsx[2m > [22m[2mDefault
+[22m[39mAPI Error [/site/meta]: HTTP Error: 500
+[90mstderr[2m | src/components/ui/form/Checkbox.stories.jsx[2m > [22m[2mChecked
+[22m[39mYou provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`.
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Popover.stories.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 454[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 452[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/ResponsiveImage.stories.jsx [2m([22m[2m1 test[22m[2m)[22m[33m 339[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 336[2mms[22m[39m
+[90mstderr[2m | src/components/ui/form/Checkbox.stories.jsx[2m > [22m[2mWith Helper Text
+[22m[39mReact does not recognize the `helperText` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `helpertext` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+[90mstderr[2m | src/components/ui/form/Radio.stories.jsx[2m > [22m[2mChecked
+[22m[39mYou provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`.
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Table.stories.jsx [2m([22m[2m2 tests[22m[2m)[22m[33m 444[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 384[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/FileUpload.stories.jsx [2m([22m[2m2 tests[22m[2m)[22m[33m 493[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 447[2mms[22m[39m
+[90mstderr[2m | src/components/ui/form/Radio.stories.jsx[2m > [22m[2mWith Helper Text
+[22m[39mReact does not recognize the `helperText` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `helpertext` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Checkbox.stories.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 669[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 389[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/RadioGroup.stories.jsx [2m([22m[2m2 tests[22m[2m)[22m[33m 415[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 331[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Radio.stories.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 726[2mms[22m[39m
+   [33m[2m✓[22m[39m Default [33m 444[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Select.stories.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 278[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Card.stories.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 302[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/form/Input.stories.jsx [2m([22m[2m4 tests[22m[2m)[22m[33m 395[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Button.stories.jsx [2m([22m[2m6 tests[22m[2m)[22m[33m 408[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Badge.stories.jsx [2m([22m[2m5 tests[22m[2m)[22m[33m 387[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/Pagination.stories.jsx [2m([22m[2m3 tests[22m[2m)[22m[32m 232[2mms[22m[39m
+ [32m✓[39m [30m[45m storybook (chromium) [49m[39m src/components/ui/TabNavigation.stories.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 117[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[45m storybook (chromium) [49m[39m src/components/ui/Toast/Toast.stories.jsx[2m [ src/components/ui/Toast/Toast.stories.jsx ][22m
+[31m[1mError[22m: Failed to import test file C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/Toast/Toast.stories.jsx[39m
+[31m[1mCaused by: TypeError[22m: Failed to fetch dynamically imported module: http://localhost:63315/@fs/C:/Users/wrigh/Documents/WebProjects/FrontendBackend/client/src/components/ui/Toast/Toast.stories.jsx?import&browserv=1773446203527[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m14 passed[39m[22m[90m (15)[39m
+[2m      Tests [22m [1m[32m44 passed[39m[22m[90m (44)[39m
+[2m   Start at [22m 23:56:40
+[2m   Duration [22m 5.26s[2m (transform 0ms, setup 9.29s, import 2.87s, tests 5.66s, environment 0ms)[22m
+
