@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 
-const ToastContext = createContext();
+export const ToastContext = createContext();
 
 export const useToast = () => {
     const context = useContext(ToastContext);

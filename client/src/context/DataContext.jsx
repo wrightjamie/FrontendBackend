@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useRef, useState, useCallback } from 'react';
 
-const DataContext = createContext(null);
+export const DataContext = createContext(null);
 
 /**
  * DataProvider: The central "Engine" for our Stale-While-Revalidate caching.
@@ -12,10 +12,18 @@ const DataContext = createContext(null);
  * - invalidate(key?): Clear specific or all cache entries.
  * - cacheVersion: Incremented on every cache change to trigger re-renders in consumers.
  */
-export const DataProvider = ({ children }) => {
+export const DataProvider = ({ children, initialData = {} }) => {
     // We use a ref for the cache to keep it stable and outside of the React render cycle
     // for immediate updates, but use state for "cache version" to trigger re-renders
     const cache = useRef(new Map());
+
+    // Initialize cache with provided data (useful for Storybook/Testing)
+    useState(() => {
+        Object.entries(initialData).forEach(([key, data]) => {
+            cache.current.set(key, { data, timestamp: Date.now() });
+        });
+    });
+
     const [cacheVersion, setCacheVersion] = useState(0);
 
     /**
