@@ -94,8 +94,8 @@
 }
 
 .success {
-    background: rgba(40, 167, 69, 0.1);
-    color: #28a745;
+    background: oklch(from var(--color-success) l c h / 0.1);
+    color: var(--color-success);
 }
 
 .error {

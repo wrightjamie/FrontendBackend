@@ -28,22 +28,22 @@
 }
 
 .success {
-    background: #28a745;
+    background: var(--color-success);
 }
 
 .error {
-    background: #dc3545;
+    background: var(--color-error);
 }
 
 .warning {
-    background: #ffc107;
-    color: #333;
+    background: var(--color-warning);
+    color: var(--color-text-primary);
 }
 
 .info {
-    background: #17a2b8;
+    background: var(--color-info);
 }
 
 .sticky {
-    background: #6c757d;
+    background: var(--color-text-secondary);
 }

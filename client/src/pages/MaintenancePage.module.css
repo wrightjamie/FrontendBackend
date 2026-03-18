@@ -4,16 +4,16 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background: radial-gradient(circle at top left, #1a1a1a, #0a0a0a);
-    color: #ffffff;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at top left, var(--color-bg-secondary), var(--color-bg-primary));
+    color: var(--color-text-primary);
+    font-family: inherit;
 }
 
 .glassCard {
-    background: rgba(255, 255, 255, 0.03);
+    background: oklch(from var(--color-text-primary) l c h / 0.03);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 2rem;
+    border: 1px solid oklch(from var(--color-text-primary) l c h / 0.05);
+    border-radius: var(--radius-2xl);
     padding: 4rem 3rem;
     max-width: 500px;
     width: 100%;
@@ -25,8 +25,8 @@
 .iconWrapper {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #6366f1, #a855f7);
-    border-radius: 1.5rem;
+    background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary));
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,8 +35,8 @@
 }
 
 .icon {
-    color: white;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    color: var(--color-text-inverse);
+    filter: drop-shadow(0 2px 4px oklch(0% 0 0 / 0.2));
 }
 
 .title {
@@ -44,7 +44,7 @@
     font-weight: var(--font-bold);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
-    background: linear-gradient(to right, #fff, #a1a1aa);
+    background: linear-gradient(to right, var(--color-text-primary), var(--color-text-tertiary));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -53,8 +53,8 @@
 .message {
     font-size: var(--text-lg);
     line-height: 1.75;
-    color: #a1a1aa;
-    margin-bottom: 3rem;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-2xl);
 }
 
 .footer {
@@ -62,9 +62,9 @@
     font-weight: var(--font-semibold);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #4b5563;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--color-text-secondary);
+    padding-top: var(--space-xl);
+    border-top: 1px solid oklch(from var(--color-text-primary) l c h / 0.05);
 }
 
 .adminRecovery {
@@ -74,7 +74,7 @@
 }
 
 .recoveryLink {
-    color: #6366f1;
+    color: var(--color-brand-primary);
     text-decoration: none;
     font-size: var(--text-xs);
     opacity: 0.6;
