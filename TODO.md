@@ -21,7 +21,7 @@
   - [ ] Admin can change any user's password (for recovery)
   - [ ] Implement secure reset flow without external STMP if possible
 - [ ] **B-043**: Various bug fixes
-  - [ ] No user hook test
+  - [x] No user hook test
   - [x] ImageUpload component - padding around text
   - [x] Footer - pull text from the admin console. Add appropriate setting
   - [x] Footer - allow setting links (replicate menu system)
@@ -33,7 +33,7 @@
   - [x] Storybook Table - no data. Do we need a default table to show?
   - [x] Toast - warning - colours are wrong - it is all white.
   - [x] Toast - doesn't show in front of the header
-  - [ ] RadioGroup - storybook - nothing shown. Do we need a default radio group to show?
+  - [x] RadioGroup - storybook - nothing shown. Do we need a default radio group to show?
 
 
 
@@ -61,11 +61,16 @@
 ## ✅ Done
 
 ### 🛠️ Phase 13: UI Refinement & Footer Customization
+- [x] **D-045**: Custom Modal Dialogs (TD-004)
+  - [x] Created `ModalContext` and `useModal` hooks for promise-based dialogs.
+  - [x] Built native HTML `<dialog>` base component with CSS animations.
+  - [x] Replaced native `window.confirm` and `prompt` usages globally.
 - [x] **D-044**: UI Bug Fixes & Storybook Improvements (B-043)
   - [x] Fixed Button sizes and grouped styling.
   - [x] Added Toast warning/info colors and fixed z-index.
   - [x] Added conditional skip buttons to Pagination.
-  - [x] Fixed Storybook stories for Table, Popover, and ResponsiveImage.
+  - [x] Fixed Storybook stories for Table, Popover, ResponsiveImage, and RadioGroup.
+  - [x] Added automated tests for the useUsers hook.
 - [x] **D-043**: Dynamic Footer Settings (B-043)
   - [x] Implemented Admin UI for footer text and links.
   - [x] Updated SiteMeta and Footer to use dynamic settings.

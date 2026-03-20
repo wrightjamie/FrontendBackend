@@ -5,6 +5,7 @@ import './index.css'
 import { AuthProvider } from './context/AuthContext'
 import { DataProvider } from './context/DataContext'
 import { ToastProvider } from './context/ToastContext'
+import { ModalProvider } from './context/ModalContext'
 import ToastContainer from './components/ui/Toast/ToastContainer'
 import App from './App'
 
@@ -12,12 +13,14 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <DataProvider>
       <ToastProvider>
-        <AuthProvider>
-          <BrowserRouter>
-            <ToastContainer />
-            <App />
-          </BrowserRouter>
-        </AuthProvider>
+        <ModalProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <ToastContainer />
+              <App />
+            </BrowserRouter>
+          </AuthProvider>
+        </ModalProvider>
       </ToastProvider>
     </DataProvider>
   </StrictMode>,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link as LinkIcon, Trash2, RefreshCw, Copy, Loader2 } from 'lucide-react';
 import apiClient from '../../api/apiClient';
 import { useToast } from '../../context/ToastContext';
+import { useModal } from '../../context/ModalContext';
 import styles from './AdminMedia.module.css';
 import ImageUpload from '../../components/form/ImageUpload';
 import { Button } from '../../components/ui/Button';
@@ -12,6 +13,7 @@ const AdminMedia = () => {
     const [regenerating, setRegenerating] = useState(false);
     const [cacheBuster, setCacheBuster] = useState('');
     const { addToast } = useToast();
+    const { confirm } = useModal();
 
     const fetchImages = async () => {
         setLoading(true);
@@ -30,7 +32,13 @@ const AdminMedia = () => {
     }, []);
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this image?')) return;
+        const confirmed = await confirm({
+            title: 'Delete Image',
+            message: 'Are you sure you want to delete this image?',
+            confirmText: 'Delete',
+            intent: 'danger'
+        });
+        if (!confirmed) return;
 
         try {
             await apiClient(`/upload/${id}`, { method: 'DELETE' });
@@ -68,7 +76,13 @@ const AdminMedia = () => {
     };
 
     const handleRegenerate = async () => {
-        if (!window.confirm('This will regenerate thumbnails for all images using the current config. Continue?')) return;
+        const confirmed = await confirm({
+            title: 'Regenerate Thumbnails',
+            message: 'This will regenerate thumbnails for all images using the current config. Continue?',
+            confirmText: 'Regenerate',
+            intent: 'warning'
+        });
+        if (!confirmed) return;
 
         setRegenerating(true);
         try {

@@ -6,6 +6,7 @@ import { Button } from '../ui/Button';
 import { useAuth } from '../../context/AuthContext';
 import { Table, Thead, Tbody, Tr, Th, Td } from '../ui/Table';
 import { Input } from '../ui/form/Input';
+import { useModal } from '../../context/ModalContext';
 import { Checkbox } from '../ui/form/Checkbox';
 import { RadioGroup } from '../ui/form/RadioGroup';
 import Pagination from '../ui/Pagination';
@@ -19,6 +20,7 @@ const DynamicDataTable = ({ type }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10;
     const { data: response, loading, refresh } = useDataEntities(type._id, currentPage, limit);
+    const { confirm } = useModal();
 
     // Normalize data based on whether it's paginated or not
     const entities = response?.data || (Array.isArray(response) ? response : []);
@@ -73,7 +75,13 @@ const DynamicDataTable = ({ type }) => {
      * handleDelete: Confirm and delete a record.
      */
     const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this record?')) {
+        const confirmed = await confirm({
+            title: 'Delete Record',
+            message: 'Are you sure you want to delete this record?',
+            confirmText: 'Delete',
+            intent: 'danger'
+        });
+        if (confirmed) {
             const res = await del(id);
             if (res.success) {
                 refresh();

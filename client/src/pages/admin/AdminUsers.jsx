@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useModal } from '../../context/ModalContext';
 import { useUsers, useUserMutations } from '../../hooks/useUsers';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
@@ -29,6 +30,7 @@ const AdminUsers = () => {
     const { user: currentUser } = useAuth();
     const { data: users, loading, error, refresh } = useUsers();
     const { approveUser, updateUser, deleteUser, resetPassword } = useUserMutations();
+    const { confirm, prompt } = useModal();
 
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState({});
@@ -69,7 +71,13 @@ const AdminUsers = () => {
     };
 
     const handleApprove = async (userId) => {
-        if (window.confirm('Approve this user?')) {
+        const confirmed = await confirm({
+            title: 'Approve User',
+            message: 'Approve this user?',
+            confirmText: 'Approve',
+            intent: 'success'
+        });
+        if (confirmed) {
             const res = await approveUser(userId);
             if (res.success) {
                 refresh();
@@ -80,7 +88,13 @@ const AdminUsers = () => {
     };
 
     const handleDelete = async (userId) => {
-        if (window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+        const confirmed = await confirm({
+            title: 'Delete User',
+            message: 'Are you sure you want to delete this user? This action cannot be undone.',
+            confirmText: 'Delete',
+            intent: 'danger'
+        });
+        if (confirmed) {
             const res = await deleteUser(userId);
             if (res.success) {
                 refresh();
@@ -91,7 +105,12 @@ const AdminUsers = () => {
     };
 
     const handleResetPassword = async (userId) => {
-        const newPassword = prompt('Enter new password for this user (min 6 characters):');
+        const newPassword = await prompt({
+            title: 'Reset Password',
+            message: 'Enter new password for this user (min 6 characters):',
+            submitText: 'Reset Password',
+            intent: 'warning'
+        });
         if (newPassword && newPassword.length >= 6) {
             const res = await resetPassword(userId, newPassword);
             if (res.success) {
