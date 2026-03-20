@@ -13,14 +13,15 @@ export default {
 
 export const Default = {
     render: (args) => (
-        <Popover {...args}>
-            <div style={{ padding: '1rem', width: '200px' }}>
-                <h4>Popover Content</h4>
-                <p>This is the content inside the popover.</p>
-            </div>
-        </Popover>
+        <div>
+            <Button popoverTarget="story-popover">Click Me</Button>
+            <Popover id="story-popover" {...args}>
+                <div style={{ padding: '1rem', width: '200px' }}>
+                    <h4>Popover Content</h4>
+                    <p>This is the content inside the popover.</p>
+                </div>
+            </Popover>
+        </div>
     ),
-    args: {
-        trigger: <Button>Click Me</Button>,
-    },
+    args: {},
 };

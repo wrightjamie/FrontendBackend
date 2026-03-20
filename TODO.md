@@ -20,6 +20,23 @@
 - [ ] **B-024**: Implement Admin Password Management Flow
   - [ ] Admin can change any user's password (for recovery)
   - [ ] Implement secure reset flow without external STMP if possible
+- [ ] **B-043**: Various bug fixes
+  - [ ] No user hook test
+  - [x] ImageUpload component - padding around text
+  - [x] Footer - pull text from the admin console. Add appropriate setting
+  - [x] Footer - allow setting links (replicate menu system)
+  - [x] Button - small and medium sizes are the same
+  - [x] Button - grouped - show middle button in storybook (group of 3, not just 2)
+  - [x] Pagination - when there's only a small number of pages, we can start to hide the skip buttons (end, next, first, prev)
+  - [x] Popover storybook - doesn't actually show anything (do we need a button to press?)
+  - [x] ResponsiveImage - storybook - nothing shown. Do we need a default image to show?
+  - [x] Storybook Table - no data. Do we need a default table to show?
+  - [x] Toast - warning - colours are wrong - it is all white.
+  - [x] Toast - doesn't show in front of the header
+  - [ ] RadioGroup - storybook - nothing shown. Do we need a default radio group to show?
+
+
+
 
 ### 🎨 Metadata & Assets
 - [x] **B-011**: Multi-file Uploads
@@ -36,11 +53,22 @@
 - [ ] **TD-004**: Replace prompt/confirm with custom modals
   - Admin actions currently use native browser dialogs.
 
+
 ## 💡 Suggestions (AI-generated)
 <!-- AI proposals for improvements. Prefix: S-### -->
 - [ ] **S-001**: Implement Role-based Sidebar navigation (instead of just Tabs)
 
 ## ✅ Done
+
+### 🛠️ Phase 13: UI Refinement & Footer Customization
+- [x] **D-044**: UI Bug Fixes & Storybook Improvements (B-043)
+  - [x] Fixed Button sizes and grouped styling.
+  - [x] Added Toast warning/info colors and fixed z-index.
+  - [x] Added conditional skip buttons to Pagination.
+  - [x] Fixed Storybook stories for Table, Popover, and ResponsiveImage.
+- [x] **D-043**: Dynamic Footer Settings (B-043)
+  - [x] Implemented Admin UI for footer text and links.
+  - [x] Updated SiteMeta and Footer to use dynamic settings.
 
 ### 🛠️ Phase 12: Maintenance & Operations
 - [x] **D-042**: Added Missing Storybook Components (T-044)

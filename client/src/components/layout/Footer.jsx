@@ -9,11 +9,19 @@ const Footer = () => {
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
-                <p>&copy; {currentYear} {meta.title}. All rights reserved.</p>
+                <p>&copy; {currentYear} {meta.title}. {meta.footerText || 'All rights reserved.'}</p>
                 <div className={styles.links}>
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Support</a>
+                    {meta.footerLinks?.length > 0 ? (
+                        meta.footerLinks.map((link, i) => (
+                            <a key={i} href={link.url}>{link.label || link.url}</a>
+                        ))
+                    ) : (
+                        <>
+                            <a href="#">Privacy</a>
+                            <a href="#">Terms</a>
+                            <a href="#">Support</a>
+                        </>
+                    )}
                 </div>
             </div>
         </footer>

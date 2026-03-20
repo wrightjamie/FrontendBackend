@@ -88,6 +88,7 @@ export const Grouped = {
     render: (args) => (
         <div style={{ display: 'flex' }}>
             <Button {...args} grouped intent="secondary">Prev</Button>
+            <Button {...args} grouped intent="secondary">Current</Button>
             <Button {...args} grouped intent="secondary">Next</Button>
         </div>
     ),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from './Table';
+import { Table, Thead, Tbody, Tr, Th, Td } from './Table';
 
 export default {
     title: 'UI/Table',
@@ -23,15 +23,37 @@ const data = [
 ];
 
 export const Default = {
-    args: {
-        columns,
-        data,
-    },
+    render: () => (
+        <Table>
+            <Thead>
+                <Tr>
+                    {columns.map(col => <Th key={col.key}>{col.header}</Th>)}
+                </Tr>
+            </Thead>
+            <Tbody>
+                {data.map(row => (
+                    <Tr key={row.id}>
+                        {columns.map(col => <Td key={col.key}>{row[col.key]}</Td>)}
+                    </Tr>
+                ))}
+            </Tbody>
+        </Table>
+    ),
 };
 
 export const Empty = {
-    args: {
-        columns,
-        data: [],
-    },
+    render: () => (
+        <Table>
+            <Thead>
+                <Tr>
+                    {columns.map(col => <Th key={col.key}>{col.header}</Th>)}
+                </Tr>
+            </Thead>
+            <Tbody>
+                <Tr>
+                    <Td colSpan={columns.length} style={{ textAlign: 'center' }}>No data available</Td>
+                </Tr>
+            </Tbody>
+        </Table>
+    ),
 };

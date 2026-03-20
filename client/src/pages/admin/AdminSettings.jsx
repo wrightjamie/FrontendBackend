@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSiteMeta, useSiteMetaMutations } from '../../hooks/useSiteMeta';
 import { useToast } from '../../context/ToastContext';
-import { Settings } from 'lucide-react';
+import { Settings, Plus, Trash2 } from 'lucide-react';
+import { Button } from '../../components/ui/Button';
 import ImageSelect from '../../components/form/ImageSelect';
 import styles from './AdminSettings.module.css';
 
@@ -15,7 +16,9 @@ const AdminSettings = () => {
         description: '',
         logo: '',
         maintenanceMode: false,
-        maintenanceMessage: ''
+        maintenanceMessage: '',
+        footerText: '',
+        footerLinks: []
     });
     const [isDirty, setIsDirty] = useState(false);
 
@@ -28,6 +31,8 @@ const AdminSettings = () => {
                 logo: meta.logo || '',
                 maintenanceMode: meta.maintenanceMode ?? false,
                 maintenanceMessage: meta.maintenanceMessage || '',
+                footerText: meta.footerText || '',
+                footerLinks: meta.footerLinks || [],
             });
         }
     }, [meta]);
@@ -95,6 +100,83 @@ const AdminSettings = () => {
                             setIsDirty(true);
                         }}
                     />
+                </div>
+
+                <div className={styles.sectionDivider}>Footer Configuration</div>
+
+                <div className={styles.field}>
+                    <label className={styles.label} htmlFor="footerText">Footer Text</label>
+                    <input
+                        id="footerText"
+                        name="footerText"
+                        type="text"
+                        className={styles.input}
+                        value={formData.footerText}
+                        onChange={handleChange}
+                        placeholder="e.g. All rights reserved."
+                    />
+                </div>
+
+                <div className={styles.field}>
+                    <label className={styles.label}>Footer Links</label>
+                    {formData.footerLinks.map((link, idx) => (
+                        <div key={idx} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                            <input
+                                type="text"
+                                className={styles.input}
+                                placeholder="Link Label"
+                                value={link.label}
+                                onChange={(e) => {
+                                    const newLinks = [...formData.footerLinks];
+                                    newLinks[idx].label = e.target.value;
+                                    setFormData(prev => ({ ...prev, footerLinks: newLinks }));
+                                    setIsDirty(true);
+                                }}
+                            />
+                            <input
+                                type="text"
+                                className={styles.input}
+                                placeholder="URL (e.g. /privacy)"
+                                value={link.url}
+                                onChange={(e) => {
+                                    const newLinks = [...formData.footerLinks];
+                                    newLinks[idx].url = e.target.value;
+                                    setFormData(prev => ({ ...prev, footerLinks: newLinks }));
+                                    setIsDirty(true);
+                                }}
+                            />
+                            <Button
+                                type="button"
+                                intent="danger"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => {
+                                    const newLinks = formData.footerLinks.filter((_, i) => i !== idx);
+                                    setFormData(prev => ({ ...prev, footerLinks: newLinks }));
+                                    setIsDirty(true);
+                                }}
+                                aria-label="Remove link"
+                            >
+                                <Trash2 size={16} />
+                            </Button>
+                        </div>
+                    ))}
+                    <Button
+                        type="button"
+                        intent="secondary"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                            setFormData(prev => ({
+                                ...prev,
+                                footerLinks: [...prev.footerLinks, { label: '', url: '' }]
+                            }));
+                            setIsDirty(true);
+                        }}
+                        style={{ marginTop: '0.5rem', alignSelf: 'flex-start' }}
+                    >
+                        <Plus size={16} /> Add Link
+                    </Button>
                 </div>
 
                 <div className={styles.sectionDivider}>Maintenance Mode</div>

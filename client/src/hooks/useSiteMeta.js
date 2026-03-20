@@ -15,6 +15,8 @@ export const useSiteMeta = () => {
         logo: data?.logo || null,
         maintenanceMode: data?.maintenanceMode ?? false,
         maintenanceMessage: data?.maintenanceMessage || 'The site is currently under maintenance. Please try again later.',
+        footerText: data?.footerText || '',
+        footerLinks: data?.footerLinks || [],
         media: data?.mediaConfig || { responsive: { sizes: {} } }
     }), [data]);
 

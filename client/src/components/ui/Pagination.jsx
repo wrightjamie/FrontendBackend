@@ -29,24 +29,26 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
     return (
         <div className={styles.pagination}>
-            <div className={styles.controls}>
-                <button
-                    onClick={() => onPageChange(1)}
-                    disabled={currentPage === 1}
-                    className={styles.pageBtn}
-                    title="First Page"
-                >
-                    <ChevronsLeft size={16} />
-                </button>
-                <button
-                    onClick={() => onPageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className={styles.pageBtn}
-                    title="Previous Page"
-                >
-                    <ChevronLeft size={16} />
-                </button>
-            </div>
+            {totalPages > 5 && (
+                <div className={styles.controls}>
+                    <button
+                        onClick={() => onPageChange(1)}
+                        disabled={currentPage === 1}
+                        className={styles.pageBtn}
+                        title="First Page"
+                    >
+                        <ChevronsLeft size={16} />
+                    </button>
+                    <button
+                        onClick={() => onPageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={styles.pageBtn}
+                        title="Previous Page"
+                    >
+                        <ChevronLeft size={16} />
+                    </button>
+                </div>
+            )}
 
             <div className={styles.pages}>
                 {getPages().map(page => (
@@ -66,24 +68,26 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 ))}
             </div>
 
-            <div className={styles.controls}>
-                <button
-                    onClick={() => onPageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className={styles.pageBtn}
-                    title="Next Page"
-                >
-                    <ChevronRight size={16} />
-                </button>
-                <button
-                    onClick={() => onPageChange(totalPages)}
-                    disabled={currentPage === totalPages}
-                    className={styles.pageBtn}
-                    title="Last Page"
-                >
-                    <ChevronsRight size={16} />
-                </button>
-            </div>
+            {totalPages > 5 && (
+                <div className={styles.controls}>
+                    <button
+                        onClick={() => onPageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={styles.pageBtn}
+                        title="Next Page"
+                    >
+                        <ChevronRight size={16} />
+                    </button>
+                    <button
+                        onClick={() => onPageChange(totalPages)}
+                        disabled={currentPage === totalPages}
+                        className={styles.pageBtn}
+                        title="Last Page"
+                    >
+                        <ChevronsRight size={16} />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

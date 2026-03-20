@@ -20,9 +20,16 @@ export default {
 
 export const Default = {
     args: {
-        mediaId: '123',
+        image: {
+            url: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=800&auto=format&fit=crop',
+            title: 'Sample Image',
+            variants: {
+                sm: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=400&auto=format&fit=crop',
+                md: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=600&auto=format&fit=crop',
+                lg: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=800&auto=format&fit=crop',
+            }
+        },
         alt: 'Example Image',
         sizes: '(max-width: 600px) 100vw, 50vw',
-        srcFallback: 'https://via.placeholder.com/800x600',
     },
 };

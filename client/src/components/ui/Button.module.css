@@ -57,7 +57,7 @@
         height: 1.5rem;
     }
 
-    .sm {
+    &.sm {
         padding: var(--space-xs) var(--space-sm);
         font-size: var(--text-sm);
     }

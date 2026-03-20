@@ -18,7 +18,9 @@ const SiteMeta = {
             title: 'App Name',
             description: 'Welcome to the application',
             maintenanceMode: false,
-            maintenanceMessage: 'The site is currently under maintenance. Please try again later.'
+            maintenanceMessage: 'The site is currently under maintenance. Please try again later.',
+            footerText: '',
+            footerLinks: []
         };
 
         if (!meta) return defaults;
