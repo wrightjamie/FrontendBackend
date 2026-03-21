@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         if (res.ok) {
             const data = await res.json();
             setUser(data.user);
-            return { success: true };
+            return { success: true, mustResetPassword: data.user.mustResetPassword };
         } else {
             const error = await res.json();
             return { success: false, message: error.message };

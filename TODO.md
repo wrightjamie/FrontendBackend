@@ -17,9 +17,10 @@
   - [x] Audit application for consistent user feedback (Success/Error/Warning)
   - [x] Ensure API errors trigger appropriate error toasts
 ### ⚙️ Core Logic & Data
-- [ ] **B-024**: Implement Admin Password Management Flow
-  - [ ] Admin can change any user's password (for recovery)
-  - [ ] Implement secure reset flow without external STMP if possible
+- [x] **B-024**: Implement Admin Password Management Flow
+  - [x] Admin can change any user's password (for recovery)
+  - [x] Implement secure reset flow without external SMTP (Force Change on login)
+  - [x] Added Emergency Admin Reset CLI script
 - [ ] **B-043**: Various bug fixes
   - [x] No user hook test
   - [x] ImageUpload component - padding around text
@@ -59,6 +60,13 @@
 - [ ] **S-001**: Implement Role-based Sidebar navigation (instead of just Tabs)
 
 ## ✅ Done
+
+### 🛠️ Phase 15: Admin Password Management (B-024)
+- [x] **D-047**: Secure Admin Reset Flow (B-024)
+  - [x] Implemented `mustResetPassword` enforcement.
+  - [x] Created `ForcePasswordChange` redirection and UI.
+  - [x] Built `reset_admin.js` emergency CLI utility.
+  - [x] Consolidated Admin security policies.
 
 ### 🛠️ Phase 14: Enhanced User Feedback & API Error Audit
 - [x] **D-046**: Enhanced User Feedback (B-018)

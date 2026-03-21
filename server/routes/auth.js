@@ -144,6 +144,7 @@ router.post('/login', async (req, res) => {
         }
 
         req.session.userId = user._id;
+        req.session.mustResetPassword = user.mustResetPassword || false;
 
         // Return all user fields except password
         const { password: userPassword, ...userWithoutPassword } = user;
@@ -262,7 +263,13 @@ router.post('/change-password', async (req, res) => {
 
         // Hash new password and update
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-        await User.update(user._id, { password: hashedPassword });
+        await User.update(user._id, {
+            password: hashedPassword,
+            mustResetPassword: false
+        });
+
+        // Update session flag
+        req.session.mustResetPassword = false;
 
         res.json({ message: 'Password changed successfully' });
     } catch (err) {

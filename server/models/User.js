@@ -20,6 +20,7 @@ const User = {
             ...userData,
             role: userData.role || 'viewer',
             status: userData.status || 'active', // active, pending, suspended
+            mustResetPassword: userData.mustResetPassword || false,
             email: userData.email || null,
             createdAt: now,
             updatedAt: now,

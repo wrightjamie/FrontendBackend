@@ -19,6 +19,7 @@ import UserProfile from './pages/UserProfile';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import MaintenancePage from './pages/MaintenancePage';
+import ForcePasswordChange from './pages/ForcePasswordChange';
 import styles from './App.module.css';
 
 function App() {
@@ -35,12 +36,18 @@ function App() {
 
   const { meta, loading: loadingMeta } = useSiteMeta();
   const isAdmin = user?.role === 'admin';
+  const mustResetPassword = user?.mustResetPassword;
 
   if (loading || loadingMeta) return <div>Loading...</div>;
 
+  // Global Redirects
+  if (mustResetPassword && location.pathname !== '/force-password-change') {
+    return <Navigate to="/force-password-change" replace />;
+  }
+
   // Maintenance Mode Redirect Logic
   // Show maintenance page if active and user is not an admin
-  if (meta.maintenanceMode && !isAdmin && location.pathname !== '/login') {
+  if (meta.maintenanceMode && !isAdmin && location.pathname !== '/login' && location.pathname !== '/force-password-change') {
     return <MaintenancePage />;
   }
 
@@ -59,6 +66,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/force-password-change" element={
+            <ProtectedRoute>
+              <ForcePasswordChange />
+            </ProtectedRoute>
+          } />
           <Route
             path="/profile"
             element={

@@ -115,7 +115,10 @@ router.put('/:id/password', isAdmin, async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const updatedUser = await User.update(id, { password: hashedPassword });
+        const updatedUser = await User.update(id, {
+            password: hashedPassword,
+            mustResetPassword: true
+        });
 
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
