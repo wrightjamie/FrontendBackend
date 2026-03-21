@@ -46,6 +46,8 @@ The system includes an automatic setup flow. If no users exist, navigating to th
 
 ## 🏗️ Architecture
 
+For a detailed breakdown of dependencies, API routes, and logic flows, see **[ARCHITECTURE.md](file:///c:/Users/wrigh/Documents/WebProjects/FrontendBackend/ARCHITECTURE.md)**.
+
 ### Frontend (Client)
 - **Framework**: React (built with Vite)
 - **State & Data**:

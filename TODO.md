@@ -61,6 +61,12 @@
 
 ## ✅ Done
 
+### 🛠️ Phase 16: Technical Documentation (B-019)
+- [x] **D-048**: Comprehensive Architecture Resource (B-019)
+  - [x] Created `ARCHITECTURE.md` with dependency inventory and Mermaid diagrams.
+  - [x] Documented all API endpoints and role-based access rules.
+  - [x] Updated `README.md` for better onboarding.
+
 ### 🛠️ Phase 15: Admin Password Management (B-024)
 - [x] **D-047**: Secure Admin Reset Flow (B-024)
   - [x] Implemented `mustResetPassword` enforcement.
@@ -170,4 +176,7 @@
 ## ❄️ Frozen
 - [ ] **B-006 (Old)**: Drag-and-drop reordering for Data Tables
 - [ ] **B-030**: Improve Data Fetching Strategy (TanStack Query)
-- [ ] **B-019**: Create Dependencies Documentation
+- [x] **B-019**: Create Dependencies Documentation
+  - [x] Detailed dependency inventory for client and server
+  - [x] Mermaid diagrams for Auth, Data, and Media flows
+  - [x] API Route Registry with role-based permission mapping
