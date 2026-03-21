@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 import { DataContext, DataProvider } from '../context/DataContext';
 import { ToastContext, ToastProvider } from '../context/ToastContext';
+import { ModalProvider } from '../context/ModalContext';
 
 /**
  * MockAppDecorator: A Storybook decorator that provides all necessary 
@@ -56,13 +57,15 @@ export const withAppProviders = (Story, context) => {
     return (
         <DataProvider initialData={fullInitialData}>
             <ToastProvider>
-                <MemoryRouter>
-                    <MockAuthProvider user={user}>
-                        <div className="storybook-wrapper">
-                            <Story />
-                        </div>
-                    </MockAuthProvider>
-                </MemoryRouter>
+                <ModalProvider>
+                    <MemoryRouter>
+                        <MockAuthProvider user={user}>
+                            <div className="storybook-wrapper">
+                                <Story />
+                            </div>
+                        </MockAuthProvider>
+                    </MemoryRouter>
+                </ModalProvider>
             </ToastProvider>
         </DataProvider>
     );
