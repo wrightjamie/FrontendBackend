@@ -14,10 +14,10 @@ export default {
 
 export const Default = {
     args: {
-        onSuccess: () => alert('Login Success!'),
+        onSuccess: () => console.log('Login Success!'),
         onRegisterClick: (e) => {
             e.preventDefault();
-            alert('Register Clicked!');
+            console.log('Register Clicked!');
         }
     }
 };

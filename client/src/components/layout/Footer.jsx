@@ -17,9 +17,9 @@ const Footer = () => {
                         ))
                     ) : (
                         <>
-                            <a href="#">Privacy</a>
-                            <a href="#">Terms</a>
-                            <a href="#">Support</a>
+                            <a href="/privacy">Privacy</a>
+                            <a href="/terms">Terms</a>
+                            <a href="/support">Support</a>
                         </>
                     )}
                 </div>

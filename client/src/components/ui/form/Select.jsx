@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 import styles from './Select.module.css';
 
 export const Select = forwardRef(({
@@ -12,7 +12,8 @@ export const Select = forwardRef(({
     placeholder,
     ...props
 }, ref) => {
-    const selectId = id || (label ? `select-${Math.random().toString(36).substr(2, 9)}` : undefined);
+    const fallbackId = useId();
+    const selectId = id || (label ? fallbackId : undefined);
 
     return (
         <div className={`${styles.container} ${error ? styles.hasError : ''} ${containerClassName || ''}`}>

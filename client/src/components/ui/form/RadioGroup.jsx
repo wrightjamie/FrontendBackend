@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 import { Radio } from './Radio';
 import styles from './RadioGroup.module.css';
 
@@ -14,7 +14,8 @@ export const RadioGroup = forwardRef(({
     ...props
 }, ref) => {
     // Ensure we have a name for the group logic to work natively
-    const groupName = name || `radio-group-${Math.random().toString(36).substr(2, 9)}`;
+    const fallbackId = useId();
+    const groupName = name || fallbackId;
 
     return (
         <fieldset

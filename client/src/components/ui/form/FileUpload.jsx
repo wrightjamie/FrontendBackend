@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, useId } from 'react';
 import styles from './FileUpload.module.css';
 
 export const FileUpload = forwardRef(({
@@ -10,7 +10,8 @@ export const FileUpload = forwardRef(({
     accept,
     ...props
 }, ref) => {
-    const inputId = id || `file-${Math.random().toString(36).substr(2, 9)}`;
+    const fallbackId = useId();
+    const inputId = id || fallbackId;
     const [fileName, setFileName] = useState('');
 
     const handleChange = (e) => {

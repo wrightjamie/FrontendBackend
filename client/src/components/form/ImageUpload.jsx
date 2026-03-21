@@ -77,9 +77,9 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPrevi
 
     return (
         <div className={styles.container}>
-            <label className={styles.label}>{label}</label>
+            <span className={styles.label}>{label}</span>
 
-            <div
+            <button type="button"
                 className={styles.uploadArea}
                 onClick={() => !preview && fileInputRef.current?.click()}
             >
@@ -104,7 +104,7 @@ const ImageUpload = ({ onUpload, currentImage, label = "Upload Image", showPrevi
                         <span>{uploading ? 'Uploading...' : 'Click to Upload'}</span>
                     </div>
                 )}
-            </div>
+            </button>
 
             <input
                 type="file"

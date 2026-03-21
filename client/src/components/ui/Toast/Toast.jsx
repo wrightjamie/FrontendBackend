@@ -77,6 +77,7 @@ const Toast = ({ id, message, type }) => {
     };
 
     return (
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
             ref={toastRef}
             className={styles.toast}

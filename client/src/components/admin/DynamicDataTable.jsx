@@ -3,7 +3,7 @@ import { ArrowUp, ArrowDown, Pencil, Trash2, Check, X, Plus } from 'lucide-react
 import styles from './DynamicDataTable.module.css';
 import { useDynamicDataMutations, useDataEntities } from '../../hooks/useDynamicData';
 import { Button } from '../ui/Button';
-import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { Table, Thead, Tbody, Tr, Th, Td } from '../ui/Table';
 import { Input } from '../ui/form/Input';
 import { useModal } from '../../context/ModalContext';
@@ -21,6 +21,7 @@ const DynamicDataTable = ({ type }) => {
     const limit = 10;
     const { data: response, loading, refresh } = useDataEntities(type._id, currentPage, limit);
     const { confirm } = useModal();
+    const { addToast } = useToast();
 
     // Normalize data based on whether it's paginated or not
     const entities = response?.data || (Array.isArray(response) ? response : []);
@@ -64,10 +65,11 @@ const DynamicDataTable = ({ type }) => {
         }
 
         if (res.success) {
+            addToast(`Record ${isAdding ? 'created' : 'updated'} successfully`, 'success');
             handleCancel();
             refresh();
         } else {
-            alert(`Error saving: ${res.error?.message || 'Operation failed'}`);
+            addToast(res.error?.message || 'Operation failed', 'error');
         }
     };
 
@@ -84,9 +86,10 @@ const DynamicDataTable = ({ type }) => {
         if (confirmed) {
             const res = await del(id);
             if (res.success) {
+                addToast('Record deleted successfully', 'success');
                 refresh();
             } else {
-                alert(`Error deleting: ${res.error?.message || 'Delete failed'}`);
+                addToast(res.error?.message || 'Delete failed', 'error');
             }
         }
     };
@@ -115,9 +118,10 @@ const DynamicDataTable = ({ type }) => {
 
         const res = await reorder(updates);
         if (res.success) {
+            addToast('Order updated', 'success');
             refresh();
         } else {
-            alert(`Error reordering: ${res.error?.message || 'Operation failed'}`);
+            addToast(res.error?.message || 'Operation failed', 'error');
         }
     };
 
@@ -139,7 +143,7 @@ const DynamicDataTable = ({ type }) => {
                         onChange={(e) => onChange(e.target.checked)}
                     />
                 );
-            case 'radio':
+            case 'radio': {
                 // Fields with options like ['red', 'blue', 'green']
                 const options = field.options || [];
                 // Normalize options to {label, value} format if they are strings
@@ -156,6 +160,7 @@ const DynamicDataTable = ({ type }) => {
                         options={radioOptions}
                     />
                 );
+            }
             case 'number':
                 return (
                     <Input

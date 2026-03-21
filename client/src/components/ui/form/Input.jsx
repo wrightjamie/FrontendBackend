@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 import styles from './Input.module.css';
 
 export const Input = forwardRef(({
@@ -13,7 +13,8 @@ export const Input = forwardRef(({
     ...props
 }, ref) => {
     // Generate a unique ID if one isn't provided but a label is present
-    const inputId = id || (label ? `input-${Math.random().toString(36).substr(2, 9)}` : undefined);
+    const fallbackId = useId();
+    const inputId = id || (label ? fallbackId : undefined);
 
     return (
         <div className={`${styles.container} ${error ? styles.hasError : ''} ${containerClassName || ''}`}>

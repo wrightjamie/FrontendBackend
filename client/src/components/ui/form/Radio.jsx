@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 import styles from './CheckboxRadio.module.css';
 
 export const Radio = forwardRef(({
@@ -9,7 +9,8 @@ export const Radio = forwardRef(({
     className,
     ...props
 }, ref) => {
-    const inputId = id || `radio-${Math.random().toString(36).substr(2, 9)}`;
+    const fallbackId = useId();
+    const inputId = id || fallbackId;
 
     return (
         <label htmlFor={inputId} className={`${styles.container} ${className || ''}`}>
@@ -17,8 +18,6 @@ export const Radio = forwardRef(({
                 ref={ref}
                 id={inputId}
                 type="radio"
-                className={`${styles.input} ${error ? styles.error : ''}`}
-                aria-invalid={!!error}
                 {...props}
             />
             <div className={styles.textWrapper}>

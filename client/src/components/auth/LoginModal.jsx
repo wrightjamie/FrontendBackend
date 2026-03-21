@@ -16,6 +16,7 @@ const LoginModal = () => {
     };
 
     const handleLogout = async () => {
+        navigate('/');
         await logout();
         closeModal();
     };
@@ -41,10 +42,10 @@ const LoginModal = () => {
                         <UserIcon size={16} />
                         <span>My Profile</span>
                     </Link>
-                    <div className={`${styles.profileLink} ${styles.logoutLink}`} onClick={handleLogout}>
+                    <button type="button" className={`${styles.profileLink} ${styles.logoutLink}`} onClick={handleLogout}>
                         <LogOut size={16} />
                         <span>Logout</span>
-                    </div>
+                    </button>
                 </div>
             ) : (
                 <div className={styles.form}>

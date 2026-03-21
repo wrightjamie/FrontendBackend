@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { useModal } from '../../context/ModalContext';
 import { useUsers, useUserMutations } from '../../hooks/useUsers';
 import { Button } from '../../components/ui/Button';
@@ -31,6 +32,7 @@ const AdminUsers = () => {
     const { data: users, loading, error, refresh } = useUsers();
     const { approveUser, updateUser, deleteUser, resetPassword } = useUserMutations();
     const { confirm, prompt } = useModal();
+    const { addToast } = useToast();
 
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState({});
@@ -66,7 +68,7 @@ const AdminUsers = () => {
             setEditForm({});
             refresh();
         } else {
-            alert(`Error updating user: ${res.error?.message || 'Update failed'}`);
+            addToast(res.error?.message || 'Update failed', 'error');
         }
     };
 
@@ -80,9 +82,10 @@ const AdminUsers = () => {
         if (confirmed) {
             const res = await approveUser(userId);
             if (res.success) {
+                addToast('User approved successfully', 'success');
                 refresh();
             } else {
-                alert(`Error approving user: ${res.error?.message || 'Approval failed'}`);
+                addToast(res.error?.message || 'Approval failed', 'error');
             }
         }
     };
@@ -97,9 +100,10 @@ const AdminUsers = () => {
         if (confirmed) {
             const res = await deleteUser(userId);
             if (res.success) {
+                addToast('User deleted successfully', 'success');
                 refresh();
             } else {
-                alert(`Error deleting user: ${res.error?.message || 'Delete failed'}`);
+                addToast(res.error?.message || 'Delete failed', 'error');
             }
         }
     };
@@ -114,12 +118,12 @@ const AdminUsers = () => {
         if (newPassword && newPassword.length >= 6) {
             const res = await resetPassword(userId, newPassword);
             if (res.success) {
-                alert('Password reset successfully');
+                addToast('Password reset successfully', 'success');
             } else {
-                alert(`Error resetting password: ${res.error?.message || 'Reset failed'}`);
+                addToast(res.error?.message || 'Reset failed', 'error');
             }
         } else if (newPassword) {
-            alert('Password must be at least 6 characters');
+            addToast('Password must be at least 6 characters', 'error');
         }
     };
 

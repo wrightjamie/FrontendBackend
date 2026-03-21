@@ -65,9 +65,9 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
 
     return (
         <div className={styles.container} ref={popoverRef}>
-            <label className={styles.label}>{label}</label>
+            <span className={styles.label}>{label}</span>
 
-            <div className={styles.trigger} onClick={() => setIsOpen(!isOpen)}>
+            <button type="button" className={styles.trigger} onClick={() => setIsOpen(!isOpen)}>
                 {value ? (
                     <div className={styles.previewWrapper}>
                         <img src={`${value}?v=${Date.now()}`} alt="Selected" className={styles.selectedPreview} />
@@ -81,7 +81,7 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
                         <span>Pick an Image</span>
                     </div>
                 )}
-            </div>
+            </button>
 
             {isOpen && (
                 <div className={styles.popover}>
@@ -113,7 +113,8 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
                                     <div className={styles.status}>No images found</div>
                                 ) : (
                                     images.map(img => (
-                                        <div
+                                        <button
+                                            type="button"
                                             key={img._id}
                                             className={`${styles.imageCard} ${value === img.url ? styles.selectedCard : ''}`}
                                             onClick={() => handleSelect(img.url)}
@@ -125,7 +126,7 @@ const ImageSelect = ({ value, onChange, label = "Select Image" }) => {
                                                     <Check size={20} />
                                                 </div>
                                             )}
-                                        </div>
+                                        </button>
                                     ))
                                 )}
                             </div>

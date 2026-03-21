@@ -5,17 +5,17 @@
 
 ## 📋 Priority Backlog
 <!-- Immediate next steps or user-highlighted features -->
-- [ ] **B-031**: Enforce Best Practices (Strict Mode & A11y)
-  - [ ] Enable React Strict Mode
-  - [ ] Add `eslint-plugin-jsx-a11y` and fix reported issues
+- [x] **B-031**: Enforce Best Practices (Strict Mode & A11y)
+  - [x] Enable React Strict Mode
+  - [x] Add `eslint-plugin-jsx-a11y` and fix reported issues
 
 ## 🧊 Backlog
 
 ### 🏗️ Foundation & UI
-- [ ] **B-018**: Enhanced Toast Notifications
+- [x] **B-018**: Enhanced Toast Notifications
   - [x] Add toast confirmation on successful logout
-  - [ ] Audit application for consistent user feedback (Success/Error/Warning)
-  - [ ] Ensure API errors trigger appropriate error toasts
+  - [x] Audit application for consistent user feedback (Success/Error/Warning)
+  - [x] Ensure API errors trigger appropriate error toasts
 ### ⚙️ Core Logic & Data
 - [ ] **B-024**: Implement Admin Password Management Flow
   - [ ] Admin can change any user's password (for recovery)
@@ -47,10 +47,10 @@
   - [ ] Implement image cropping/editing preview
 
 ## 🧾 Technical Debt
-- [ ] **TD-003**: Fix Logout Redirection Logic
+- [x] **TD-003**: Fix Logout Redirection Logic
   - Currently redirected to Login page on logout instead of Home.
   - Potential race condition in `AuthContext`.
-- [ ] **TD-004**: Replace prompt/confirm with custom modals
+- [x] **TD-004**: Replace prompt/confirm with custom modals
   - Admin actions currently use native browser dialogs.
 
 
@@ -59,6 +59,13 @@
 - [ ] **S-001**: Implement Role-based Sidebar navigation (instead of just Tabs)
 
 ## ✅ Done
+
+### 🛠️ Phase 14: Enhanced User Feedback & API Error Audit
+- [x] **D-046**: Enhanced User Feedback (B-018)
+  - [x] Replaced all native `alert()` calls with `addToast` system in Admin area.
+  - [x] Added success notifications for Create, Update, Delete, and Reorder actions.
+  - [x] Standardized error toast messages across the application.
+  - [x] Fixed accessibility and logic errors in Admin components.
 
 ### 🛠️ Phase 13: UI Refinement & Footer Customization
 - [x] **D-045**: Custom Modal Dialogs (TD-004)

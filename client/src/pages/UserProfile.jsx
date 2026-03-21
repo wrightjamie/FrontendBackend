@@ -7,6 +7,8 @@ import styles from './UserProfile.module.css';
 import { User, ShieldCheck, Mail, LogOut, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 /**
  * UserProfile: User profile page for managing personal information
  * Accessible to all logged-in users
@@ -14,6 +16,7 @@ import { useState, useEffect } from 'react';
 const UserProfile = () => {
     const { user, refreshUser, logout } = useAuth(); // Added logout from useAuth
     const { addToast } = useToast();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         username: '',
@@ -69,8 +72,8 @@ const UserProfile = () => {
     };
 
     const handleLogout = () => {
+        navigate('/');
         logout();
-        addToast('Logged out successfully!', 'info');
     };
 
     return (
