@@ -52,7 +52,7 @@ export const PromptDialog = ({
             maxWidth="400px"
         >
             <form onSubmit={handleSubmit} style={{ margin: 0 }}>
-                {message && <p style={{ marginTop: 0, marginBottom: 'var(--spacing-4)' }}>{message}</p>}
+                {message && <p style={{ marginTop: 0, marginBottom: 'var(--space-md)' }}>{message}</p>}
                 <Input
                     ref={inputRef}
                     value={value}
