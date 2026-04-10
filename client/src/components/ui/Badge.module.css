@@ -3,7 +3,7 @@
 
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: var(--space-xs);
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-pill);
     font-size: var(--text-xs);
@@ -11,7 +11,7 @@
 
     background: oklch(from var(--badge-color) 95% calc(c / 2) h);
     color: oklch(from var(--badge-color) 35% c h);
-    border: 1px solid oklch(from var(--badge-color) 85% calc(c / 1.5) h);
+    border: 1px solid var(--color-border) 85% calc(c / 1.5) h);
 
 
     &.success {

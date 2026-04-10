@@ -12,7 +12,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
     cursor: pointer;
     transition: all var(--transition-base);
     font-family: inherit;
@@ -23,7 +23,7 @@
 
     &:hover:not(:disabled) {
         background: oklch(from var(--btn-color) calc(l - .1) c h);
-        transform: translateY(-1px);
+        transform: translateY(calc(1px * -1));
         box-shadow:
             var(--btn-shadow),
             0 6px 15px oklch(from var(--btn-color) 40% 0.05 h / 0.1);
@@ -52,7 +52,7 @@
 
     /* Sizes */
     &.xs {
-        padding: 0.125rem 0.5rem;
+        padding: var(--space-xs) var(--space-sm);
         font-size: var(--text-xs);
         height: 1.5rem;
     }
@@ -115,11 +115,11 @@
         
         &:hover:not(:disabled) {
             transform: none; /* Keep group cohesive */
-            z-index: 1; /* Bring hovered button to front for border clarity */
+            z-index: var(--z-dropdown); /* Bring hovered button to front for border clarity */
         }
 
         &:not(:first-of-type) {
-            margin-left: -1px;
+            margin-left: calc(1px * -1);
         }
 
         &:first-of-type {

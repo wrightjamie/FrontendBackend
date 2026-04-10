@@ -18,11 +18,11 @@
 
 .header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-xl);
 }
 
 .header h1 {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 var(--space-sm) 0;
     font-size: var(--text-3xl);
     color: var(--color-text-primary);
 }
@@ -36,13 +36,13 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-lg);
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-sm);
 }
 
 .inputGroup label {
@@ -52,19 +52,19 @@
 }
 
 .input {
-    padding: 0.75rem 1rem;
+    padding: var(--space-md) var(--space-md);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: var(--radius-rounded);
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
     font-size: var(--text-base);
-    transition: all 0.2s;
+    transition: all var(--transition-base);
 }
 
 .input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary) 15%, transparent);
+    box-shadow: var(--shadow-md);
 }
 
 .input:disabled {
@@ -75,17 +75,17 @@
 .error {
     background: color-mix(in oklch, var(--color-danger) 10%, transparent);
     color: var(--color-danger);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
+    padding: var(--space-md) var(--space-md);
+    border-radius: var(--radius-rounded);
     margin: 0;
     font-size: var(--text-sm);
     border: 1px solid color-mix(in oklch, var(--color-danger) 30%, transparent);
 }
 
 .footer {
-    margin-top: 2rem;
+    margin-top: var(--space-xl);
     text-align: center;
-    padding-top: 2rem;
+    padding-top: var(--space-xl);
     border-top: 1px solid var(--color-border);
 }
 
@@ -99,7 +99,7 @@
     color: var(--color-primary);
     text-decoration: none;
     font-weight: var(--font-medium);
-    transition: color 0.2s;
+    transition: color var(--transition-base);
 }
 
 .link:hover {
@@ -115,10 +115,10 @@
 .successIcon {
     width: 80px;
     height: 80px;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto var(--space-lg);
     background: oklch(from var(--color-success) 95% calc(c / 2) h);
     color: oklch(from var(--color-success) 35% c h);
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,13 +126,13 @@
 }
 
 .successCard h1 {
-    margin: 0 0 1rem 0;
+    margin: 0 0 var(--space-md) 0;
     font-size: var(--text-2xl);
     color: var(--color-text-primary);
 }
 
 .successCard p {
-    margin: 0 0 1rem 0;
+    margin: 0 0 var(--space-md) 0;
     color: var(--color-text-secondary);
     line-height: 1.6;
 }

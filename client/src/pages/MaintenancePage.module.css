@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: var(--space-xl);
     background: radial-gradient(circle at top left, var(--color-bg-secondary), var(--color-bg-primary));
     color: var(--color-text-primary);
     font-family: inherit;
@@ -12,13 +12,13 @@
 .glassCard {
     background: oklch(from var(--color-text-primary) l c h / 0.03);
     backdrop-filter: blur(20px);
-    border: 1px solid oklch(from var(--color-text-primary) l c h / 0.05);
+    border: 1px solid var(--color-border) l c h / 0.05);
     border-radius: var(--radius-2xl);
-    padding: 4rem 3rem;
+    padding: var(--space-xxl) var(--space-xxl);
     max-width: 500px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-xl);
     animation: fadeIn 0.8s ease-out;
 }
 
@@ -30,8 +30,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 2.5rem;
-    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+    margin: 0 auto var(--space-xl);
+    box-shadow: var(--shadow-lg);
 }
 
 .icon {
@@ -42,7 +42,7 @@
 .title {
     font-size: var(--text-4xl);
     font-weight: var(--font-bold);
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
     letter-spacing: -0.02em;
     background: linear-gradient(to right, var(--color-text-primary), var(--color-text-tertiary));
     -webkit-background-clip: text;
@@ -64,11 +64,11 @@
     letter-spacing: 0.1em;
     color: var(--color-text-secondary);
     padding-top: var(--space-xl);
-    border-top: 1px solid oklch(from var(--color-text-primary) l c h / 0.05);
+    border-top: 1px solid var(--color-border) l c h / 0.05);
 }
 
 .adminRecovery {
-    margin-top: 1rem;
+    margin-top: var(--space-md);
     text-transform: none;
     letter-spacing: normal;
 }
@@ -78,7 +78,7 @@
     text-decoration: none;
     font-size: var(--text-xs);
     opacity: 0.6;
-    transition: opacity 0.2s;
+    transition: opacity var(--transition-base);
 }
 
 .recoveryLink:hover {
@@ -99,7 +99,7 @@
 
 @media (max-width: 640px) {
     .glassCard {
-        padding: 3rem 2rem;
+        padding: var(--space-xxl) var(--space-xl);
     }
 
     .title {

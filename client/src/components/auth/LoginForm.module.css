@@ -1,15 +1,15 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-lg);
     min-width: 300px;
 }
 
 .error {
     color: var(--color-danger);
     background: color-mix(in srgb, var(--color-danger) 10%, transparent);
-    padding: 0.75rem;
-    border-radius: 8px;
+    padding: var(--space-md);
+    border-radius: var(--radius-rounded);
     font-size: var(--text-sm);
     margin: 0;
 }
@@ -19,7 +19,7 @@
 .footer {
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: var(--space-md);
     font-size: var(--text-sm);
     color: var(--color-text-secondary);
 }
@@ -28,7 +28,7 @@
     color: var(--color-primary);
     text-decoration: none;
     font-weight: var(--font-medium);
-    margin-left: 0.25rem;
+    margin-left: var(--space-xs);
 }
 
 .link:hover {

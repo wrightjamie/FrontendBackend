@@ -1,7 +1,7 @@
 .container {
     background: var(--color-bg-secondary);
-    border-radius: 12px;
-    padding: 1rem;
+    border-radius: var(--radius-rounded);
+    padding: var(--space-md);
     border: 1px solid var(--color-border);
 }
 
@@ -9,9 +9,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-md);
 }
 
 .header h2 {
@@ -22,7 +22,7 @@
 
 .header p {
     flex-basis: 100%;
-    margin: -0.5rem 0 0 0;
+    margin: calc(var(--space-sm) * -1) 0 0 0;
     color: var(--color-text-secondary);
     font-size: var(--text-sm);
 }
@@ -38,7 +38,7 @@
 }
 
 .orderCell span {
-    margin-left: 0.5rem;
+    margin-left: var(--space-sm);
     font-variant-numeric: tabular-nums;
     color: var(--color-text-secondary);
 }
@@ -55,7 +55,7 @@
 }
 
 .loading {
-    padding: 2rem;
+    padding: var(--space-xl);
     text-align: center;
     color: var(--color-text-secondary);
 }

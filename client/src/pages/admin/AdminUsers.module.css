@@ -1,16 +1,16 @@
 .container {
-    padding: 1rem;
+    padding: var(--space-md);
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
 }
 
 .header h2 {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 var(--space-sm) 0;
     color: var(--color-text-primary);
 }
 
@@ -21,11 +21,11 @@
 }
 
 .section {
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-xxl);
 }
 
 .sectionTitle {
-    margin: 0 0 1rem 0;
+    margin: 0 0 var(--space-md) 0;
     font-size: var(--text-lg);
     color: var(--color-text-primary);
     font-weight: var(--font-semibold);
@@ -35,7 +35,7 @@
 
 .loading,
 .error {
-    padding: 2rem;
+    padding: var(--space-xl);
     text-align: center;
     color: var(--color-text-secondary);
 }

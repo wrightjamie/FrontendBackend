@@ -1,20 +1,20 @@
 .container {
     max-width: 700px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--space-xl);
 }
 
 .header {
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-xxl);
 }
 
 .header h1 {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 var(--space-sm) 0;
     color: var(--color-text-primary);
     font-size: var(--text-3xl);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-md);
 }
 
 .header p {
@@ -26,32 +26,32 @@
 .section {
     background: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 2rem;
+    border-radius: var(--radius-rounded);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
 }
 
 .section h2 {
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 var(--space-lg) 0;
     color: var(--color-text-primary);
     font-size: var(--text-xl);
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-md);
     border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 0.5rem;
+    padding-bottom: var(--space-sm);
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-lg);
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-sm);
 }
 
 .inputGroup label {
@@ -61,19 +61,19 @@
 }
 
 .input {
-    padding: 0.75rem 1rem;
+    padding: var(--space-md) var(--space-md);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: var(--radius-rounded);
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
     font-size: var(--text-base);
-    transition: all 0.2s;
+    transition: all var(--transition-base);
 }
 
 .input:focus:not(:disabled) {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary) 15%, transparent);
+    box-shadow: var(--shadow-md);
 }
 
 .input:disabled {
@@ -91,11 +91,11 @@
 .actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1rem;
+    margin-top: var(--space-md);
 }
 
 .separator {
     height: 1px;
     background: var(--color-border);
-    margin: 2rem 0;
+    margin: var(--space-xl) 0;
 }

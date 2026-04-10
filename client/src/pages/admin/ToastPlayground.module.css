@@ -1,22 +1,22 @@
 .container {
-    padding: 1rem;
+    padding: var(--space-md);
 }
 
 .buttonGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
 }
 
 .testBtn {
-    padding: 1rem;
+    padding: var(--space-md);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-rounded);
     font-weight: var(--font-semibold);
     cursor: pointer;
     color: white;
-    transition: transform 0.1s, opacity 0.2s;
+    transition: transform var(--transition-fast), opacity var(--transition-base);
 }
 
 .testBtn:active {

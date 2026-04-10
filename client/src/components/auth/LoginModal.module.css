@@ -1,7 +1,7 @@
 .popover {
     /* Anchor Positioning */
     position-anchor: --user-btn;
-    top: calc(anchor(bottom) + 0.5rem);
+    top: calc(anchor(bottom) + var(--space-sm));
     right: anchor(right);
 
     /* Reset UA defaults */
@@ -12,12 +12,12 @@
 .profileLink {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-md);
     color: var(--color-text-primary);
     text-decoration: none;
     border-radius: var(--radius-sm);
-    transition: background 0.2s;
+    transition: background var(--transition-base);
 }
 
 .profileLink:hover {
@@ -33,7 +33,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: var(--space-lg);
     min-width: 250px;
 }
 
@@ -42,12 +42,12 @@
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: var(--space-xs);
     text-align: left;
 }
 
 .input {
-    padding: 0.5rem;
+    padding: var(--space-sm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
 }
@@ -56,7 +56,7 @@
     background-color: var(--color-brand-primary);
     color: var(--color-text-inverse);
     border: none;
-    padding: 0.5rem;
+    padding: var(--space-sm);
     border-radius: var(--radius-sm);
     cursor: pointer;
 }

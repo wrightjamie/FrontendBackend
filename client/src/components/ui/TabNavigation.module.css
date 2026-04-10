@@ -1,6 +1,6 @@
 .tabsContainer {
     display: flex;
-    gap: 2rem;
+    gap: var(--space-xl);
     border-bottom: 3px solid var(--color-border);
     overflow-x: auto;
     scrollbar-width: none;
@@ -13,7 +13,7 @@
 }
 
 .tab {
-    padding: 0.75rem 0.5rem;
+    padding: var(--space-md) var(--space-sm);
     color: var(--color-text-secondary);
     text-decoration: none;
     font-weight: var(--font-medium);
@@ -21,7 +21,7 @@
     border-bottom: 3px solid transparent;
     border-top-left-radius: var(--radius-md);
     border-top-right-radius: var(--radius-md);
-    transition: all 0.2s;
+    transition: all var(--transition-base);
     background: transparent;
     border-top: none;
     border-left: none;
@@ -32,7 +32,7 @@
     /* Icon support */
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-sm);
 }
 
 .tab:hover {
@@ -49,8 +49,8 @@
 
 /* Pill Variant */
 .tab.pill {
-    padding: 0.5rem 1rem;
-    border-radius: 99px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-round);
     border: 1px solid transparent;
     font-size: var(--text-sm);
 }

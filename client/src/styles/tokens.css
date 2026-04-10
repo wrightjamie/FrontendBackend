@@ -1,197 +1,205 @@
 /**
  * Design Tokens
  * 
- * This file contains all design tokens for the application using modern CSS
- * and OKLCH color space for maximum flexibility and maintainability.
- * 
- * Pattern: Use relative colors with oklch(from var(--base) ...) to generate
- * color variations automatically, similar to the Toast system.
+ * Layer 1: Primitives (Raw values)
+ * Layer 2: Semantic Aliases (Usage based)
+ * Layer 3: Components (used in the individual module.css files)
  */
 
 :root {
     /* ============================================
-     BRAND COLORS (OKLCH)
-     ============================================ */
+       LAYER 1: PRIMITIVES
+       ============================================ */
+    
+    /* Solid Colors (Hex) */
+    --color-blue-500: #646cff;
+    --color-blue-600: #535bf2;
+    --color-purple-500: #8a2be2;
+    --color-red-500: #ff4646;
+    --color-green-500: #28a745;
+    --color-yellow-500: #ffc107;
+    --color-cyan-500: #17a2b8;
 
-    /* Primary brand color - used for primary actions, links */
-    --color-brand-primary: oklch(62% 0.22 264);
+    --color-white: #ffffff;
+    --color-gray-50: #f9f9f9;
+    --color-gray-100: #f0f0f0;
+    --color-gray-200: #e0e0e0;
+    --color-gray-300: #cccccc;
+    --color-gray-400: #999999;
+    --color-gray-500: #666666;
+    --color-gray-700: #444444;
+    --color-gray-800: #242424;
+    --color-gray-900: #1a1a1a;
+    --color-black: #000000;
 
-    /* Secondary brand color - used for accents and secondary actions */
-    --color-brand-secondary: oklch(65% 0.15 290);
+    /* Transparent Colors (RGBA) */
+    --color-black-alpha-10: rgba(0, 0, 0, 0.1);
+    --color-black-alpha-40: rgba(0, 0, 0, 0.4);
+    --color-black-alpha-50: rgba(0, 0, 0, 0.5);
+    --color-black-alpha-60: rgba(0, 0, 0, 0.6);
+    --color-white-alpha-10: rgba(255, 255, 255, 0.1);
+    --color-white-alpha-60: rgba(255, 255, 255, 0.6);
+    --color-white-alpha-87: rgba(255, 255, 255, 0.87);
 
-    /* Accent color - used for highlights and special elements */
-    --color-brand-accent: oklch(70% 0.18 180);
+    /* Spacing Primitives */
+    --space-1: 0.125rem; /* 2px */
+    --space-2: 0.25rem;  /* 4px */
+    --space-3: 0.5rem;   /* 8px */
+    --space-4: 0.75rem;  /* 12px */
+    --space-5: 1rem;     /* 16px */
+    --space-6: 1.25rem;  /* 20px */
+    --space-7: 1.5rem;   /* 24px */
+    --space-8: 2rem;     /* 32px */
+    --space-9: 3rem;     /* 48px */
+    --space-10: 4rem;    /* 64px */
 
+    /* Border Radius Primitives */
+    --radius-1: 4px;
+    --radius-2: 8px;
+    --radius-3: 9999px;
+    --radius-full: 50%;
 
-    /* ============================================
-     SEMANTIC COLORS (OKLCH Hues)
-     ============================================ */
+    /* Typography Primitives */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 2.5rem;
 
-    /* Base hues for semantic colors - allows easy theming */
-    --semantic-success-hue: 145;
-    --semantic-warning-hue: 85;
-    --semantic-error-hue: 25;
-    --semantic-info-hue: 250;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 
-    /* Semantic colors using consistent lightness and chroma */
-    --color-success: oklch(62% 0.18 var(--semantic-success-hue));
-    --color-warning: oklch(72% 0.18 var(--semantic-warning-hue));
-    --color-error: oklch(62% 0.22 var(--semantic-error-hue));
-    --color-info: oklch(62% 0.22 var(--semantic-info-hue));
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
 
-    /* Legacy alias for backwards compatibility */
-    --color-primary: var(--color-brand-primary);
-    --color-primary-hover: oklch(from var(--color-brand-primary) calc(l - 8%) c h);
-    --color-danger: var(--color-error);
+    /* Shadow Primitives */
+    --shadow-1: 0 1px 3px var(--color-black-alpha-10);
+    --shadow-2: 0 4px 6px var(--color-black-alpha-10);
+    --shadow-3: 0 10px 15px var(--color-black-alpha-10);
+    --shadow-4: 0 20px 25px var(--color-black-alpha-40);
 
+    /* Z-Index Primitives */
+    --z-0: 0;
+    --z-10: 10;
+    --z-20: 20;
+    --z-30: 30;
+    --z-40: 40;
+    --z-50: 50;
+    --z-99: 9999;
 
-    /* ============================================
-     NEUTRAL PALETTE (Background & Text)
-     ============================================ */
-
-    /* Background colors */
-    --color-bg-primary: oklch(100% 0 0);
-    --color-bg-secondary: oklch(98% 0 0);
-    --color-bg-tertiary: oklch(96% 0 0);
-
-    /* Text colors */
-    --color-text-primary: oklch(25% 0.02 264);
-    --color-text-secondary: oklch(50% 0.01 264);
-    --color-text-tertiary: oklch(65% 0.01 264);
-    --color-text-inverse: oklch(100% 0 0);
-
-    /* Border colors */
-    --color-border: oklch(85% 0.01 264);
-    --color-border-hover: oklch(70% 0.02 264);
-
-
-    /* ============================================
-     SPACING SCALE (T-shirt sizing)
-     ============================================ */
-
-    --space-xs: 0.25rem;
-    /* 4px */
-    --space-sm: 0.5rem;
-    /* 8px */
-    --space-md: 1rem;
-    /* 16px */
-    --space-lg: 1.5rem;
-    /* 24px */
-    --space-xl: 2rem;
-    /* 32px */
-    --space-2xl: 3rem;
-    /* 48px */
-    --space-3xl: 4rem;
-    /* 64px */
-
-
-    /* ============================================
-     BORDER RADIUS
-     ============================================ */
-
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    --radius-pill: 999px;
-    --radius-circle: 50%;
-
-
-    /* ============================================
-     SHADOWS
-     ============================================ */
-
-    --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.05);
-    --shadow-md: 0 4px 6px oklch(0% 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px oklch(0% 0 0 / 0.15);
-    --shadow-xl: 0 20px 25px oklch(0% 0 0 / 0.2);
+    /* Motion Primitives */
+    --duration-fast: 150ms;
+    --duration-base: 200ms;
+    --duration-slow: 300ms;
+    --ease-standard: ease;
 
 
     /* ============================================
-     TYPOGRAPHY SCALE
-     ============================================ */
+       LAYER 2: ALIASES (Semantic)
+       ============================================ */
 
-    /* Font sizes */
-    --text-xs: 0.75rem;
-    /* 12px */
-    --text-sm: 0.875rem;
-    /* 14px */
-    --text-base: 1rem;
-    /* 16px */
-    --text-lg: 1.125rem;
-    /* 18px */
-    --text-xl: 1.25rem;
-    /* 20px */
-    --text-2xl: 1.5rem;
-    /* 24px */
-    --text-3xl: 2rem;
-    /* 32px */
-    --text-4xl: 2.5rem;
-    /* 40px */
+    /* Brand / Semantic Colors */
+    --color-primary: var(--color-blue-500);
+    --color-primary-hover: var(--color-blue-600);
+    --color-success: var(--color-green-500);
+    --color-warning: var(--color-yellow-500);
+    --color-error: var(--color-red-500);
+    --color-danger: var(--color-red-500); /* Alias for error */
+    --color-info: var(--color-cyan-500);
 
-    /* Font weights */
-    --font-normal: 400;
-    --font-medium: 500;
-    --font-semibold: 600;
-    --font-bold: 700;
+    /* Backgrounds */
+    --color-bg-primary: var(--color-white);
+    --color-bg-secondary: var(--color-gray-50);
+    --color-bg-tertiary: var(--color-gray-100);
+    --color-bg-overlay: var(--color-black-alpha-50);
 
-    /* Line heights */
-    --leading-tight: 1.25;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.75;
+    /* Text */
+    --color-text-primary: var(--color-gray-800);
+    --color-text-secondary: var(--color-gray-500);
+    --color-text-tertiary: var(--color-gray-400);
+    --color-text-inverse: var(--color-white);
 
+    /* Borders */
+    --color-border: var(--color-gray-300);
+    --color-border-hover: var(--color-gray-400);
 
-    /* ============================================
-     Z-INDEX SCALE
-     ============================================ */
+    /* Spacing Aliases */
+    --space-xs: var(--space-2);
+    --space-sm: var(--space-3);
+    --space-md: var(--space-5);
+    --space-lg: var(--space-7);
+    --space-xl: var(--space-8);
+    --space-xxl: var(--space-9);
 
-    --z-base: 0;
-    --z-dropdown: 1000;
-    --z-sticky: 1100;
-    --z-modal: 2000;
-    --z-popover: 3000;
-    --z-toast: 9999;
+    /* Radius Aliases (per user request) */
+    --radius-subtle: var(--radius-1);
+    --radius-rounded: var(--radius-2);
+    --radius-round: var(--radius-3);
+    --radius-circle: var(--radius-full);
 
+    /* Typography Aliases */
+    --text-xs: var(--font-size-xs);
+    --text-sm: var(--font-size-sm);
+    --text-base: var(--font-size-base);
+    --text-lg: var(--font-size-lg);
+    --text-xl: var(--font-size-xl);
+    --text-2xl: var(--font-size-2xl);
+    --text-3xl: var(--font-size-3xl);
+    --text-4xl: var(--font-size-4xl);
 
-    /* ============================================
-     TRANSITIONS
-     ============================================ */
+    --font-normal: var(--font-weight-normal);
+    --font-medium: var(--font-weight-medium);
+    --font-semibold: var(--font-weight-semibold);
+    --font-bold: var(--font-weight-bold);
 
-    --transition-fast: 150ms ease;
-    --transition-base: 200ms ease;
-    --transition-slow: 300ms ease;
+    --leading-tight: var(--line-height-tight);
+    --leading-normal: var(--line-height-normal);
+    --leading-relaxed: var(--line-height-relaxed);
 
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    /* Shadows */
+    --shadow-sm: var(--shadow-1);
+    --shadow-md: var(--shadow-2);
+    --shadow-lg: var(--shadow-3);
+    --shadow-xl: var(--shadow-4);
+
+    /* Z-Index Aliases */
+    --z-base: var(--z-0);
+    --z-dropdown: var(--z-10);
+    --z-sticky: var(--z-20);
+    --z-modal: var(--z-30);
+    --z-popover: var(--z-40);
+    --z-toast: var(--z-99);
+
+    /* Motion Aliases */
+    --transition-fast: var(--duration-fast) var(--ease-standard);
+    --transition-base: var(--duration-base) var(--ease-standard);
+    --transition-slow: var(--duration-slow) var(--ease-standard);
 }
 
-
-/* ============================================
-   DARK MODE OVERRIDES
-   ============================================ */
-
+/* Dark Mode Overrides (Layer 2 Re-mappings only) */
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Background colors - Reverted to subtle dark grey/blue palette */
-        --color-bg-primary: oklch(20% 0.01 264);
-        --color-bg-secondary: oklch(17% 0.01 264);
-        --color-bg-tertiary: oklch(24% 0.01 264);
+        --color-bg-primary: var(--color-gray-800);
+        --color-bg-secondary: var(--color-gray-900);
+        --color-bg-tertiary: var(--color-gray-700);
+        --color-bg-overlay: var(--color-black-alpha-60);
 
-        /* Text colors - Reverted to high-contrast palette */
-        --color-text-primary: oklch(95% 0 0);
-        --color-text-secondary: oklch(70% 0.01 264);
-        --color-text-tertiary: oklch(55% 0.01 264);
+        --color-text-primary: var(--color-white-alpha-87);
+        --color-text-secondary: var(--color-white-alpha-60);
+        --color-text-tertiary: var(--color-gray-400);
 
-        /* Border colors - Reverted to subtle palette */
-        --color-border: oklch(35% 0.01 264);
-        --color-border-hover: oklch(45% 0.02 264);
+        --color-border: var(--color-gray-700);
+        --color-border-hover: var(--color-gray-500);
 
-        /* Adjust shadows for dark mode - Subtle colorful depth */
-        --shadow-color-dark: oklch(0% 0.05 264);
-        --shadow-sm: 0 1px 2px oklch(from var(--shadow-color-dark) l c h / 0.3);
-        --shadow-md: 0 4px 6px oklch(from var(--shadow-color-dark) l c h / 0.4);
-        --shadow-lg: 0 10px 15px oklch(from var(--shadow-color-dark) l c h / 0.5);
-        --shadow-xl: 0 20px 25px oklch(from var(--shadow-color-dark) l c h / 0.6);
+        --shadow-1: 0 1px 3px var(--color-black-alpha-50);
+        --shadow-2: 0 4px 6px var(--color-black-alpha-50);
+        --shadow-3: 0 10px 15px var(--color-black-alpha-60);
+        --shadow-4: 0 20px 25px var(--color-black-alpha-60);
     }
 }
